@@ -24,7 +24,7 @@ from studio.catalog import (
     media_path,
 )
 from studio.compiler import ContractError, compile_pack
-from studio.config import PACKS
+from studio.config import PACKS, web_dist
 from studio.orchestrator import TERMINAL, RunError, decide, pause, start, step
 
 _EVENT_VALIDATOR = Draft202012Validator(contract_schema("runtime-event.schema.json"))
@@ -68,8 +68,12 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
-    @app.get("/")
-    def root() -> dict:
+    dist = web_dist()
+
+    @app.get("/", response_model=None)
+    def root() -> dict | FileResponse:
+        if dist:
+            return FileResponse(dist / "index.html")
         return {
             "service": "cognitive-value-studio",
             "mode": "SHADOW",
@@ -262,6 +266,17 @@ def create_app() -> FastAPI:
         if path is None:
             raise HTTPException(404, "no image")
         return FileResponse(path, media_type="image/webp")
+
+    if dist:
+
+        @app.get("/{path:path}", include_in_schema=False)
+        def web(path: str) -> FileResponse:
+            if path.startswith(("api/", "media/")):
+                raise HTTPException(404, "not found")
+            target = (dist / path).resolve()
+            if target.is_relative_to(dist) and target.is_file():
+                return FileResponse(target)
+            return FileResponse(dist / "index.html")
 
     return app
 

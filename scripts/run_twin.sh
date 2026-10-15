@@ -6,10 +6,23 @@
 #   scripts/run_twin.sh --update   git pull --ff-only first, then start
 #   scripts/run_twin.sh --share    also open a temporary public Cloudflare tunnel
 #   scripts/run_twin.sh --check    verify prerequisites and dependencies, then exit
+#   scripts/run_twin.sh --background  build the UI, start one detached server on :8876, return
+#   scripts/run_twin.sh --stop     stop the detached server
+#   scripts/run_twin.sh --status   exit 0 if the detached server is healthy
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
+
+# Apps launched from Finder get a minimal PATH without Homebrew or nvm.
+for dir in /opt/homebrew/bin /usr/local/bin; do
+  [[ -d "$dir" && ":$PATH:" != *":$dir:"* ]] && PATH="$dir:$PATH"
+done
+if ! command -v node >/dev/null 2>&1 && [[ -s "${NVM_DIR:-$HOME/.nvm}/nvm.sh" ]]; then
+  # shellcheck disable=SC1091
+  source "${NVM_DIR:-$HOME/.nvm}/nvm.sh" >/dev/null 2>&1 || true
+fi
+export PATH
 
 API_PORT="${PORT:-8876}"
 WEB_PORT=5173
@@ -18,27 +31,67 @@ API_URL="http://127.0.0.1:${API_PORT}"
 RUN_DIR="$ROOT/.run"
 mkdir -p "$RUN_DIR"
 
+PID_FILE="$RUN_DIR/twin.pid"
+
 UPDATE=0
 SHARE=0
 CHECK_ONLY=0
+BACKGROUND=0
 for arg in "$@"; do
   case "$arg" in
     --update) UPDATE=1 ;;
     --share) SHARE=1 ;;
     --check) CHECK_ONLY=1 ;;
-    -h|--help) sed -n '2,8p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    --background) BACKGROUND=1 ;;
+    --stop|--status) ACTION="${arg#--}" ;;
+    -h|--help) sed -n '2,11p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) echo "Unknown option: $arg (try --help)"; exit 2 ;;
   esac
 done
 
-bold() { printf '\033[1m%s\033[0m\n' "$*"; }
-step() { printf '\033[34m==>\033[0m %s\n' "$*"; }
-warn() { printf '\033[33m!!\033[0m  %s\n' "$*"; }
+if [[ -t 1 ]]; then
+  bold() { printf '\033[1m%s\033[0m\n' "$*"; }
+  step() { printf '\033[34m==>\033[0m %s\n' "$*"; }
+  warn() { printf '\033[33m!!\033[0m  %s\n' "$*"; }
+  fail_line() { printf '\033[31mxx\033[0m  %s\n' "$*"; }
+else
+  bold() { printf '%s\n' "$*"; }
+  step() { printf '==> %s\n' "$*"; }
+  warn() { printf '!!  %s\n' "$*"; }
+  fail_line() { printf 'xx  %s\n' "$*"; }
+fi
 fail() {
-  printf '\033[31mxx\033[0m  %s\n' "$*"
+  fail_line "$*" >&2
   pause_if_double_clicked
   exit 1
 }
+
+detached_pid() {
+  local pid
+  pid="$(cat "$PID_FILE" 2>/dev/null || true)"
+  [[ "$pid" =~ ^[0-9]+$ ]] || return 1
+  ps -p "$pid" -o command= 2>/dev/null | grep -q "main.py" || return 1
+  echo "$pid"
+}
+
+case "${ACTION:-}" in
+  stop)
+    if pid="$(detached_pid)"; then
+      kill "$pid" 2>/dev/null || true
+      for _ in $(seq 1 20); do kill -0 "$pid" 2>/dev/null || break; sleep 0.25; done
+      kill -9 "$pid" 2>/dev/null || true
+      echo "Twin stopped."
+    else
+      echo "Twin was not running."
+    fi
+    rm -f "$PID_FILE"
+    exit 0
+    ;;
+  status)
+    detached_pid >/dev/null && curl -fsS -o /dev/null "$API_URL/api/health" 2>/dev/null
+    exit $?
+    ;;
+esac
 pause_if_double_clicked() {
   if [[ "${RUN_TWIN_FROM_FINDER:-0}" == "1" ]]; then
     read -r -p "Press Return to close this window." _ || true
@@ -126,6 +179,40 @@ wait_for() {
   done
   return 1
 }
+open_browser() {
+  [[ "${RUN_TWIN_NO_BROWSER:-0}" == "1" ]] && return 0
+  if have open; then open "$1"; elif have xdg-open; then (xdg-open "$1" >/dev/null 2>&1 &); fi
+}
+
+if [[ "$BACKGROUND" == "1" ]]; then
+  DIST="$ROOT/apps/web/dist"
+  if detached_pid >/dev/null && curl -fsS -o /dev/null "$API_URL/api/health" 2>/dev/null; then
+    step "Twin already running at $API_URL"
+    open_browser "$API_URL"
+    exit 0
+  fi
+  rm -f "$PID_FILE"
+
+  step "Building the web app"
+  stale="$(find apps/web/src apps/web/index.html apps/web/package-lock.json apps/web/vite.config.ts \
+    -newer "$DIST/index.html" -print -quit 2>/dev/null || echo rebuild)"
+  if [[ ! -f "$DIST/index.html" || -n "$stale" ]]; then
+    (cd apps/web && npm run build >"$RUN_DIR/build.log" 2>&1) || fail "The web build failed. See .run/build.log"
+  else
+    echo "    Up to date"
+  fi
+
+  port_busy "$API_PORT" && fail "Port $API_PORT is already in use by another program. Quit it and try again."
+
+  step "Starting the twin on $API_URL"
+  (cd apps/api && STUDIO_WEB_DIST="$DIST" PORT="$API_PORT" exec nohup "$VENV_PY" main.py) </dev/null >"$RUN_DIR/api.log" 2>&1 &
+  echo $! >"$PID_FILE"
+  wait_for "$API_URL/api/health" 60 "$(cat "$PID_FILE")" \
+    || { "$0" --stop >/dev/null; fail "The twin did not start. See .run/api.log"; }
+  open_browser "$API_URL"
+  bold "The twin is running at $API_URL"
+  exit 0
+fi
 
 PIDS=()
 # Kill before printing: when the Terminal window closes, writes to it can fail.
@@ -180,7 +267,7 @@ if [[ "$SHARE" == "1" ]]; then
   fi
 fi
 
-if have open; then open "$WEB_URL"; elif have xdg-open; then (xdg-open "$WEB_URL" >/dev/null 2>&1 &); fi
+open_browser "$WEB_URL"
 
 echo
 bold "The twin is running."
