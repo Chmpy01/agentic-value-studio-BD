@@ -4,7 +4,29 @@ Local, synthetic, approval-gated studio. It loads the supplied Intelligent Workp
 
 Reference projects under `reference_projects/` are unchanged inputs.
 
-## Quick start (one click)
+## Easiest: Docker Desktop (nothing else to install)
+
+Double-click `Run Twin (Docker).command` (Mac) or run `docker compose up -d --build`, then open **http://127.0.0.1:8876**.
+
+- The first build takes a few minutes. Later starts take seconds.
+- Stop and start it from Docker Desktop (container `cognitive-value-twin`), or press Return in the launcher window.
+- One container serves the built web app and the API. The port is published to `127.0.0.1` only.
+- The container runs as a non-root user with a read-only filesystem and all Linux capabilities dropped.
+- Run history is kept in the `twin-state` volume. `docker compose down -v` clears it.
+
+## Mac app (for non-technical users)
+
+Requires Python 3.11+ and Node.js 20.19+ or 22.12+ on the Mac (`brew install python@3.12 node`).
+
+1. Double-click `Create Twin App.command` once. It installs dependencies and creates **Cognitive Value Twin** in `~/Applications`.
+2. Double-click **Cognitive Value Twin**, or drag it to the Dock. No Terminal window opens.
+   - It builds the web app if the code changed and starts one server on http://127.0.0.1:8876.
+   - It then opens the browser.
+3. To stop it, quit the app from the Dock (right-click, then **Quit**). Clicking the app again while it runs reopens the browser.
+
+The app is compiled on your Mac by `osacompile` from `packaging/mac/TwinApp.applescript`, so it is not a downloaded binary. It belongs to the project folder: if you move the folder, run `Create Twin App.command` again. Errors are shown in a dialog with a **Show logs** button that opens `.run/`. The same background mode works from a terminal: `scripts/run_twin.sh --background`, `--status`, `--stop`.
+
+## Quick start for developers (one click, hot reload)
 
 Requires Python 3.11+ and Node.js 20.19+ or 22.12+ (on a Mac: `brew install python@3.12 node`). No API keys.
 
@@ -61,7 +83,7 @@ That process listens on **http://127.0.0.1:8877** (`A2A_PORT`). Leave `AGNTCY_DI
 source .venv/bin/activate
 python3 scripts/check_assets.py
 python3 -m unittest discover -s reference_projects/agent_runtime/tests -v
-PYTHONPATH=apps/api python -m unittest tests.test_studio tests.test_reasoning -v
+PYTHONPATH=apps/api python -m unittest tests.test_studio tests.test_reasoning tests.test_packaging -v
 cd apps/web && npm run build
 ```
 

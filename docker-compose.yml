@@ -1,0 +1,26 @@
+name: cognitive-value-twin
+
+services:
+  twin:
+    build: .
+    image: cognitive-value-twin:local
+    container_name: cognitive-value-twin
+    ports:
+      # Loopback only: reachable from this computer, not from the network.
+      - "127.0.0.1:8876:8876"
+    volumes:
+      - twin-state:/state
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 1g
+    cpus: 2
+    pids_limit: 256
+    restart: "no"
+
+volumes:
+  twin-state:
