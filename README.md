@@ -4,7 +4,29 @@ Local, synthetic, approval-gated studio. It loads the supplied Intelligent Workp
 
 Reference projects under `reference_projects/` are unchanged inputs.
 
-## Start
+## Quick start (one click)
+
+Requires Python 3.11+ and Node.js 20.19+ or 22.12+ (on a Mac: `brew install python@3.12 node`). No API keys.
+
+- **Mac:** double-click `Run Twin.command` in Finder. The first time, macOS may ask you to confirm: right-click the file, choose **Open**, then **Open** again.
+- **Terminal (Mac or Linux):** `./scripts/run_twin.sh`
+
+The launcher:
+- checks the Python and Node versions;
+- creates `.venv` and installs packages, but only on the first run or when `requirements.txt` or `package-lock.json` changes;
+- starts the API on port 8876 and the web app on port 5173, then opens the browser.
+
+Close the window or press Ctrl+C to stop both servers. Logs go to `.run/`.
+
+| Option | Effect |
+| --- | --- |
+| `--update` | `git pull --ff-only` before starting (skipped if you have local changes) |
+| `--share` | Also opens a temporary public Cloudflare link (needs `brew install cloudflared`). Anyone with the link can use the app until you stop it. |
+| `--check` | Check prerequisites and install dependencies without starting |
+
+To pass an option from Finder, run it in Terminal instead, e.g. `./scripts/run_twin.sh --update`.
+
+## Manual start
 
 From the repository root. Python 3.11+ and Node.js 22 are enough. No API keys.
 

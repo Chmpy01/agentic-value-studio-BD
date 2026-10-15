@@ -12,3 +12,4 @@ build/
 state/*.json
 state/*.db
 .DS_Store
+.run/
