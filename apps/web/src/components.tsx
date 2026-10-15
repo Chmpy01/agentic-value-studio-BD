@@ -8,16 +8,21 @@ export function Building({
   nodes,
   active,
   onPick,
+  eyebrow,
+  badge,
 }: {
   src: string
   hotspots: { nodeId: string; x: number; y: number }[]
   nodes: GraphNode[]
   active: string[]
   onPick?: (id: string) => void
+  eyebrow?: string
+  badge?: string
 }) {
   return (
-    <div className="building">
-      <img src={src} alt="" />
+    <div className="canvas">
+      <img className="canvas-image" src={src} alt="" />
+      {eyebrow && <span className="canvas-eyebrow">{eyebrow}</span>}
       {hotspots.map((spot) => {
         const node = nodes.find((item) => item.id === spot.nodeId)
         const on = active.includes(spot.nodeId)
@@ -25,15 +30,18 @@ export function Building({
           <button
             key={spot.nodeId}
             type="button"
-            className={on ? 'hot on' : 'hot'}
+            className={on ? 'hotspot on' : 'hotspot'}
             style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
             aria-label={node?.title || spot.nodeId}
+            title={node?.title}
             onClick={() => onPick?.(spot.nodeId)}
           >
-            <span />
+            <Icon name={node?.icon} size={17} />
           </button>
         )
       })}
+      {badge && <span className="canvas-badge">{badge}</span>}
+      <span className="canvas-watermark">Concept visual · no customer telemetry</span>
     </div>
   )
 }

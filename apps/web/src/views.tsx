@@ -54,65 +54,79 @@ export function StoryView({
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [index, scenes.length, setIndex])
+  const focusLabel = scene.focusNodeIds
+    .map((id) => nodeById(pack.design.nodes, id)?.type)
+    .filter(Boolean)[0]
   return (
-    <section className="stage story-stage">
-      <article className="story-card">
-        <div>
-          <p className="eyebrow">{scene.eyebrow}</p>
-          <h1>{scene.headline}</h1>
-          <p className="lede">{scene.explanation}</p>
-          <ul className="points">
-            {scene.keyPoints.map((point) => (
-              <li key={point}>{point}</li>
+    <section className="section">
+      <ol className="steps" aria-label="Story steps">
+        {scenes.map((item, step) => (
+          <li key={item.id}>
+            <button
+              type="button"
+              className={step === index ? 'step active' : step < index ? 'step done' : 'step'}
+              aria-current={step === index ? 'step' : undefined}
+              onClick={() => setIndex(step)}
+            >
+              <b>{step + 1}</b>
+              {item.title}
+            </button>
+          </li>
+        ))}
+      </ol>
+      <div className="scene-grid">
+        <Building
+          src={pack.imageUrl}
+          hotspots={pack.design.scene.hotspots}
+          nodes={pack.design.nodes}
+          active={scene.focusNodeIds}
+          eyebrow={focusLabel ? `${scene.title} · ${focusLabel} focus` : scene.title}
+          badge={scene.headline}
+        />
+        <article className="card story-copy">
+          <span className="overline">{scene.eyebrow}</span>
+          <h2>{scene.headline}</h2>
+          <p className="lead">{scene.explanation}</p>
+          <div className="rule" />
+          <ol className="point-list">
+            {scene.keyPoints.map((point, number) => (
+              <li key={point} className="point-item">
+                <span className="num">{number + 1}</span>
+                {point}
+              </li>
             ))}
-          </ul>
-        </div>
-        <footer className="story-foot">
-          <div className="dots" aria-label="Story progress">
-            {scenes.map((item, dot) => (
-              <button
-                key={item.id}
-                type="button"
-                className={dot === index ? 'on' : ''}
-                aria-label={item.title}
-                aria-current={dot === index}
-                onClick={() => setIndex(dot)}
-              />
-            ))}
+          </ol>
+          <div className="lens-callout">
+            <Icon name={lensCopy?.icon} />
+            <div>
+              <span className="smlabel">{lensCopy?.label} perspective</span>
+              <p>{scene.lensTalkingPoints[lens]}</p>
+            </div>
           </div>
-          <div className="row-actions">
-            <button type="button" onClick={() => setIndex(Math.max(0, index - 1))} disabled={index === 0}>
-              Back
-            </button>
-            <button type="button" className="primary" onClick={() => setIndex(Math.min(scenes.length - 1, index + 1))} disabled={index === scenes.length - 1}>
-              Next
-            </button>
-            <button type="button" onClick={() => setNotes(true)}>
-              Presenter notes
-            </button>
-          </div>
-        </footer>
-      </article>
-      <aside className="panel">
-        <p className="kicker">{lensCopy?.label}</p>
-        <h2>{scene.title}</h2>
-        <p className="quiet">{lensCopy?.description}</p>
-        <div className="focus-list">
-          {scene.focusNodeIds.map((id) => {
-            const node = nodeById(pack.design.nodes, id)
-            if (!node) return null
-            return (
-              <div key={id} className="focus-item">
-                <Icon name={node.icon} />
-                <div>
-                  <small>{node.type}</small>
-                  <strong>{node.title}</strong>
-                </div>
-              </div>
-            )
-          })}
+        </article>
+      </div>
+      <footer className="footer-bar">
+        <p>
+          <strong>{scene.title}</strong>
+          <span>{scene.transition}</span>
+        </p>
+        <div className="row-actions">
+          <button type="button" className="ui-btn" onClick={() => setNotes(true)}>
+            Presenter notes
+          </button>
+          <button type="button" className="ui-btn" onClick={() => setIndex(Math.max(0, index - 1))} disabled={index === 0}>
+            Back
+          </button>
+          <button
+            type="button"
+            className="ui-btn primary"
+            onClick={() => setIndex(Math.min(scenes.length - 1, index + 1))}
+            disabled={index === scenes.length - 1}
+          >
+            Continue
+          </button>
         </div>
-      </aside>
+      </footer>
       <Drawer open={notes} title="Presenter notes" onClose={() => setNotes(false)}>
         <p>{scene.presenterNotes}</p>
         <p className="quiet">{scene.transition}</p>
@@ -256,23 +270,32 @@ export function LiveView({
   const done = new Set(events.filter((event) => event.stage === 'complete' || event.stage === 'decision').map((event) => event.agent))
   const workflow = pack.scenario.workflow.find((step) => step.agent === shown?.agent)
   return (
-    <section className="stage">
+    <section className="section">
+      <ol className="steps" aria-live="polite" aria-label="Agent hand-offs">
+        {FLOW.map((id, number) => {
+          const agent = pack.network.find((item) => item.id === id)
+          const current = shown?.agent === id
+          return (
+            <li key={id}>
+              <span className={current ? 'step active' : done.has(id) ? 'step done' : 'step'}>
+                <b>{number + 1}</b>
+                {agent?.title || id}
+              </span>
+            </li>
+          )
+        })}
+      </ol>
+      <div className="stage">
       <div className="visual-stack">
-        <Building src={pack.imageUrl} hotspots={pack.design.scene.hotspots} nodes={pack.design.nodes} active={active} />
-        <ol className="stepper" aria-live="polite">
-          {FLOW.map((id) => {
-            const agent = pack.network.find((item) => item.id === id)
-            const current = shown?.agent === id
-            return (
-              <li key={id} className={current ? 'current' : done.has(id) ? 'done' : ''}>
-                <span>{agent?.title || id}</span>
-              </li>
-            )
-          })}
-        </ol>
-        <p className="trace-line">
-          {replay ? 'Recorded trace replay' : 'Live audit stream'} · trace {run?.run.traceId || 'not started'}
-        </p>
+        <Building
+          src={pack.imageUrl}
+          hotspots={pack.design.scene.hotspots}
+          nodes={pack.design.nodes}
+          active={active}
+          eyebrow={replay ? 'Recorded trace replay' : run ? `Live audit stream · ${run.run.state}` : 'Ready · synthetic signals'}
+          badge={shown ? `${shown.type} · ${shown.evidenceStatus}` : pack.intent.presentation.title}
+        />
+        <p className="trace-line">trace {run?.run.traceId || 'not started'}</p>
       </div>
       <aside className="panel">
         <div className="control-row">
@@ -367,6 +390,7 @@ export function LiveView({
           </div>
         )}
       </aside>
+      </div>
       <Drawer open={notes} title="Run notes" onClose={() => setNotes(false)}>
         <p>{workflow?.detail || pack.scenario.subtitle}</p>
         <p className="quiet">Synthetic observations. Correlation here is not causation, and a drafted ticket is not a saving.</p>

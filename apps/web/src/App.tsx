@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Moon, Sun } from 'lucide-react'
+import { Boxes, Layers, Moon, Sun } from 'lucide-react'
 import { api } from './api'
 import { Icon } from './icons'
 import type { LensId, ModeId, Navigation, PackDetail, PackSummary, PublicRun } from './types'
@@ -129,59 +129,81 @@ export default function App() {
     )
   }
 
+  const nodeCount = pack.design.nodes.length
+  const edgeCount = pack.design.edges.length
   return (
-    <>
+    <div className="app">
       <a className="skip" href="#workspace">Skip to content</a>
-      <header className="topbar">
-        <div className="brand-row">
-          <div className="brand">
-            <span className="mark" aria-hidden="true" />
-            <div>
-              <strong>{nav.product}</strong>
-              <small>{pack.design.customer?.scope || 'Synthetic reference'}</small>
-            </div>
+      <header className="top">
+        <div className="brand">
+          <span className="mark" aria-hidden="true">
+            <Boxes size={22} strokeWidth={1.75} />
+          </span>
+          <div>
+            <h1>Cognitive Value Studio</h1>
+            <p>Value Twin → governed agent operations</p>
           </div>
-          <label className="select">
-            <span>Industry pack</span>
-            <select
-              value={packId}
-              aria-label="Industry pack"
-              onChange={(event) => setPackId(event.target.value)}
-            >
-              {packs.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
+        </div>
+        <div className="top-actions">
+          <label className="select-wrap">
+            <Layers size={16} strokeWidth={1.75} aria-hidden="true" />
+            <span>
+              <span className="tiny">Loaded knowledge pack</span>
+              <select value={packId} aria-label="Industry pack" onChange={(event) => setPackId(event.target.value)}>
+                {packs.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </span>
           </label>
-          <div className="lenses" role="group" aria-label="Economic lens">
+          <button type="button" className="ui-btn" aria-label="Toggle colour theme" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+            {theme === 'light' ? <Moon size={15} /> : <Sun size={15} />}
+            Theme
+          </button>
+        </div>
+      </header>
+      <div className="shell">
+        <div className="toprow">
+          <nav className="nav" aria-label="Studio modes">
+            {nav.modes.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className={mode === item.id ? 'active' : ''}
+                aria-current={mode === item.id ? 'page' : undefined}
+                onClick={() => setMode(item.id as ModeId)}
+              >
+                <Icon name={item.icon} size={16} />
+                {item.label}
+              </button>
+            ))}
+          </nav>
+          <div className="lens" role="group" aria-label="Economic lens">
             {nav.lenses.map((item) => (
               <button
                 key={item.id}
                 type="button"
-                className={lens === item.id ? 'on' : ''}
+                className={lens === item.id ? 'active' : ''}
+                aria-pressed={lens === item.id}
                 onClick={() => setLens(item.id as LensId)}
               >
-                <Icon name={item.icon} size={15} />
                 {item.label}
               </button>
             ))}
           </div>
-          <span className="badge">Synthetic · no live control</span>
-          <button type="button" className="icon-button" aria-label="Toggle colour theme" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-            {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
-          </button>
         </div>
-        <nav className="modes" aria-label="Studio modes">
-          {nav.modes.map((item) => (
-            <button key={item.id} type="button" className={mode === item.id ? 'on' : ''} onClick={() => setMode(item.id as ModeId)}>
-              <Icon name={item.icon} size={16} />
-              {item.label}
-            </button>
-          ))}
-        </nav>
-      </header>
+        <div className="microbar">
+          <p>
+            <span className="industry">{pack.design.industry}</span>
+            <span className="desc"> · {pack.design.subtitle}</span>
+          </p>
+          <div className="meta">
+            <span className="pill synthetic">Synthetic · no live control</span>
+            <span className="pill">{nodeCount} knowledge nodes · {edgeCount} links</span>
+          </div>
+        </div>
       <main id="workspace">
         {mode === 'story' && (
           <StoryView pack={pack} lens={lens} index={scene} setIndex={chooseScene} notes={notes} setNotes={setNotes} />
@@ -207,6 +229,7 @@ export default function App() {
         {mode === 'evidence' && <EvidenceView pack={pack} lens={lens} run={run} />}
         {mode === 'studio' && <StudioView pack={pack} />}
       </main>
-    </>
+      </div>
+    </div>
   )
 }
