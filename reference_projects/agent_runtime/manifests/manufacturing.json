@@ -1,0 +1,521 @@
+{
+  "apiVersion": "cvs.openai.example/v1alpha1",
+  "kind": "ValueIntentRuntime",
+  "metadata": {
+    "name": "manufacturing-value-ops",
+    "version": "0.1.0",
+    "sourcePackId": "manufacturing",
+    "sourceRuntimeId": "runtime-manufacturing",
+    "status": "synthetic/unvalidated",
+    "compiledExampleDate": "2026-10-09",
+    "sha256": "8a0198e51892cf5b1df0fc64dbf9188eda5dfc81117d2ddd995f6f4534c23f04"
+  },
+  "valueIntent": {
+    "boardObjectives": [
+      {
+        "id": "b1",
+        "name": "Increase reliable throughput"
+      },
+      {
+        "id": "b2",
+        "name": "Reduce cost per good unit"
+      },
+      {
+        "id": "b3",
+        "name": "Protect safe, resilient operations"
+      }
+    ],
+    "owner": "Plant Operations Director",
+    "metric": "OEE / cost per good unit",
+    "baselineText": "Illustrative 8 stops per shift; no validated cost attribution",
+    "targetText": "Test reduction of repeat stops",
+    "hypothesis": "Unquantified pending cycle-time, scrap, margin and maintenance baseline",
+    "valueStatus": "UNVALIDATED",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "name": "Constraint uptime recovery"
+      },
+      {
+        "id": "h2",
+        "name": "Energy intensity improvement"
+      }
+    ],
+    "metricRefs": [
+      {
+        "id": "k1",
+        "name": "OEE, availability, good units"
+      }
+    ]
+  },
+  "evidence": {
+    "sources": [
+      {
+        "id": "d1",
+        "name": "OT historian / MES / PLC events"
+      }
+    ],
+    "snapshots": [
+      {
+        "source": "OT historian",
+        "name": "Compressor micro-stops",
+        "value": "8 / shift",
+        "quality": "simulated"
+      },
+      {
+        "source": "MES",
+        "name": "Output variance",
+        "value": "−6.4%",
+        "quality": "simulated"
+      },
+      {
+        "source": "CMMS",
+        "name": "Backlog",
+        "value": "5 open",
+        "quality": "simulated"
+      }
+    ],
+    "provenance": "synthetic",
+    "confounders": [
+      "weather and occupancy mix",
+      "bookings, safety overrides",
+      "asset operating state"
+    ],
+    "verification": "counterfactual required; no benefit certified"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "b1",
+        "type": "board",
+        "title": "Increase reliable throughput",
+        "summary": "Lift constrained production capacity without unnecessary capital",
+        "icon": "target",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "b2",
+        "type": "board",
+        "title": "Reduce cost per good unit",
+        "summary": "Reduce downtime and energy intensity",
+        "icon": "target",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "b3",
+        "type": "board",
+        "title": "Protect safe, resilient operations",
+        "summary": "Improve safety, cyber resilience and traceability",
+        "icon": "target",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f1",
+        "type": "function",
+        "title": "Plant director",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f2",
+        "type": "function",
+        "title": "Production / Quality",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f3",
+        "type": "function",
+        "title": "Maintenance",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f4",
+        "type": "function",
+        "title": "EHS / Sustainability",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f5",
+        "type": "function",
+        "title": "OT / IT / Finance",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "s1",
+        "type": "signal",
+        "title": "Repeated micro-stops",
+        "summary": "Historian and shift records suggest recurring losses at a constrained workstation.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "asset",
+        "sourceId": "d1",
+        "sceneXY": [
+          31,
+          38
+        ]
+      },
+      {
+        "id": "d1",
+        "type": "source",
+        "title": "OT historian / MES / PLC events",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      },
+      {
+        "id": "s2",
+        "type": "signal",
+        "title": "Energy per good unit",
+        "summary": "Energy peaks may not align with productive machine time.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "energy",
+        "sourceId": "d2",
+        "sceneXY": [
+          63,
+          28
+        ]
+      },
+      {
+        "id": "s3",
+        "type": "signal",
+        "title": "Condition alerts vs backlog",
+        "summary": "Maintenance flags coincide with repeat work orders and spares delays.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "signal",
+        "sourceId": "d3",
+        "sceneXY": [
+          56,
+          61
+        ]
+      },
+      {
+        "id": "h1",
+        "type": "hypothesis",
+        "title": "Constraint uptime recovery",
+        "summary": "Run a measured maintenance and scheduling intervention against baseline OEE loss.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k1",
+        "financialModel": {
+          "annualPoolGBP": 42000000,
+          "opportunityPct": 3.2,
+          "captureFactor": 0.65,
+          "implementationGBP": 520000,
+          "serviceAnnualGBP": 140000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k1",
+        "type": "metric",
+        "title": "OEE, availability, good units",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "h2",
+        "type": "hypothesis",
+        "title": "Energy intensity improvement",
+        "summary": "Test equipment scheduling and idle-state management subject to production constraints.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k2",
+        "financialModel": {
+          "annualPoolGBP": 8000000,
+          "opportunityPct": 7,
+          "captureFactor": 0.65,
+          "implementationGBP": 380000,
+          "serviceAnnualGBP": 100000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "c1",
+        "type": "capability",
+        "title": "Cisco industrial networking",
+        "summary": "Resilient plant connectivity and segmentation",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r1",
+        "type": "risk",
+        "title": "Assurance control 1",
+        "summary": "No direct autonomous control of safety-critical OT in the prototype",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v1",
+        "type": "stream",
+        "title": "Grow",
+        "summary": "Increase revenue or capacity",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v2",
+        "type": "stream",
+        "title": "Optimise",
+        "summary": "Improve asset and resource efficiency",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v6",
+        "type": "stream",
+        "title": "Realise",
+        "summary": "Prove measured, attributable outcomes",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      }
+    ],
+    "edges": [
+      {
+        "from": "b1",
+        "to": "f1",
+        "relation": "owned-by",
+        "rationale": "Executive priority requires accountable business ownership."
+      },
+      {
+        "from": "b1",
+        "to": "v1",
+        "relation": "contributes-to",
+        "rationale": "The outcome maps to an enterprise value stream."
+      },
+      {
+        "from": "f1",
+        "to": "s1",
+        "relation": "informed-by",
+        "rationale": "Function reviews the relevant operational signal."
+      },
+      {
+        "from": "d1",
+        "to": "s1",
+        "relation": "produces",
+        "rationale": "Data supports signal interpretation, subject to access and quality."
+      },
+      {
+        "from": "s1",
+        "to": "h1",
+        "relation": "supports-hypothesis",
+        "rationale": "Signal is evidence for a proposition, not proof of causality."
+      },
+      {
+        "from": "h1",
+        "to": "k1",
+        "relation": "measured-by",
+        "rationale": "The metric quantifies the hypothesised business impact."
+      },
+      {
+        "from": "h1",
+        "to": "c1",
+        "relation": "requires-capability",
+        "rationale": "Technology requirement follows the validated opportunity."
+      },
+      {
+        "from": "h1",
+        "to": "r1",
+        "relation": "constrained-by",
+        "rationale": "Risk and assurance apply before change."
+      },
+      {
+        "from": "h1",
+        "to": "v2",
+        "relation": "contributes-to",
+        "rationale": "Outcome ties to value stream economics."
+      },
+      {
+        "from": "k1",
+        "to": "v6",
+        "relation": "proves",
+        "rationale": "Verification supports realised value."
+      },
+      {
+        "from": "b2",
+        "to": "f2",
+        "relation": "owned-by",
+        "rationale": "Executive priority requires accountable business ownership."
+      },
+      {
+        "from": "b2",
+        "to": "v2",
+        "relation": "contributes-to",
+        "rationale": "The outcome maps to an enterprise value stream."
+      },
+      {
+        "from": "b3",
+        "to": "f3",
+        "relation": "owned-by",
+        "rationale": "Executive priority requires accountable business ownership."
+      },
+      {
+        "from": "f3",
+        "to": "s3",
+        "relation": "informed-by",
+        "rationale": "Function reviews the relevant operational signal."
+      },
+      {
+        "from": "b1",
+        "to": "f4",
+        "relation": "sponsored-by",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "b2",
+        "to": "f5",
+        "relation": "governed-by",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "s1",
+        "to": "h2",
+        "relation": "correlates-with",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "s2",
+        "to": "h1",
+        "relation": "correlates-with",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      }
+    ],
+    "primaryRefIds": [
+      "b1",
+      "b2",
+      "f3",
+      "s1",
+      "h1",
+      "k1"
+    ]
+  },
+  "agentPlan": {
+    "strategy": "coordinator-with-role-handlers",
+    "agents": [
+      {
+        "id": "sense",
+        "title": "Signal Steward",
+        "authority": "read-only",
+        "purpose": "Collect signals; inspect provenance and freshness"
+      },
+      {
+        "id": "context",
+        "title": "Context Resolver",
+        "authority": "read-only",
+        "purpose": "Join event against value graph and responsibilities"
+      },
+      {
+        "id": "value",
+        "title": "Value Reasoner",
+        "authority": "recommend",
+        "purpose": "Correlate evidence; estimate opportunity without claiming causality"
+      },
+      {
+        "id": "plan",
+        "title": "Intervention Planner",
+        "authority": "recommend",
+        "purpose": "Produce alternatives, assumptions and risk controls"
+      },
+      {
+        "id": "guard",
+        "title": "Policy & Risk Gate",
+        "authority": "deterministic",
+        "purpose": "Check tools, scope and approval conditions"
+      },
+      {
+        "id": "act",
+        "title": "Action Broker",
+        "authority": "simulated-ticket",
+        "purpose": "Draft non-operational work order after human approval"
+      },
+      {
+        "id": "verify",
+        "title": "Outcome Auditor",
+        "authority": "read-only",
+        "purpose": "Record post-action measurement as pending"
+      }
+    ],
+    "flow": [
+      "sense",
+      "context",
+      "value",
+      "plan",
+      "guard",
+      "human-approval",
+      "act",
+      "verify"
+    ]
+  },
+  "governance": {
+    "mode": "SHADOW",
+    "minimumEvidence": "customer-verified before financial claim",
+    "approval": {
+      "required": true,
+      "role": "Maintenance + OT/EHS approval"
+    },
+    "allowedActions": [
+      "read_synthetic_events",
+      "reason_on_graph",
+      "draft_work_order"
+    ],
+    "deniedActions": [
+      "bms.setpoint.write",
+      "plc.write",
+      "access_control.write",
+      "production.system.write"
+    ],
+    "riskBoundary": "Worker safety, OT segmentation, change control",
+    "externalSystemsEnabled": false
+  },
+  "commercial": {
+    "partnerRole": "OT integrator, reliability MSP, machine OEM",
+    "ciscoCapabilityPositioning": "Industrial networking, OT visibility/security, observability integrations",
+    "noRevenueOrROIClaimsWithoutMeasuredEvidence": true
+  },
+  "runtime": {
+    "eventSource": "embedded-synthetic-snapshot",
+    "eventTimeoutSeconds": 15,
+    "idempotencyRequired": true,
+    "auditRequired": true,
+    "outcomeState": "NOT_MEASURED"
+  },
+  "presentation": {
+    "title": "Resilient Manufacturing Site",
+    "subtitle": "OT historian + quality + maintenance → production resilience and cost per good unit",
+    "scene": "manufacturing",
+    "industry": "Industrial facilities"
+  }
+}

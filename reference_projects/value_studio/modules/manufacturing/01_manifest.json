@@ -1,0 +1,42 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "manufacturing",
+  "moduleId": "01_manifest",
+  "payload": {
+    "schemaVersion": "1.0.0",
+    "packId": "manufacturing",
+    "name": "The Resilient Production Site",
+    "industry": "Manufacturing & industrial facilities",
+    "subtitle": "From connected plant to OEE, energy per unit, safety and production resilience",
+    "customer": {
+      "name": "Synthetic reference enterprise",
+      "sector": "Manufacturing & industrial facilities",
+      "scope": "Illustrative account with synthetic operational and economic data"
+    },
+    "status": "synthetic",
+    "provenance": {
+      "method": "illustrative-workshop",
+      "created": "2026-10-09",
+      "disclaimer": "All signals and financial numbers are synthetic, not customer telemetry or guaranteed value."
+    },
+    "outcomeTags": [
+      "Grow",
+      "Optimise",
+      "Protect",
+      "Operate",
+      "Govern",
+      "Realise"
+    ],
+    "validation": {
+      "missingData": [
+        "Customer baseline",
+        "Commercial cost owner",
+        "Data-access approvals",
+        "Named sponsor",
+        "Measurement agreement"
+      ],
+      "stage": "Exploratory"
+    }
+  }
+}

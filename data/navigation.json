@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "product": "Cognitive Value → Agentic Operations Studio",
+  "modes": [
+    {"id": "story", "label": "Guided Story", "icon": "play"},
+    {"id": "twin", "label": "Design-Time Value Twin", "icon": "waypoints"},
+    {"id": "live", "label": "Live Agent Operations", "icon": "radio"},
+    {"id": "network", "label": "Agent Network", "icon": "network"},
+    {"id": "evidence", "label": "Value Evidence", "icon": "shield"},
+    {"id": "studio", "label": "Pack Studio", "icon": "layers"}
+  ],
+  "lenses": [
+    {"id": "customer", "label": "Customer", "icon": "building"},
+    {"id": "partner", "label": "Partner", "icon": "handshake"},
+    {"id": "cisco", "label": "Cisco + Ecosystem", "icon": "network"}
+  ]
+}

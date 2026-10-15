@@ -1,0 +1,42 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "retail",
+  "moduleId": "01_manifest",
+  "payload": {
+    "schemaVersion": "1.0.0",
+    "packId": "retail",
+    "name": "The Connected Retail Estate",
+    "industry": "Retail stores & omnichannel operations",
+    "subtitle": "From smart stores to conversion, availability, energy and estate economics",
+    "customer": {
+      "name": "Synthetic reference enterprise",
+      "sector": "Retail stores & omnichannel operations",
+      "scope": "Illustrative account with synthetic operational and economic data"
+    },
+    "status": "synthetic",
+    "provenance": {
+      "method": "illustrative-workshop",
+      "created": "2026-10-09",
+      "disclaimer": "All signals and financial numbers are synthetic, not customer telemetry or guaranteed value."
+    },
+    "outcomeTags": [
+      "Grow",
+      "Optimise",
+      "Protect",
+      "Operate",
+      "Govern",
+      "Realise"
+    ],
+    "validation": {
+      "missingData": [
+        "Customer baseline",
+        "Commercial cost owner",
+        "Data-access approvals",
+        "Named sponsor",
+        "Measurement agreement"
+      ],
+      "stage": "Exploratory"
+    }
+  }
+}

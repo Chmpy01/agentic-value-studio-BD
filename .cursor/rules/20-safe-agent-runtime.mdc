@@ -1,0 +1,11 @@
+---
+description: Secure and govern all agent runtime components
+alwaysApply: true
+---
+- Safe default is synthetic, localhost, shadow/read-only; no external connector secrets required.
+- HARD DENY bms.setpoint.write, plc.write, access_control.write, production.system.write; no code path may execute these.
+- Policy checks are deterministic and out-of-band from model output; human approval is recorded with person/time/action/intent hash.
+- Rejected, expired or mismatched approvals block actions. 'Approval' only permits a simulated ticket in this prototype.
+- Add idempotency, bounded retries, event validation, timeouts, trace IDs, audit records and failure paths.
+- Log model output separately from verified facts and tool results. Avoid secret or PII logging.
+- Use a strict connector interface and deny-by-default allowlist. No eval of generated scripts or untrusted prompt text.

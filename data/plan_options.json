@@ -1,0 +1,17 @@
+{
+  "office": [
+    "Review occupied hours versus HVAC schedule",
+    "Check IEQ and accessibility overrides",
+    "Propose FM schedule review work order"
+  ],
+  "retail": [
+    "Review refrigeration exception with store duty manager",
+    "Check product temperature limits",
+    "Draft inspection work order"
+  ],
+  "manufacturing": [
+    "Review machine micro-stop events with plant operations",
+    "Check production scheduling and safety",
+    "Draft maintenance analysis work order"
+  ]
+}

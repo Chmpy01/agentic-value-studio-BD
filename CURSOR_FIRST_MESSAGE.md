@@ -1,0 +1,9 @@
+# First message to paste into Cursor Agent
+
+Implement the project specified by @MASTER_CURSOR_PROMPT.md, following @AGENTS.md and the repository's .cursor/rules. This folder includes three working reference projects, a 3D scene library, three graph packs, compiled Value Intent manifests, schemas, visual references, and design-time AI playbooks. **Reuse and consolidate those exact assets; don't recreate them from scratch.**
+
+Start by running `python3 scripts/check_assets.py`, then run the original Python runtime's tests and inspect its architecture. Produce a concise audit, file mapping and phased plan. Next implement only Phase 1: a locally executable, polished React + Python studio that loads office/retail/manufacturing JSON packs and shows a truly event-driven Observe -> Context -> Value -> Plan -> Policy -> Human Approval -> Simulated Work Order -> Evidence Pending workflow. Make the agent graph animate from backend trace events, not fabricated browser timings. Show separate Design Twin, Live Operations, Agent Network, Evidence and Guided Story screens, with separate Customer/Partner/Cisco lenses. 
+
+Safety: no Cisco credentials, no remote access, no real OT/BMS/PLC writes. Reject and expired approval paths must work; the allowed operation is a simulated local work-order draft only. Modelled savings must remain `NOT_MEASURED` until verified. The existing runtime is deterministic and not yet a distributed AGNTCY system; do not mislabel it.
+
+Deliver tested, documented startup commands and screenshots. Only after Phase 1 passes should we move to real LangGraph persistence and a separately deployed A2A agent, then AGNTCY Directory/SLIM when demonstrably warranted. Fix inconsistent port docs and legacy absolute validation paths in the new implementation. Do not claim success without executing tests. Don't ask me for setup details already in the project.

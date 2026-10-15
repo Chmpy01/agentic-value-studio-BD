@@ -1,0 +1,18 @@
+site_kind,case_id,floor,x,z,layer,stakeholder,metric,illustrative_value_GBP,partner_offer,cisco_ecosystem,data_status
+office,occ,3,-4,1,people,Head of Workplace,£ per occupied seat and utilisation %,460000,Workplace analytics assessment + integration + managed occupancy insights,Cisco wireless + Cisco Spaces + Webex / ecosystem integration,synthetic
+office,energy,4,-2,-2,energy,Energy Director,"kWh/m², £/year, tCO₂e",300000,Energy advisory + OT integration + optimisation-as-a-service,Industrial networking + secure IoT visibility + specialist BMS / analytics partner,synthetic
+office,asset,4,5,-1.9,asset,Facilities Director,"MTBF, maintenance cost, availability",210000,"Asset services, field maintenance, assurance contracts","Resilient OT connectivity, cyber segmentation, observability + FM ISV",synthetic
+office,security,1,5,3.8,security,CISO / Security Director,"MTTD, MTTR, policy coverage",125000,OT discovery + security design + 24×7 managed detection,"Cyber controls, segmentation and cross-domain observability",synthetic
+office,finance,2,2.3,1.9,finance,CFO / Real Estate VP,"NPV, £/sqm, payback months",640000,"Value baseline pack, finance model, programme integration",Cisco-enabled contextual telemetry with commercial data partners,synthetic
+office,experience,2,-5,-0.7,people,CHRO / Workplace Lead,"IEQ compliance, complaints/100 people",90000,Workplace advisory + IEQ monitoring service,Wireless sensing context + Webex workplace + specialist sensors,synthetic
+office,connectivity,1,-3,3,ecosystem,CIO / Head of OT,"Data quality, latency, £/integration",115000,Architecture + integration + managed data quality SLAs,"Networking, IoT, security, observability, ecosystem data platforms",synthetic
+manufacturing,mprod,1,-3,1,space,Plant Manager,"OEE pts, throughput units/day",520000,"OT data integration, line advisory and managed analytics","Industrial Ethernet, OT segmentation, edge connectivity",synthetic
+manufacturing,menergy,2,-3,-3,energy,Energy / Sustainability Lead,"£/unit, kWh/production unit",290000,Energy managed optimisation with controls OEM,IT/OT connectivity and visibility foundation,synthetic
+manufacturing,massets,2,4,-2,asset,Head of Maintenance,Downtime hrs and £/lost hr,440000,Predictive maintenance + subscription + field services,Industrial network and cyber resilience + analytics ISV,synthetic
+manufacturing,msafe,1,5,3,security,EHS Director,"Incidents, response time, exposure",80000,Safety design / change management / managed monitoring,OT segmentation + secure transport with safety specialist,synthetic
+manufacturing,mot,1,-5,-3,ecosystem,OT Security Lead,"Asset coverage, policy drift, time-to-contain",100000,Managed OT security and cyber assessment,"Industrial security, network assurance and visibility",synthetic
+retail,rjourney,1,-4,1,people,Commercial / Trading Director,"Conversion %, £/visit",380000,Retail advisory + store analytics subscription,Wireless + location context + ISV POS integration,synthetic
+retail,renergy,2,0,-3,energy,Head of Energy,kWh/store and fault frequency,210000,Energy/FM optimisation-as-a-service,Secure site connectivity + BMS specialist,synthetic
+retail,rqueue,1,4,2,space,Retail Operations VP,"Queue minutes, labour £/sales",180000,Workplace analytics and managed performance,Network/location context + retail specialist analytics,synthetic
+retail,rsecurity,1,-5,-3,security,Loss Prevention Director,"Shrink %, incidents, response",165000,Security integration + monitored services,Network cyber and surveillance ecosystem integration,synthetic
+retail,rfulfil,2,5,-2,ecosystem,Omnichannel Director,"SLA %, labour hrs/order",240000,Workflow integration + managed fulfilment analytics,Network + secure API fabric + specialist apps,synthetic

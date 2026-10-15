@@ -1,0 +1,118 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "manufacturing",
+  "moduleId": "04_value",
+  "payload": {
+    "nodes": [
+      {
+        "id": "h1",
+        "type": "hypothesis",
+        "title": "Constraint uptime recovery",
+        "summary": "Run a measured maintenance and scheduling intervention against baseline OEE loss.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k1",
+        "financialModel": {
+          "annualPoolGBP": 42000000,
+          "opportunityPct": 3.2,
+          "captureFactor": 0.65,
+          "implementationGBP": 520000,
+          "serviceAnnualGBP": 140000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k1",
+        "type": "metric",
+        "title": "OEE, availability, good units",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "h2",
+        "type": "hypothesis",
+        "title": "Energy intensity improvement",
+        "summary": "Test equipment scheduling and idle-state management subject to production constraints.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k2",
+        "financialModel": {
+          "annualPoolGBP": 8000000,
+          "opportunityPct": 7,
+          "captureFactor": 0.65,
+          "implementationGBP": 380000,
+          "serviceAnnualGBP": 100000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k2",
+        "type": "metric",
+        "title": "kWh / good unit",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "h3",
+        "type": "hypothesis",
+        "title": "Predictive maintenance workflow",
+        "summary": "Test condition-based interventions while separating genuine early warnings from noise.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k3",
+        "financialModel": {
+          "annualPoolGBP": 9000000,
+          "opportunityPct": 7.5,
+          "captureFactor": 0.65,
+          "implementationGBP": 330000,
+          "serviceAnnualGBP": 125000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k3",
+        "type": "metric",
+        "title": "MTBF, MTTR, scrap",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r1",
+        "type": "risk",
+        "title": "Assurance control 1",
+        "summary": "No direct autonomous control of safety-critical OT in the prototype",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r2",
+        "type": "risk",
+        "title": "Assurance control 2",
+        "summary": "Production loss causality must be validated against mix and shift context",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r3",
+        "type": "risk",
+        "title": "Assurance control 3",
+        "summary": "Cyber segmentation and permitted change windows are prerequisites",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      }
+    ]
+  }
+}

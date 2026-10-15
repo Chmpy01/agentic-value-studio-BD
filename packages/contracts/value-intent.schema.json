@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cognitivevalue.example/schemas/value-intent/v1",
+  "title": "Cognitive Value Intent",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "packId",
+    "intentVersion",
+    "intentHash",
+    "valueIntent",
+    "evidence",
+    "graph",
+    "agentPlan",
+    "governance",
+    "commercial",
+    "runtime"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "cvs.intent/v1"},
+    "kind": {"const": "ValueIntent"},
+    "packId": {"type": "string", "minLength": 3},
+    "intentVersion": {"type": "string"},
+    "intentHash": {"type": "string", "minLength": 64, "maxLength": 64},
+    "valueIntent": {
+      "type": "object",
+      "required": ["owner", "metric", "baselineText", "targetText", "hypothesis", "valueStatus", "primaryRefIds"],
+      "properties": {
+        "valueStatus": {"const": "UNVALIDATED"},
+        "primaryRefIds": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["provenance", "evidenceStatus", "snapshots", "confounders"],
+      "properties": {
+        "provenance": {"const": "synthetic"},
+        "evidenceStatus": {"const": "NOT_MEASURED"}
+      }
+    },
+    "governance": {
+      "type": "object",
+      "required": ["mode", "approval", "allowedActions", "deniedActions", "externalSystemsEnabled"],
+      "properties": {
+        "mode": {"const": "SHADOW"},
+        "externalSystemsEnabled": {"const": false},
+        "deniedActions": {
+          "type": "array",
+          "minItems": 4,
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["outcomeState", "idempotencyRequired", "auditRequired"],
+      "properties": {"outcomeState": {"const": "NOT_MEASURED"}}
+    },
+    "commercial": {
+      "type": "object",
+      "required": ["customer", "partner", "cisco", "separation"]
+    },
+    "graph": {
+      "type": "object",
+      "required": ["nodes", "edges", "primaryRefIds"]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+services:
+  value-runtime:
+    build: .
+    ports:
+      - "127.0.0.1:8876:8876"
+    environment:
+      BIND_HOST: "0.0.0.0"
+    volumes:
+      - ./state:/app/state
+    # Published only on host loopback (not public network).

@@ -1,0 +1,1226 @@
+{
+  "schemaVersion": "1.0.0",
+  "packId": "manufacturing",
+  "name": "The Resilient Production Site",
+  "industry": "Manufacturing & industrial facilities",
+  "subtitle": "From connected plant to OEE, energy per unit, safety and production resilience",
+  "customer": {
+    "name": "Synthetic reference enterprise",
+    "sector": "Manufacturing & industrial facilities",
+    "scope": "Illustrative account with synthetic operational and economic data"
+  },
+  "status": "synthetic",
+  "provenance": {
+    "method": "illustrative-workshop",
+    "created": "2026-10-09",
+    "disclaimer": "All signals and financial numbers are synthetic, not customer telemetry or guaranteed value."
+  },
+  "theme": {
+    "accent": "#16a78a",
+    "visualKey": "manufacturing"
+  },
+  "navigation": [
+    {
+      "id": "story",
+      "label": "Guided Story",
+      "icon": "play"
+    },
+    {
+      "id": "signals",
+      "label": "Signal Reasoning",
+      "icon": "activity"
+    },
+    {
+      "id": "explore",
+      "label": "Value Explorer",
+      "icon": "spark"
+    },
+    {
+      "id": "graph",
+      "label": "Value Graph",
+      "icon": "network"
+    },
+    {
+      "id": "evidence",
+      "label": "Evidence & Risk",
+      "icon": "shield"
+    },
+    {
+      "id": "economics",
+      "label": "Economics",
+      "icon": "chart"
+    },
+    {
+      "id": "new",
+      "label": "New Customer",
+      "icon": "users"
+    },
+    {
+      "id": "lab",
+      "label": "Pack Studio",
+      "icon": "database"
+    }
+  ],
+  "lenses": {
+    "customer": {
+      "label": "Customer",
+      "icon": "building",
+      "description": "The customer buys a measurable change to enterprise performance — not a collection of systems."
+    },
+    "partner": {
+      "label": "Partner",
+      "icon": "handshake",
+      "description": "The partner monetises discovery, integration, managed operations and value assurance."
+    },
+    "cisco": {
+      "label": "Cisco + ecosystem",
+      "icon": "network",
+      "description": "Capabilities are selected only after a value hypothesis and delivery dependencies are understood."
+    }
+  },
+  "nodes": [
+    {
+      "id": "b1",
+      "type": "board",
+      "title": "Increase reliable throughput",
+      "summary": "Lift constrained production capacity without unnecessary capital",
+      "icon": "target",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "b2",
+      "type": "board",
+      "title": "Reduce cost per good unit",
+      "summary": "Reduce downtime and energy intensity",
+      "icon": "target",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "b3",
+      "type": "board",
+      "title": "Protect safe, resilient operations",
+      "summary": "Improve safety, cyber resilience and traceability",
+      "icon": "target",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "f1",
+      "type": "function",
+      "title": "Plant director",
+      "summary": "Accountable decision maker in this value stream.",
+      "icon": "users",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "f2",
+      "type": "function",
+      "title": "Production / Quality",
+      "summary": "Accountable decision maker in this value stream.",
+      "icon": "users",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "f3",
+      "type": "function",
+      "title": "Maintenance",
+      "summary": "Accountable decision maker in this value stream.",
+      "icon": "users",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "f4",
+      "type": "function",
+      "title": "EHS / Sustainability",
+      "summary": "Accountable decision maker in this value stream.",
+      "icon": "users",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "f5",
+      "type": "function",
+      "title": "OT / IT / Finance",
+      "summary": "Accountable decision maker in this value stream.",
+      "icon": "users",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "s1",
+      "type": "signal",
+      "title": "Repeated micro-stops",
+      "summary": "Historian and shift records suggest recurring losses at a constrained workstation.",
+      "icon": "activity",
+      "evidenceStatus": "hypothesis",
+      "confidence": "to-validate",
+      "layer": "asset",
+      "sourceId": "d1",
+      "sceneXY": [
+        31,
+        38
+      ]
+    },
+    {
+      "id": "d1",
+      "type": "source",
+      "title": "OT historian / MES / PLC events",
+      "summary": "Potential source of evidence; availability must be confirmed.",
+      "icon": "database",
+      "evidenceStatus": "unverified",
+      "confidence": "to-validate",
+      "dataClassification": "operational / restricted"
+    },
+    {
+      "id": "s2",
+      "type": "signal",
+      "title": "Energy per good unit",
+      "summary": "Energy peaks may not align with productive machine time.",
+      "icon": "activity",
+      "evidenceStatus": "hypothesis",
+      "confidence": "to-validate",
+      "layer": "energy",
+      "sourceId": "d2",
+      "sceneXY": [
+        63,
+        28
+      ]
+    },
+    {
+      "id": "d2",
+      "type": "source",
+      "title": "Meters / production counts / tariffs",
+      "summary": "Potential source of evidence; availability must be confirmed.",
+      "icon": "database",
+      "evidenceStatus": "unverified",
+      "confidence": "to-validate",
+      "dataClassification": "operational / restricted"
+    },
+    {
+      "id": "s3",
+      "type": "signal",
+      "title": "Condition alerts vs backlog",
+      "summary": "Maintenance flags coincide with repeat work orders and spares delays.",
+      "icon": "activity",
+      "evidenceStatus": "hypothesis",
+      "confidence": "to-validate",
+      "layer": "signal",
+      "sourceId": "d3",
+      "sceneXY": [
+        56,
+        61
+      ]
+    },
+    {
+      "id": "d3",
+      "type": "source",
+      "title": "CMMS / vibration sensors / work orders",
+      "summary": "Potential source of evidence; availability must be confirmed.",
+      "icon": "database",
+      "evidenceStatus": "unverified",
+      "confidence": "to-validate",
+      "dataClassification": "operational / restricted"
+    },
+    {
+      "id": "h1",
+      "type": "hypothesis",
+      "title": "Constraint uptime recovery",
+      "summary": "Run a measured maintenance and scheduling intervention against baseline OEE loss.",
+      "icon": "spark",
+      "evidenceStatus": "hypothesis",
+      "confidence": "to-validate",
+      "metricId": "k1",
+      "financialModel": {
+        "annualPoolGBP": 42000000,
+        "opportunityPct": 3.2,
+        "captureFactor": 0.65,
+        "implementationGBP": 520000,
+        "serviceAnnualGBP": 140000,
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "k1",
+      "type": "metric",
+      "title": "OEE, availability, good units",
+      "summary": "Outcome metric requiring baseline, owner and method.",
+      "icon": "chart",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "h2",
+      "type": "hypothesis",
+      "title": "Energy intensity improvement",
+      "summary": "Test equipment scheduling and idle-state management subject to production constraints.",
+      "icon": "spark",
+      "evidenceStatus": "hypothesis",
+      "confidence": "to-validate",
+      "metricId": "k2",
+      "financialModel": {
+        "annualPoolGBP": 8000000,
+        "opportunityPct": 7,
+        "captureFactor": 0.65,
+        "implementationGBP": 380000,
+        "serviceAnnualGBP": 100000,
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "k2",
+      "type": "metric",
+      "title": "kWh / good unit",
+      "summary": "Outcome metric requiring baseline, owner and method.",
+      "icon": "chart",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "h3",
+      "type": "hypothesis",
+      "title": "Predictive maintenance workflow",
+      "summary": "Test condition-based interventions while separating genuine early warnings from noise.",
+      "icon": "spark",
+      "evidenceStatus": "hypothesis",
+      "confidence": "to-validate",
+      "metricId": "k3",
+      "financialModel": {
+        "annualPoolGBP": 9000000,
+        "opportunityPct": 7.5,
+        "captureFactor": 0.65,
+        "implementationGBP": 330000,
+        "serviceAnnualGBP": 125000,
+        "currency": "GBP"
+      }
+    },
+    {
+      "id": "k3",
+      "type": "metric",
+      "title": "MTBF, MTTR, scrap",
+      "summary": "Outcome metric requiring baseline, owner and method.",
+      "icon": "chart",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "c1",
+      "type": "capability",
+      "title": "Cisco industrial networking",
+      "summary": "Resilient plant connectivity and segmentation",
+      "icon": "network",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "c2",
+      "type": "capability",
+      "title": "Cisco security for IT/OT",
+      "summary": "Visibility, policy and protected remote access",
+      "icon": "network",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "c3",
+      "type": "capability",
+      "title": "Splunk / observability",
+      "summary": "Correlated events from authorised operational sources",
+      "icon": "network",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "p1",
+      "type": "partner",
+      "title": "Industrial engineering / OT SI",
+      "summary": "Safety-aligned integration with MES, historian and PLC estates",
+      "icon": "handshake",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "p2",
+      "type": "partner",
+      "title": "OEM / machine specialist",
+      "summary": "Asset performance and control expertise",
+      "icon": "handshake",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "p3",
+      "type": "partner",
+      "title": "Industrial managed services partner",
+      "summary": "Reliability analytics and governed operational support",
+      "icon": "handshake",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "o1",
+      "type": "offer",
+      "title": "Value stream diagnostic",
+      "summary": "Plant baseline and economic opportunity sizing",
+      "icon": "briefcase",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "o2",
+      "type": "offer",
+      "title": "Industrial integration programme",
+      "summary": "Scoped OT integration with change-control assurance",
+      "icon": "briefcase",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "o3",
+      "type": "offer",
+      "title": "Reliability service",
+      "summary": "Outcome monitoring, subscription and continuous improvement",
+      "icon": "briefcase",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "r1",
+      "type": "risk",
+      "title": "Assurance control 1",
+      "summary": "No direct autonomous control of safety-critical OT in the prototype",
+      "icon": "shield",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "r2",
+      "type": "risk",
+      "title": "Assurance control 2",
+      "summary": "Production loss causality must be validated against mix and shift context",
+      "icon": "shield",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "r3",
+      "type": "risk",
+      "title": "Assurance control 3",
+      "summary": "Cyber segmentation and permitted change windows are prerequisites",
+      "icon": "shield",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "v1",
+      "type": "stream",
+      "title": "Grow",
+      "summary": "Increase revenue or capacity",
+      "icon": "layers",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "v2",
+      "type": "stream",
+      "title": "Optimise",
+      "summary": "Improve asset and resource efficiency",
+      "icon": "layers",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "v3",
+      "type": "stream",
+      "title": "Protect",
+      "summary": "Mitigate financial, operational and cyber risk",
+      "icon": "layers",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "v4",
+      "type": "stream",
+      "title": "Operate",
+      "summary": "Continuously run and improve service",
+      "icon": "layers",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "v5",
+      "type": "stream",
+      "title": "Govern",
+      "summary": "Accountability, evidence, controls and policy",
+      "icon": "layers",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    },
+    {
+      "id": "v6",
+      "type": "stream",
+      "title": "Realise",
+      "summary": "Prove measured, attributable outcomes",
+      "icon": "layers",
+      "evidenceStatus": "illustrative",
+      "confidence": "to-validate"
+    }
+  ],
+  "edges": [
+    {
+      "from": "b1",
+      "to": "f1",
+      "relation": "owned-by",
+      "rationale": "Executive priority requires accountable business ownership."
+    },
+    {
+      "from": "b1",
+      "to": "v1",
+      "relation": "contributes-to",
+      "rationale": "The outcome maps to an enterprise value stream."
+    },
+    {
+      "from": "f1",
+      "to": "s1",
+      "relation": "informed-by",
+      "rationale": "Function reviews the relevant operational signal."
+    },
+    {
+      "from": "d1",
+      "to": "s1",
+      "relation": "produces",
+      "rationale": "Data supports signal interpretation, subject to access and quality."
+    },
+    {
+      "from": "s1",
+      "to": "h1",
+      "relation": "supports-hypothesis",
+      "rationale": "Signal is evidence for a proposition, not proof of causality."
+    },
+    {
+      "from": "h1",
+      "to": "k1",
+      "relation": "measured-by",
+      "rationale": "The metric quantifies the hypothesised business impact."
+    },
+    {
+      "from": "h1",
+      "to": "c1",
+      "relation": "requires-capability",
+      "rationale": "Technology requirement follows the validated opportunity."
+    },
+    {
+      "from": "c1",
+      "to": "p1",
+      "relation": "delivered-with",
+      "rationale": "Partner combines capabilities into an end-to-end solution."
+    },
+    {
+      "from": "p1",
+      "to": "o1",
+      "relation": "monetises-through",
+      "rationale": "Partner commercial motion funds service delivery and improvement."
+    },
+    {
+      "from": "h1",
+      "to": "r1",
+      "relation": "constrained-by",
+      "rationale": "Risk and assurance apply before change."
+    },
+    {
+      "from": "h1",
+      "to": "v2",
+      "relation": "contributes-to",
+      "rationale": "Outcome ties to value stream economics."
+    },
+    {
+      "from": "k1",
+      "to": "v6",
+      "relation": "proves",
+      "rationale": "Verification supports realised value."
+    },
+    {
+      "from": "b2",
+      "to": "f2",
+      "relation": "owned-by",
+      "rationale": "Executive priority requires accountable business ownership."
+    },
+    {
+      "from": "b2",
+      "to": "v2",
+      "relation": "contributes-to",
+      "rationale": "The outcome maps to an enterprise value stream."
+    },
+    {
+      "from": "f2",
+      "to": "s2",
+      "relation": "informed-by",
+      "rationale": "Function reviews the relevant operational signal."
+    },
+    {
+      "from": "d2",
+      "to": "s2",
+      "relation": "produces",
+      "rationale": "Data supports signal interpretation, subject to access and quality."
+    },
+    {
+      "from": "s2",
+      "to": "h2",
+      "relation": "supports-hypothesis",
+      "rationale": "Signal is evidence for a proposition, not proof of causality."
+    },
+    {
+      "from": "h2",
+      "to": "k2",
+      "relation": "measured-by",
+      "rationale": "The metric quantifies the hypothesised business impact."
+    },
+    {
+      "from": "h2",
+      "to": "c2",
+      "relation": "requires-capability",
+      "rationale": "Technology requirement follows the validated opportunity."
+    },
+    {
+      "from": "c2",
+      "to": "p2",
+      "relation": "delivered-with",
+      "rationale": "Partner combines capabilities into an end-to-end solution."
+    },
+    {
+      "from": "p2",
+      "to": "o2",
+      "relation": "monetises-through",
+      "rationale": "Partner commercial motion funds service delivery and improvement."
+    },
+    {
+      "from": "h2",
+      "to": "r2",
+      "relation": "constrained-by",
+      "rationale": "Risk and assurance apply before change."
+    },
+    {
+      "from": "h2",
+      "to": "v1",
+      "relation": "contributes-to",
+      "rationale": "Outcome ties to value stream economics."
+    },
+    {
+      "from": "k2",
+      "to": "v6",
+      "relation": "proves",
+      "rationale": "Verification supports realised value."
+    },
+    {
+      "from": "b3",
+      "to": "f3",
+      "relation": "owned-by",
+      "rationale": "Executive priority requires accountable business ownership."
+    },
+    {
+      "from": "b3",
+      "to": "v3",
+      "relation": "contributes-to",
+      "rationale": "The outcome maps to an enterprise value stream."
+    },
+    {
+      "from": "f3",
+      "to": "s3",
+      "relation": "informed-by",
+      "rationale": "Function reviews the relevant operational signal."
+    },
+    {
+      "from": "d3",
+      "to": "s3",
+      "relation": "produces",
+      "rationale": "Data supports signal interpretation, subject to access and quality."
+    },
+    {
+      "from": "s3",
+      "to": "h3",
+      "relation": "supports-hypothesis",
+      "rationale": "Signal is evidence for a proposition, not proof of causality."
+    },
+    {
+      "from": "h3",
+      "to": "k3",
+      "relation": "measured-by",
+      "rationale": "The metric quantifies the hypothesised business impact."
+    },
+    {
+      "from": "h3",
+      "to": "c3",
+      "relation": "requires-capability",
+      "rationale": "Technology requirement follows the validated opportunity."
+    },
+    {
+      "from": "c3",
+      "to": "p3",
+      "relation": "delivered-with",
+      "rationale": "Partner combines capabilities into an end-to-end solution."
+    },
+    {
+      "from": "p3",
+      "to": "o3",
+      "relation": "monetises-through",
+      "rationale": "Partner commercial motion funds service delivery and improvement."
+    },
+    {
+      "from": "h3",
+      "to": "r3",
+      "relation": "constrained-by",
+      "rationale": "Risk and assurance apply before change."
+    },
+    {
+      "from": "h3",
+      "to": "v4",
+      "relation": "contributes-to",
+      "rationale": "Outcome ties to value stream economics."
+    },
+    {
+      "from": "k3",
+      "to": "v6",
+      "relation": "proves",
+      "rationale": "Verification supports realised value."
+    },
+    {
+      "from": "b1",
+      "to": "f4",
+      "relation": "sponsored-by",
+      "rationale": "Cross-functional link included to avoid siloed value modelling."
+    },
+    {
+      "from": "b2",
+      "to": "f5",
+      "relation": "governed-by",
+      "rationale": "Cross-functional link included to avoid siloed value modelling."
+    },
+    {
+      "from": "b3",
+      "to": "f2",
+      "relation": "sponsored-by",
+      "rationale": "Cross-functional link included to avoid siloed value modelling."
+    },
+    {
+      "from": "s1",
+      "to": "h2",
+      "relation": "correlates-with",
+      "rationale": "Cross-functional link included to avoid siloed value modelling."
+    },
+    {
+      "from": "s2",
+      "to": "h1",
+      "relation": "correlates-with",
+      "rationale": "Cross-functional link included to avoid siloed value modelling."
+    },
+    {
+      "from": "f5",
+      "to": "r2",
+      "relation": "owns-control",
+      "rationale": "Cross-functional link included to avoid siloed value modelling."
+    },
+    {
+      "from": "p2",
+      "to": "p3",
+      "relation": "coordinates-with",
+      "rationale": "Cross-functional link included to avoid siloed value modelling."
+    },
+    {
+      "from": "v5",
+      "to": "r1",
+      "relation": "governs",
+      "rationale": "Cross-functional link included to avoid siloed value modelling."
+    }
+  ],
+  "story": [
+    {
+      "id": "scene-1",
+      "title": "The hidden opportunity",
+      "eyebrow": "01 / 08 · MANUFACTURING",
+      "headline": "Connected machines alone do not guarantee throughput.",
+      "explanation": "Technology data is useful. But the business question remains unanswered when each function sees only its own system.",
+      "visual": "problem",
+      "focusNodeIds": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "keyPoints": [
+        "Product data",
+        "Departmental reports",
+        "Unconnected investment decisions"
+      ],
+      "presenterNotes": "Ask the audience which dashboards they already have. Contrast product insight with enterprise decision quality. Avoid calling current tools broken. Industry-specific context: Traditional smart-factory demos showcase machine telemetry, but executive priorities are throughput and resilience.",
+      "transition": "Next, connect this to start at the board.",
+      "lensTalkingPoints": {
+        "customer": "Decision owner and measurable change: Plant director.",
+        "partner": "Commercial action: Value stream diagnostic.",
+        "cisco": "Capability test: Cisco industrial networking — subject to architecture fit."
+      }
+    },
+    {
+      "id": "scene-2",
+      "title": "Start at the board",
+      "eyebrow": "02 / 08 · MANUFACTURING",
+      "headline": "Begin with output, unit economics and plant resilience.",
+      "explanation": "Begin with strategic demand: decisions and outcomes the leadership team will fund.",
+      "visual": "board",
+      "focusNodeIds": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "keyPoints": [
+        "Increase reliable throughput",
+        "Reduce cost per good unit",
+        "Protect safe, resilient operations"
+      ],
+      "presenterNotes": "Ask for three board objectives and one measurable commitment. Where relevant separate revenue, operating costs, risk and sustainability obligations. Industry-specific context: A plant board wants more good units, lower cost per unit and safe operations.",
+      "transition": "Next, connect this to follow value across functions.",
+      "lensTalkingPoints": {
+        "customer": "Decision owner and measurable change: Plant director.",
+        "partner": "Commercial action: Value stream diagnostic.",
+        "cisco": "Capability test: Cisco industrial networking — subject to architecture fit."
+      }
+    },
+    {
+      "id": "scene-3",
+      "title": "Follow value across functions",
+      "eyebrow": "03 / 08 · MANUFACTURING",
+      "headline": "Follow losses across production, maintenance and finance.",
+      "explanation": "An outcome is shared across functions; costs, owners and evidence are distributed.",
+      "visual": "functions",
+      "focusNodeIds": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5"
+      ],
+      "keyPoints": [
+        "Plant director",
+        "Production / Quality",
+        "Maintenance",
+        "EHS / Sustainability"
+      ],
+      "presenterNotes": "Invite stakeholders to identify who controls actions versus who carries cost or benefit. Accessibility, EHS and privacy can change the solution. Industry-specific context: Plant, maintenance, quality, EHS and finance must share the measured definition of loss.",
+      "transition": "Next, connect this to build the value twin.",
+      "lensTalkingPoints": {
+        "customer": "Decision owner and measurable change: Production / Quality.",
+        "partner": "Commercial action: Value stream diagnostic.",
+        "cisco": "Capability test: Cisco industrial networking — subject to architecture fit."
+      }
+    },
+    {
+      "id": "scene-4",
+      "title": "Build the Value Twin",
+      "eyebrow": "04 / 08 · MANUFACTURING",
+      "headline": "Model production value before a full digital twin.",
+      "explanation": "A Value Twin is a semantic model of customer decisions, signals, assumptions and value — before a full operational digital twin.",
+      "visual": "twin",
+      "focusNodeIds": [
+        "d1",
+        "s1",
+        "d2",
+        "s2",
+        "d3",
+        "s3"
+      ],
+      "keyPoints": [
+        "People + place",
+        "Systems + operations",
+        "Business + financial context"
+      ],
+      "presenterNotes": "Explain the conceptual Value Twin is a linked decision graph: it does NOT need live BMS or a rendered BIM model to begin. Source claims remain provisional. Industry-specific context: The Value Twin connects business constraints to existing OT and enterprise evidence before a full spatial twin.",
+      "transition": "Next, connect this to reason across signals.",
+      "lensTalkingPoints": {
+        "customer": "Decision owner and measurable change: Production / Quality.",
+        "partner": "Commercial action: Industrial integration programme.",
+        "cisco": "Capability test: Cisco security for IT/OT — subject to architecture fit."
+      }
+    },
+    {
+      "id": "scene-5",
+      "title": "Reason across signals",
+      "eyebrow": "05 / 08 · MANUFACTURING",
+      "headline": "Correlate OT and enterprise evidence responsibly.",
+      "explanation": "Reason over evidence from multiple domains; discover patterns while marking uncertainty and testing causality.",
+      "visual": "reason",
+      "focusNodeIds": [
+        "s1",
+        "s2",
+        "s3",
+        "h1",
+        "h2"
+      ],
+      "keyPoints": [
+        "Repeated micro-stops",
+        "Energy per good unit",
+        "Condition alerts vs backlog"
+      ],
+      "presenterNotes": "Discuss correlation versus causation. Confirm data access, quality, time alignment, weather, seasonality, shifts, comparable sites and privacy. Industry-specific context: Micro-stops plus maintenance backlog may indicate a recoverable constraint — subject to plant validation.",
+      "transition": "Next, connect this to test a business hypothesis.",
+      "lensTalkingPoints": {
+        "customer": "Decision owner and measurable change: Maintenance.",
+        "partner": "Commercial action: Industrial integration programme.",
+        "cisco": "Capability test: Cisco security for IT/OT — subject to architecture fit."
+      }
+    },
+    {
+      "id": "scene-6",
+      "title": "Test a business hypothesis",
+      "eyebrow": "06 / 08 · MANUFACTURING",
+      "headline": "Test a safe, financially qualified intervention.",
+      "explanation": "Prioritise measurable interventions, baseline the outcome and design a risk-controlled pilot.",
+      "visual": "hypothesis",
+      "focusNodeIds": [
+        "h1",
+        "k1",
+        "r1"
+      ],
+      "keyPoints": [
+        "Constraint uptime recovery",
+        "Energy intensity improvement",
+        "Predictive maintenance workflow"
+      ],
+      "presenterNotes": "Choose one hypothesis. Agree baseline, test design, owner, benefit formula, risk controls, investment threshold and success/failure triggers. Industry-specific context: A production trial, change controls and measurement plan establish the viable intervention.",
+      "transition": "Next, connect this to orchestrate the ecosystem.",
+      "lensTalkingPoints": {
+        "customer": "Decision owner and measurable change: Maintenance.",
+        "partner": "Commercial action: Industrial integration programme.",
+        "cisco": "Capability test: Cisco security for IT/OT — subject to architecture fit."
+      }
+    },
+    {
+      "id": "scene-7",
+      "title": "Orchestrate the ecosystem",
+      "eyebrow": "07 / 08 · MANUFACTURING",
+      "headline": "Orchestrate industrial, security and reliability expertise.",
+      "explanation": "Only now select vendor capabilities, partners, services and commercial models necessary to deliver value.",
+      "visual": "ecosystem",
+      "focusNodeIds": [
+        "c1",
+        "c2",
+        "c3",
+        "p1",
+        "p2",
+        "p3",
+        "o3"
+      ],
+      "keyPoints": [
+        "Industrial engineering / OT SI",
+        "OEM / machine specialist",
+        "Industrial managed services partner"
+      ],
+      "presenterNotes": "Do not present the Cisco portfolio as the whole solution. Show OT, integrators, FM/industry experts and partner recurring revenue responsibilities. Industry-specific context: Cisco, OEMs, OT integrators and reliability specialists each contribute defined capabilities.",
+      "transition": "Next, connect this to prove, learn and expand.",
+      "lensTalkingPoints": {
+        "customer": "Decision owner and measurable change: EHS / Sustainability.",
+        "partner": "Commercial action: Reliability service.",
+        "cisco": "Capability test: Splunk / observability — subject to architecture fit."
+      }
+    },
+    {
+      "id": "scene-8",
+      "title": "Prove, learn and expand",
+      "eyebrow": "08 / 08 · MANUFACTURING",
+      "headline": "Prove performance under real production conditions.",
+      "explanation": "Operate, measure against the counterfactual, report realised value and feed learning into the next opportunity.",
+      "visual": "loop",
+      "focusNodeIds": [
+        "k1",
+        "k2",
+        "k3",
+        "v6"
+      ],
+      "keyPoints": [
+        "Baseline",
+        "Governed intervention",
+        "Observed outcome",
+        "Repeatable playbook"
+      ],
+      "presenterNotes": "Close the loop: evidence-backed impact, governance, operational ownership, changes in assumptions, and scaling into adjacent sites or value streams. Industry-specific context: Verify uplift under representative production conditions before multi-plant deployment.",
+      "transition": "Return to a new discovery conversation or choose a different industry pack.",
+      "lensTalkingPoints": {
+        "customer": "Decision owner and measurable change: EHS / Sustainability.",
+        "partner": "Commercial action: Reliability service.",
+        "cisco": "Capability test: Splunk / observability — subject to architecture fit."
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "value",
+      "label": "Outcome → value → delivery",
+      "nodeIds": [
+        "b1",
+        "f1",
+        "s1",
+        "h1",
+        "k1",
+        "c1",
+        "p1",
+        "o1"
+      ]
+    },
+    {
+      "id": "operations",
+      "label": "Signal → intervention → services",
+      "nodeIds": [
+        "d2",
+        "s2",
+        "h2",
+        "k2",
+        "c2",
+        "p2",
+        "o2"
+      ]
+    },
+    {
+      "id": "risk",
+      "label": "Governed change and risk",
+      "nodeIds": [
+        "b3",
+        "f3",
+        "s3",
+        "h3",
+        "r3",
+        "c3",
+        "p3",
+        "o3"
+      ]
+    }
+  ],
+  "scene": {
+    "imagePath": "assets/manufacturing.webp",
+    "hotspots": [
+      {
+        "nodeId": "s1",
+        "x": 31,
+        "y": 38
+      },
+      {
+        "nodeId": "s2",
+        "x": 63,
+        "y": 28
+      },
+      {
+        "nodeId": "s3",
+        "x": 56,
+        "y": 61
+      }
+    ]
+  },
+  "outcomeTags": [
+    "Grow",
+    "Optimise",
+    "Protect",
+    "Operate",
+    "Govern",
+    "Realise"
+  ],
+  "validation": {
+    "missingData": [
+      "Customer baseline",
+      "Commercial cost owner",
+      "Data-access approvals",
+      "Named sponsor",
+      "Measurement agreement"
+    ],
+    "stage": "Exploratory"
+  },
+  "ui": {
+    "startMode": "story",
+    "layout": "focus",
+    "iconMap": {
+      "board": "target",
+      "function": "users",
+      "signal": "activity",
+      "source": "database",
+      "hypothesis": "spark",
+      "metric": "chart",
+      "capability": "network",
+      "partner": "handshake",
+      "offer": "briefcase",
+      "risk": "shield",
+      "stream": "layers"
+    },
+    "views": [
+      {
+        "id": "story",
+        "label": "Guided Story",
+        "icon": "play",
+        "enabled": true
+      },
+      {
+        "id": "signals",
+        "label": "Signal Reasoning",
+        "icon": "activity",
+        "enabled": true
+      },
+      {
+        "id": "explore",
+        "label": "Value Explorer",
+        "icon": "spark",
+        "enabled": true
+      },
+      {
+        "id": "graph",
+        "label": "Value Graph",
+        "icon": "network",
+        "enabled": true
+      },
+      {
+        "id": "evidence",
+        "label": "Evidence & Risk",
+        "icon": "shield",
+        "enabled": true
+      },
+      {
+        "id": "economics",
+        "label": "Economics",
+        "icon": "chart",
+        "enabled": true
+      },
+      {
+        "id": "new",
+        "label": "New Customer",
+        "icon": "users",
+        "enabled": true
+      },
+      {
+        "id": "lab",
+        "label": "Pack Studio",
+        "icon": "database",
+        "enabled": true
+      }
+    ],
+    "allowedNodeTypes": [
+      "board",
+      "capability",
+      "function",
+      "hypothesis",
+      "metric",
+      "offer",
+      "partner",
+      "risk",
+      "signal",
+      "source",
+      "stream"
+    ]
+  },
+  "evidenceRegister": [
+    {
+      "id": "ev-b1",
+      "nodeId": "b1",
+      "sourceId": null,
+      "status": "illustrative",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Verify statement, relevance and approval"
+    },
+    {
+      "id": "ev-b2",
+      "nodeId": "b2",
+      "sourceId": null,
+      "status": "illustrative",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Verify statement, relevance and approval"
+    },
+    {
+      "id": "ev-b3",
+      "nodeId": "b3",
+      "sourceId": null,
+      "status": "illustrative",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Verify statement, relevance and approval"
+    },
+    {
+      "id": "ev-s1",
+      "nodeId": "s1",
+      "sourceId": "d1",
+      "status": "hypothesis",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+    },
+    {
+      "id": "ev-d1",
+      "nodeId": "d1",
+      "sourceId": null,
+      "status": "unverified",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+    },
+    {
+      "id": "ev-s2",
+      "nodeId": "s2",
+      "sourceId": "d2",
+      "status": "hypothesis",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+    },
+    {
+      "id": "ev-d2",
+      "nodeId": "d2",
+      "sourceId": null,
+      "status": "unverified",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+    },
+    {
+      "id": "ev-s3",
+      "nodeId": "s3",
+      "sourceId": "d3",
+      "status": "hypothesis",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+    },
+    {
+      "id": "ev-d3",
+      "nodeId": "d3",
+      "sourceId": null,
+      "status": "unverified",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+    },
+    {
+      "id": "ev-h1",
+      "nodeId": "h1",
+      "sourceId": null,
+      "status": "hypothesis",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Agree baseline, sponsor, counterfactual and success criteria"
+    },
+    {
+      "id": "ev-h2",
+      "nodeId": "h2",
+      "sourceId": null,
+      "status": "hypothesis",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Agree baseline, sponsor, counterfactual and success criteria"
+    },
+    {
+      "id": "ev-h3",
+      "nodeId": "h3",
+      "sourceId": null,
+      "status": "hypothesis",
+      "dataOwner": "To confirm",
+      "lastChecked": null,
+      "validationAction": "Agree baseline, sponsor, counterfactual and success criteria"
+    }
+  ]
+}

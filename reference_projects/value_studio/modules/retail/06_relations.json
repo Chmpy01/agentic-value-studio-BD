@@ -1,0 +1,274 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "retail",
+  "moduleId": "06_relations",
+  "payload": {
+    "edges": [
+      {
+        "from": "b1",
+        "to": "f1",
+        "relation": "owned-by",
+        "rationale": "Executive priority requires accountable business ownership."
+      },
+      {
+        "from": "b1",
+        "to": "v1",
+        "relation": "contributes-to",
+        "rationale": "The outcome maps to an enterprise value stream."
+      },
+      {
+        "from": "f1",
+        "to": "s1",
+        "relation": "informed-by",
+        "rationale": "Function reviews the relevant operational signal."
+      },
+      {
+        "from": "d1",
+        "to": "s1",
+        "relation": "produces",
+        "rationale": "Data supports signal interpretation, subject to access and quality."
+      },
+      {
+        "from": "s1",
+        "to": "h1",
+        "relation": "supports-hypothesis",
+        "rationale": "Signal is evidence for a proposition, not proof of causality."
+      },
+      {
+        "from": "h1",
+        "to": "k1",
+        "relation": "measured-by",
+        "rationale": "The metric quantifies the hypothesised business impact."
+      },
+      {
+        "from": "h1",
+        "to": "c1",
+        "relation": "requires-capability",
+        "rationale": "Technology requirement follows the validated opportunity."
+      },
+      {
+        "from": "c1",
+        "to": "p1",
+        "relation": "delivered-with",
+        "rationale": "Partner combines capabilities into an end-to-end solution."
+      },
+      {
+        "from": "p1",
+        "to": "o1",
+        "relation": "monetises-through",
+        "rationale": "Partner commercial motion funds service delivery and improvement."
+      },
+      {
+        "from": "h1",
+        "to": "r1",
+        "relation": "constrained-by",
+        "rationale": "Risk and assurance apply before change."
+      },
+      {
+        "from": "h1",
+        "to": "v2",
+        "relation": "contributes-to",
+        "rationale": "Outcome ties to value stream economics."
+      },
+      {
+        "from": "k1",
+        "to": "v6",
+        "relation": "proves",
+        "rationale": "Verification supports realised value."
+      },
+      {
+        "from": "b2",
+        "to": "f2",
+        "relation": "owned-by",
+        "rationale": "Executive priority requires accountable business ownership."
+      },
+      {
+        "from": "b2",
+        "to": "v2",
+        "relation": "contributes-to",
+        "rationale": "The outcome maps to an enterprise value stream."
+      },
+      {
+        "from": "f2",
+        "to": "s2",
+        "relation": "informed-by",
+        "rationale": "Function reviews the relevant operational signal."
+      },
+      {
+        "from": "d2",
+        "to": "s2",
+        "relation": "produces",
+        "rationale": "Data supports signal interpretation, subject to access and quality."
+      },
+      {
+        "from": "s2",
+        "to": "h2",
+        "relation": "supports-hypothesis",
+        "rationale": "Signal is evidence for a proposition, not proof of causality."
+      },
+      {
+        "from": "h2",
+        "to": "k2",
+        "relation": "measured-by",
+        "rationale": "The metric quantifies the hypothesised business impact."
+      },
+      {
+        "from": "h2",
+        "to": "c2",
+        "relation": "requires-capability",
+        "rationale": "Technology requirement follows the validated opportunity."
+      },
+      {
+        "from": "c2",
+        "to": "p2",
+        "relation": "delivered-with",
+        "rationale": "Partner combines capabilities into an end-to-end solution."
+      },
+      {
+        "from": "p2",
+        "to": "o2",
+        "relation": "monetises-through",
+        "rationale": "Partner commercial motion funds service delivery and improvement."
+      },
+      {
+        "from": "h2",
+        "to": "r2",
+        "relation": "constrained-by",
+        "rationale": "Risk and assurance apply before change."
+      },
+      {
+        "from": "h2",
+        "to": "v1",
+        "relation": "contributes-to",
+        "rationale": "Outcome ties to value stream economics."
+      },
+      {
+        "from": "k2",
+        "to": "v6",
+        "relation": "proves",
+        "rationale": "Verification supports realised value."
+      },
+      {
+        "from": "b3",
+        "to": "f3",
+        "relation": "owned-by",
+        "rationale": "Executive priority requires accountable business ownership."
+      },
+      {
+        "from": "b3",
+        "to": "v3",
+        "relation": "contributes-to",
+        "rationale": "The outcome maps to an enterprise value stream."
+      },
+      {
+        "from": "f3",
+        "to": "s3",
+        "relation": "informed-by",
+        "rationale": "Function reviews the relevant operational signal."
+      },
+      {
+        "from": "d3",
+        "to": "s3",
+        "relation": "produces",
+        "rationale": "Data supports signal interpretation, subject to access and quality."
+      },
+      {
+        "from": "s3",
+        "to": "h3",
+        "relation": "supports-hypothesis",
+        "rationale": "Signal is evidence for a proposition, not proof of causality."
+      },
+      {
+        "from": "h3",
+        "to": "k3",
+        "relation": "measured-by",
+        "rationale": "The metric quantifies the hypothesised business impact."
+      },
+      {
+        "from": "h3",
+        "to": "c3",
+        "relation": "requires-capability",
+        "rationale": "Technology requirement follows the validated opportunity."
+      },
+      {
+        "from": "c3",
+        "to": "p3",
+        "relation": "delivered-with",
+        "rationale": "Partner combines capabilities into an end-to-end solution."
+      },
+      {
+        "from": "p3",
+        "to": "o3",
+        "relation": "monetises-through",
+        "rationale": "Partner commercial motion funds service delivery and improvement."
+      },
+      {
+        "from": "h3",
+        "to": "r3",
+        "relation": "constrained-by",
+        "rationale": "Risk and assurance apply before change."
+      },
+      {
+        "from": "h3",
+        "to": "v4",
+        "relation": "contributes-to",
+        "rationale": "Outcome ties to value stream economics."
+      },
+      {
+        "from": "k3",
+        "to": "v6",
+        "relation": "proves",
+        "rationale": "Verification supports realised value."
+      },
+      {
+        "from": "b1",
+        "to": "f4",
+        "relation": "sponsored-by",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "b2",
+        "to": "f5",
+        "relation": "governed-by",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "b3",
+        "to": "f2",
+        "relation": "sponsored-by",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "s1",
+        "to": "h2",
+        "relation": "correlates-with",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "s2",
+        "to": "h1",
+        "relation": "correlates-with",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "f5",
+        "to": "r2",
+        "relation": "owns-control",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "p2",
+        "to": "p3",
+        "relation": "coordinates-with",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "v5",
+        "to": "r1",
+        "relation": "governs",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      }
+    ]
+  }
+}

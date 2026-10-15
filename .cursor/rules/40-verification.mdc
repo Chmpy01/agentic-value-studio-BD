@@ -1,0 +1,9 @@
+---
+description: Testing and truthful status requirements
+alwaysApply: true
+---
+- Never claim 'tested' unless commands passed and output is shown.
+- Add unit tests, schema validation, invalid-reference tests, approval rejection/expiry, idempotency, not-measured assurance, security forbiddance and graph replay tests.
+- Include two industry tests besides office, at least retail and manufacturing.
+- Show exact local commands, required credentials (ideally none), port configuration and known gaps in README.
+- Do not install or connect AGNTCY components unless configured; feature flag integrations and document them as experimental until exercised.

@@ -1,0 +1,11 @@
+---
+description: Ensure rigorous JSON contracts, provenance and lineage in domain models and runtime events
+globs: '**/*.{json,jsonschema,py,ts,tsx}'
+alwaysApply: false
+---
+- Use JSON Schema Draft 2020-12 where applicable; keep explicit schemaVersion and migration policy.
+- Enforce every edge reference resolves to an existing graph node; reject broken or duplicated IDs.
+- Carry packId, intentVersion, correlationId, runId, traceId, graphRefs, evidenceStatus, timestamp and dataClassification across handoffs.
+- Never infer evidenceStatus='verified' from a successful schema check, simulation, synthetic data, or correlation.
+- Keep board objective -> function -> signal/source -> hypothesis -> metric -> intervention -> capability -> partner action traversable.
+- Do not mix customer value, partner billed revenue and Cisco product opportunity into one amount.

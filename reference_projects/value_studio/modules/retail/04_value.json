@@ -1,0 +1,118 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "retail",
+  "moduleId": "04_value",
+  "payload": {
+    "nodes": [
+      {
+        "id": "h1",
+        "type": "hypothesis",
+        "title": "Queue-to-conversion improvement",
+        "summary": "Test checkout and staffing interventions at peak demand with experimental controls.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k1",
+        "financialModel": {
+          "annualPoolGBP": 60000000,
+          "opportunityPct": 1.8,
+          "captureFactor": 0.65,
+          "implementationGBP": 390000,
+          "serviceAnnualGBP": 110000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k1",
+        "type": "metric",
+        "title": "conversion, basket, wait",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "h2",
+        "type": "hypothesis",
+        "title": "Refrigeration efficiency",
+        "summary": "Test fault detection and schedule optimisation while protecting food safety requirements.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k2",
+        "financialModel": {
+          "annualPoolGBP": 5000000,
+          "opportunityPct": 8,
+          "captureFactor": 0.65,
+          "implementationGBP": 310000,
+          "serviceAnnualGBP": 85000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k2",
+        "type": "metric",
+        "title": "kWh / chilled m³, loss",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "h3",
+        "type": "hypothesis",
+        "title": "Omnichannel store orchestration",
+        "summary": "Reduce failed collections and labour rework through connected order and store signals.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k3",
+        "financialModel": {
+          "annualPoolGBP": 6500000,
+          "opportunityPct": 6,
+          "captureFactor": 0.65,
+          "implementationGBP": 270000,
+          "serviceAnnualGBP": 90000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k3",
+        "type": "metric",
+        "title": "cost / collection, SLA",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r1",
+        "type": "risk",
+        "title": "Assurance control 1",
+        "summary": "Footfall analytics must use privacy-by-design and suitable legal basis",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r2",
+        "type": "risk",
+        "title": "Assurance control 2",
+        "summary": "POS and conversion require representative comparisons, not simple correlations",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r3",
+        "type": "risk",
+        "title": "Assurance control 3",
+        "summary": "Refrigeration controls must respect food safety and cold-chain requirements",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      }
+    ]
+  }
+}

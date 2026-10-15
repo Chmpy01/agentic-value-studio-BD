@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://cognitivevalue.example/schemas/operational-pack/1.0",
+  "title":"Cognitive Value Agent Operations — Runtime Pack",
+  "type":"object","additionalProperties":false,
+  "required":["schemaVersion","packId","title","industry","status","enterprisePackRef","valueIntent","agents","connectors","permissions","signalSnapshot","stakeholders","valueStreams","partnerRole","ciscoRole","scene","workflow","outcome","controls","provenance"],
+  "properties":{
+    "schemaVersion":{"const":"1.0"},"packId":{"type":"string","minLength":5},"title":{"type":"string","minLength":3},"industry":{"type":"string"},"subtitle":{"type":"string"},"status":{"const":"synthetic-simulation"},"scene":{"enum":["office","retail","manufacturing"]},
+    "enterprisePackRef":{"type":"object","required":["packId","nodeIds"],"additionalProperties":false,"properties":{"packId":{"type":"string"},"nodeIds":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}}}},
+    "valueIntent":{"type":"object","required":["objective","accountableOwner","metric","baseline","target","benefitHypothesis","riskBoundary","approvalAuthority","autonomy","valueStatus"],"properties":{"objective":{"type":"string"},"accountableOwner":{"type":"string"},"metric":{"type":"string"},"baseline":{"type":"string"},"target":{"type":"string"},"benefitHypothesis":{"type":"string"},"riskBoundary":{"type":"string"},"approvalAuthority":{"type":"string"},"autonomy":{"type":"string"},"valueStatus":{"const":"unvalidated"}}},
+    "agents":{"type":"array","minItems":7,"items":{"type":"object","required":["id","name","type","mandate","icon"],"properties":{"id":{"type":"string"},"name":{"type":"string"},"type":{"type":"string"},"mandate":{"type":"string"},"icon":{"type":"string"},"tone":{"type":"string"}}}},
+    "connectors":{"type":"array","items":{"type":"string"}},"permissions":{"type":"array","items":{"type":"string"}},"stakeholders":{"type":"array","items":{"type":"string"}},"valueStreams":{"type":"string"},"partnerRole":{"type":"string"},"ciscoRole":{"type":"string"},"dataLabels":{"type":"array","items":{"type":"string"}},
+    "signalSnapshot":{"type":"array","minItems":1,"items":{"type":"object","required":["source","name","value","quality"],"properties":{"source":{"type":"string"},"name":{"type":"string"},"value":{"type":"string"},"quality":{"const":"simulated"}}}},
+    "workflow":{"type":"array","minItems":9,"maxItems":9,"items":{"type":"object","required":["id","name","agent","contract","description","detail","requiresApproval","evidenceState"],"properties":{"id":{"type":"string"},"name":{"type":"string"},"agent":{"type":"string"},"contract":{"type":"string"},"description":{"type":"string"},"detail":{"type":"string"},"requiresApproval":{"type":"boolean"},"evidenceState":{"enum":["observed","proposed","simulated"]}}}},
+    "outcome":{"type":"object","required":["baseline","target","metric","benefitHypothesis","verification","certainty"],"properties":{"baseline":{"type":"string"},"target":{"type":"string"},"metric":{"type":"string"},"benefitHypothesis":{"type":"string"},"verification":{"type":"string"},"certainty":{"type":"string"}}},
+    "controls":{"type":"object","required":["requireHumanApproval","allowPhysicalControl","allowedActions","riskNotes"],"properties":{"requireHumanApproval":{"const":true},"allowPhysicalControl":{"const":false},"allowedActions":{"type":"array","items":{"type":"string"}},"riskNotes":{"type":"string"}}},
+    "provenance":{"type":"object","required":["sources","verified","generated"],"properties":{"sources":{"type":"string"},"verified":{"const":false},"generated":{"type":"string"}}}
+  }
+}

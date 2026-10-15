@@ -1,0 +1,289 @@
+{
+  "id": "office",
+  "name": "Smart Office Building",
+  "label": "Intelligent workspace · 4 floors",
+  "kind": "office",
+  "floors": 4,
+  "area": 28500,
+  "annualEnergy": 2200000,
+  "annualOperatingCost": 8400000,
+  "summary": "Four-floor intelligent workplace with rooftop plant, collaboration zones, lobby and EV parking.",
+  "cases": [
+    {
+      "id": "occ",
+      "title": "Workplace utilisation",
+      "layer": "people",
+      "floor": 3,
+      "x": -4,
+      "z": 1,
+      "unit": "68% average booking-to-use",
+      "stakeholder": "Head of Workplace",
+      "secondary": "Real Estate, HR, CIO",
+      "hypothesis": "Turn occupancy and booking signals into an evidence-led consolidation and workplace redesign decision.",
+      "signals": [
+        "Cisco Spaces / presence trends",
+        "Room booking, access events",
+        "Lease costs and capacity"
+      ],
+      "baseline": "Actual weekly utilisation by zone and day",
+      "value": "Lower unused estate costs; protect workplace experience",
+      "metric": "£ per occupied seat and utilisation %",
+      "illustrative": 460000,
+      "confidence": "Hypothesis · source coverage to validate",
+      "partner": "Workplace analytics assessment + integration + managed occupancy insights",
+      "cisco": "Cisco wireless + Cisco Spaces + Webex / ecosystem integration",
+      "next": "Validate privacy-safe aggregated occupancy against booking and lease economics.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "energy",
+      "title": "Energy / carbon performance",
+      "layer": "energy",
+      "floor": 4,
+      "x": -2,
+      "z": -2,
+      "unit": "17% outside-hours load",
+      "stakeholder": "Energy Director",
+      "secondary": "FM, CFO, Sustainability",
+      "hypothesis": "Identify after-hours conditioning and opportunities for occupancy-informed HVAC scheduling without compromising comfort.",
+      "signals": [
+        "Smart meters and utility tariffs",
+        "HVAC/BMS schedule",
+        "Occupancy and IEQ sensors"
+      ],
+      "baseline": "Weather-normalised kWh/m² and off-hours load",
+      "value": "Reduced purchased energy and emissions",
+      "metric": "kWh/m², £/year, tCO₂e",
+      "illustrative": 300000,
+      "confidence": "Illustrative proxy · field validation required",
+      "partner": "Energy advisory + OT integration + optimisation-as-a-service",
+      "cisco": "Industrial networking + secure IoT visibility + specialist BMS / analytics partner",
+      "next": "Map metering zones to BMS operating schedules and confirm control authority.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "asset",
+      "title": "Predictive equipment health",
+      "layer": "asset",
+      "floor": 4,
+      "x": 5,
+      "z": -1.9,
+      "unit": "12 critical plant assets",
+      "stakeholder": "Facilities Director",
+      "secondary": "Maintenance, Finance, Insurer",
+      "hypothesis": "Join asset telemetry and service work orders to improve reliability and prioritise planned maintenance.",
+      "signals": [
+        "BMS fault and condition trends",
+        "CAFM/CMMS work orders",
+        "OEM asset specifications"
+      ],
+      "baseline": "Downtime hours, reactive work and failure frequency",
+      "value": "Avoided incidents and reduced reactive maintenance",
+      "metric": "MTBF, maintenance cost, availability",
+      "illustrative": 210000,
+      "confidence": "Illustrative · downtime overlap excluded",
+      "partner": "Asset services, field maintenance, assurance contracts",
+      "cisco": "Resilient OT connectivity, cyber segmentation, observability + FM ISV",
+      "next": "Identify five failure modes and test fault-to-work-order data lineage.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "security",
+      "title": "Connected safety & cyber risk",
+      "layer": "security",
+      "floor": 1,
+      "x": 5,
+      "z": 3.8,
+      "unit": "8 disjointed systems",
+      "stakeholder": "CISO / Security Director",
+      "secondary": "Building owner, FM, Risk",
+      "hypothesis": "Reduce blind spots in connected building operations across access, cameras and OT networks.",
+      "signals": [
+        "Access events and incident logs",
+        "OT device inventory",
+        "Network telemetry / policy"
+      ],
+      "baseline": "Detection-to-response times and uncovered OT assets",
+      "value": "Lower operational exposure and incident impact",
+      "metric": "MTTD, MTTR, policy coverage",
+      "illustrative": 125000,
+      "confidence": "Risk reduction proxy, not guaranteed savings",
+      "partner": "OT discovery + security design + 24×7 managed detection",
+      "cisco": "Cyber controls, segmentation and cross-domain observability",
+      "next": "Complete an approved IT/OT asset discovery and threat workshop.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "finance",
+      "title": "Estate economics & lease options",
+      "layer": "finance",
+      "floor": 2,
+      "x": 2.3,
+      "z": 1.9,
+      "unit": "£/m² value opportunity",
+      "stakeholder": "CFO / Real Estate VP",
+      "secondary": "Procurement, Workplace, Operations",
+      "hypothesis": "Connect utilisation and energy performance to lease events and total occupancy cost.",
+      "signals": [
+        "Rent, service charges and lease break dates",
+        "Utilisation by floor",
+        "Energy and FM cost pools"
+      ],
+      "baseline": "Cost per useful occupied sqm / seat",
+      "value": "Working capital and cost savings through better portfolio decisions",
+      "metric": "NPV, £/sqm, payback months",
+      "illustrative": 640000,
+      "confidence": "Portfolio scenario · not additive to space case",
+      "partner": "Value baseline pack, finance model, programme integration",
+      "cisco": "Cisco-enabled contextual telemetry with commercial data partners",
+      "next": "Agree CFO business-case boundaries and lease decision dates.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "experience",
+      "title": "Indoor experience & wellbeing",
+      "layer": "people",
+      "floor": 2,
+      "x": -5,
+      "z": -0.7,
+      "unit": "IEQ + experience signals",
+      "stakeholder": "CHRO / Workplace Lead",
+      "secondary": "HR, FM, Health & Safety",
+      "hypothesis": "Correlate ventilation, temperature and service tickets with feedback and utilisation.",
+      "signals": [
+        "ASHRAE-aligned IEQ readings",
+        "Experience surveys / complaints",
+        "Workplace service tickets"
+      ],
+      "baseline": "Comfort exceptions, complaints, workplace sentiment",
+      "value": "Better experience and fewer productivity barriers",
+      "metric": "IEQ compliance, complaints/100 people",
+      "illustrative": 90000,
+      "confidence": "Benefits hard to monetise; exclude unvalidated productivity",
+      "partner": "Workplace advisory + IEQ monitoring service",
+      "cisco": "Wireless sensing context + Webex workplace + specialist sensors",
+      "next": "Agree measurement protocol and privacy guardrails.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "connectivity",
+      "title": "Unified building data fabric",
+      "layer": "ecosystem",
+      "floor": 1,
+      "x": -3,
+      "z": 3,
+      "unit": "11 systems / 6 owners",
+      "stakeholder": "CIO / Head of OT",
+      "secondary": "FM, CISO, Integration Partners",
+      "hypothesis": "Create secure governed interoperability across isolated IT, OT and enterprise sources.",
+      "signals": [
+        "OT topology and protocols",
+        "BACnet/Modbus/BMS streams",
+        "Workplace, finance and CMMS APIs"
+      ],
+      "baseline": "Integration coverage, stale signals and cost to integrate",
+      "value": "Lower integration friction, faster cross-domain use cases",
+      "metric": "Data quality, latency, £/integration",
+      "illustrative": 115000,
+      "confidence": "Enabler value, avoid double counting downstream",
+      "partner": "Architecture + integration + managed data quality SLAs",
+      "cisco": "Networking, IoT, security, observability, ecosystem data platforms",
+      "next": "Design minimum viable signal contract and access governance.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    }
+  ],
+  "personas": [
+    [
+      "CFO / Finance",
+      "Portfolio payback, NPV and risk"
+    ],
+    [
+      "Head of Real Estate",
+      "Lease, yield and occupancy"
+    ],
+    [
+      "Facilities Director",
+      "Uptime, cost-to-operate"
+    ],
+    [
+      "CIO / OT",
+      "Connectivity, privacy and integration"
+    ],
+    [
+      "CISO",
+      "OT and physical security"
+    ],
+    [
+      "CHRO / Workplace",
+      "Experience, health, hybrid work"
+    ],
+    [
+      "Sustainability",
+      "Energy intensity and reporting"
+    ]
+  ],
+  "partners": [
+    [
+      "Value advisory",
+      "Discovery, benchmarks, ROI model"
+    ],
+    [
+      "SI / OT integrator",
+      "BMS, metering, API integration"
+    ],
+    [
+      "Cisco / network partner",
+      "Secure network + location foundation"
+    ],
+    [
+      "FM / energy specialist",
+      "Building operations and savings validation"
+    ],
+    [
+      "ISV / AI partner",
+      "Analytics, workflow, managed optimisation"
+    ]
+  ],
+  "story": "Show how a Value Twin aligns signals, decision-makers, technical capabilities and financial outcomes before specifying a full digital twin.",
+  "provenance": {
+    "classification": "synthetic",
+    "asOf": "2026-10-08",
+    "owner": "Demonstration dataset",
+    "sources": []
+  }
+}

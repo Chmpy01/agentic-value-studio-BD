@@ -1,0 +1,118 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "office",
+  "moduleId": "04_value",
+  "payload": {
+    "nodes": [
+      {
+        "id": "h1",
+        "type": "hypothesis",
+        "title": "Optimise the estate footprint",
+        "summary": "Test whether a floor can be consolidated while keeping accessible space and collaboration quality.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k1",
+        "financialModel": {
+          "annualPoolGBP": 9500000,
+          "opportunityPct": 10,
+          "captureFactor": 0.65,
+          "implementationGBP": 420000,
+          "serviceAnnualGBP": 85000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k1",
+        "type": "metric",
+        "title": "£ / m², utilisation, experience",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "h2",
+        "type": "hypothesis",
+        "title": "Adaptive HVAC scheduling",
+        "summary": "Test schedule adjustments based on aggregated demand while maintaining ventilation and thermal constraints.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k2",
+        "financialModel": {
+          "annualPoolGBP": 4000000,
+          "opportunityPct": 12,
+          "captureFactor": 0.65,
+          "implementationGBP": 210000,
+          "serviceAnnualGBP": 56000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k2",
+        "type": "metric",
+        "title": "kWh / occupied hour",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "h3",
+        "type": "hypothesis",
+        "title": "Predictive workplace services",
+        "summary": "Test whether correlated room, device and FM events reduce repeat incidents and time to restore.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k3",
+        "financialModel": {
+          "annualPoolGBP": 2600000,
+          "opportunityPct": 9,
+          "captureFactor": 0.65,
+          "implementationGBP": 150000,
+          "serviceAnnualGBP": 70000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k3",
+        "type": "metric",
+        "title": "tickets / 100 rooms, MTTR",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r1",
+        "type": "risk",
+        "title": "Assurance control 1",
+        "summary": "Occupancy signals require privacy safeguards and aggregation",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r2",
+        "type": "risk",
+        "title": "Assurance control 2",
+        "summary": "Energy savings must not compromise air quality, comfort or access needs",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r3",
+        "type": "risk",
+        "title": "Assurance control 3",
+        "summary": "Attribution requires weather, policy and tariff normalisation",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      }
+    ]
+  }
+}

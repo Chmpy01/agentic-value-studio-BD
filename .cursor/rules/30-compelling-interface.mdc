@@ -1,0 +1,12 @@
+---
+description: Interface, storytelling and accessibility standards
+globs: 'apps/**/*.{ts,tsx,css,html}'
+alwaysApply: false
+---
+- Build a bright, high-quality, restrained executive presentation interface based on visual_references; not a busy monitoring dashboard.
+- One primary visual per view, one contextual panel, large typography, spacious layout, thoughtful iconography and transitions.
+- Keep presenter-only talk track in notes/drawer, NOT overlaying the visual.
+- Render tabs, icons, scenes, domain cards and value layers from JSON configs, not hard-coded office-specific labels.
+- Customer / Partner / Cisco + Ecosystem is a lens selector independent of current screen/mode.
+- Live runs animate handoffs and display a selectable execution graph, while value context remains queryable.
+- Ensure keyboard navigation, reduced motion, colour contrast, 1280x720 and mobile layouts.

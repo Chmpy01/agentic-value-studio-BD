@@ -1,0 +1,458 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/cognitive-value-studio/pack.schema.json",
+  "title": "Cognitive Value Studio pack schema",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "packId",
+    "name",
+    "industry",
+    "status",
+    "navigation",
+    "nodes",
+    "edges",
+    "story",
+    "tracks",
+    "scene"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "packId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "industry": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "synthetic",
+        "draft",
+        "reviewed",
+        "validated"
+      ]
+    },
+    "customer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "sector": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        }
+      }
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "theme": {
+      "type": "object"
+    },
+    "lenses": {
+      "type": "object"
+    },
+    "outcomeTags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation": {
+      "type": "object"
+    },
+    "navigation": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nav"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    },
+    "story": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/$defs/scene"
+      }
+    },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    },
+    "scene": {
+      "type": "object",
+      "properties": {
+        "imagePath": {
+          "type": "string"
+        },
+        "hotspots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/hotspot"
+          }
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "properties": {
+        "startMode": {
+          "type": "string"
+        },
+        "layout": {
+          "type": "string"
+        },
+        "iconMap": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "views": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "allowedNodeTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evidenceRegister": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nodeId",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "nodeId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "dataOwner": {
+            "type": "string"
+          },
+          "sourceId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "validationAction": {
+            "type": "string"
+          },
+          "lastChecked": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "title",
+        "summary",
+        "evidenceStatus"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "board",
+            "function",
+            "persona",
+            "signal",
+            "source",
+            "hypothesis",
+            "metric",
+            "capability",
+            "partner",
+            "offer",
+            "risk",
+            "stream"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "evidenceStatus": {
+          "enum": [
+            "illustrative",
+            "hypothesis",
+            "unverified",
+            "observed",
+            "validated"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "to-validate",
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "layer": {
+          "type": "string"
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "metricId": {
+          "type": "string"
+        },
+        "financialModel": {
+          "type": "object",
+          "required": [
+            "annualPoolGBP",
+            "opportunityPct",
+            "captureFactor",
+            "implementationGBP",
+            "serviceAnnualGBP"
+          ],
+          "properties": {
+            "annualPoolGBP": {
+              "type": "number",
+              "minimum": 0
+            },
+            "opportunityPct": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "captureFactor": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "implementationGBP": {
+              "type": "number",
+              "minimum": 0
+            },
+            "serviceAnnualGBP": {
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "required": [
+        "from",
+        "to",
+        "relation"
+      ],
+      "properties": {
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "relation": {
+          "type": "string"
+        },
+        "rationale": {
+          "type": "string"
+        }
+      }
+    },
+    "scene": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "headline",
+        "visual",
+        "focusNodeIds",
+        "presenterNotes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "headline": {
+          "type": "string"
+        },
+        "eyebrow": {
+          "type": "string"
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "visual": {
+          "enum": [
+            "problem",
+            "board",
+            "functions",
+            "twin",
+            "reason",
+            "hypothesis",
+            "ecosystem",
+            "loop"
+          ]
+        },
+        "focusNodeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keyPoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "presenterNotes": {
+          "type": "string"
+        },
+        "transition": {
+          "type": "string"
+        },
+        "lensTalkingPoints": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "nav": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "icon"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "story",
+            "explore",
+            "graph",
+            "signals",
+            "evidence",
+            "economics",
+            "new",
+            "lab"
+          ]
+        },
+        "label": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        }
+      }
+    },
+    "track": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "nodeIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "nodeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "hotspot": {
+      "type": "object",
+      "required": [
+        "nodeId",
+        "x",
+        "y"
+      ],
+      "properties": {
+        "nodeId": {
+          "type": "string"
+        },
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  }
+}

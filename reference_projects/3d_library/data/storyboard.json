@@ -1,0 +1,56 @@
+{
+  "version": "2.0",
+  "disclaimer": "Demonstration-only customer and commercial value signals; not metered savings",
+  "lenses": [
+    "customer",
+    "partner",
+    "cisco"
+  ],
+  "steps": [
+    {
+      "id": "external-trigger",
+      "label": "Why change now?",
+      "scope": "building",
+      "camera": {
+        "mode": "site-wide"
+      },
+      "talkTrack": "Find commercial triggers before defining technology scope"
+    },
+    {
+      "id": "evidence",
+      "label": "Discover fragmented signals",
+      "scope": "all layers",
+      "talkTrack": "Map source systems and their custodians; separate estimated from observed data"
+    },
+    {
+      "id": "personas",
+      "label": "Build buying coalition",
+      "scope": "selected case",
+      "talkTrack": "Connect the CFO, estates, energy, facilities, workplace and IT/OT interests"
+    },
+    {
+      "id": "value",
+      "label": "Validate the economic case",
+      "scope": "selected case",
+      "talkTrack": "Define counterfactual, attribution, investment envelope and measurable metrics"
+    },
+    {
+      "id": "partner",
+      "label": "Monetise orchestration",
+      "scope": "ecosystem",
+      "talkTrack": "Separate advisory, integration, software and managed-service revenue from customer benefits"
+    },
+    {
+      "id": "cisco",
+      "label": "Architect the enabling layer",
+      "scope": "ecosystem",
+      "talkTrack": "Make Cisco relevance explicit without implying ownership of BMS or specialist controls"
+    },
+    {
+      "id": "agentic",
+      "label": "Roadmap to governed operations",
+      "scope": "building",
+      "talkTrack": "Begin with recommendations and supervised workflows; keep safety systems independently authorised"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "retail",
+  "moduleId": "05_ecosystem",
+  "payload": {
+    "nodes": [
+      {
+        "id": "c1",
+        "type": "capability",
+        "title": "Cisco networking / wireless",
+        "summary": "Resilient store connectivity and appropriate sensor context",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "c2",
+        "type": "capability",
+        "title": "Cisco security",
+        "summary": "Protected store edge, access and segmentation",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "c3",
+        "type": "capability",
+        "title": "Splunk / observability",
+        "summary": "Correlating cross-site service events and application performance",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "p1",
+        "type": "partner",
+        "title": "Retail analytics specialist",
+        "summary": "Commercial experiments, attribution and customer journey",
+        "icon": "handshake",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "p2",
+        "type": "partner",
+        "title": "Store systems SI",
+        "summary": "Integrate POS, refrigeration, queue and order platforms",
+        "icon": "handshake",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "p3",
+        "type": "partner",
+        "title": "Retail managed services partner",
+        "summary": "Run monitoring and multi-site optimisation",
+        "icon": "handshake",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "o1",
+        "type": "offer",
+        "title": "Store value discovery",
+        "summary": "Commercial baseline and test design",
+        "icon": "briefcase",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "o2",
+        "type": "offer",
+        "title": "Repeatable site deployment",
+        "summary": "Rollout integration and per-site implementation",
+        "icon": "briefcase",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "o3",
+        "type": "offer",
+        "title": "Multi-site optimisation",
+        "summary": "Per-store subscription and performance governance",
+        "icon": "briefcase",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      }
+    ]
+  }
+}

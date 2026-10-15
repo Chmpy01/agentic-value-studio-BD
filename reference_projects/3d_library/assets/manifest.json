@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "assetFormat": "glTF 2.0 GLB",
+  "coordinateSystem": "X horizontal, Y elevation, Z depth; floors 3.1m illustrated increments",
+  "license": "Generated for this project; no external geometry reused",
+  "assets": [
+    {
+      "file": "smart_office.glb",
+      "kind": "office",
+      "floors": 4,
+      "parts": 630,
+      "size_bytes": 102868,
+      "groups": [
+        "Site",
+        "Roof",
+        "Floor_1",
+        "Floor_2",
+        "Floor_3",
+        "Floor_4"
+      ],
+      "description": "Self-generated illustrated architecture kit. Synthetic scene; not BIM/engineering accuracy."
+    },
+    {
+      "file": "smart_manufacturing.glb",
+      "kind": "manufacturing",
+      "floors": 2,
+      "parts": 308,
+      "size_bytes": 56536,
+      "groups": [
+        "Site",
+        "Roof",
+        "Floor_1",
+        "Floor_2"
+      ],
+      "description": "Self-generated illustrated architecture kit. Synthetic scene; not BIM/engineering accuracy."
+    },
+    {
+      "file": "smart_retail.glb",
+      "kind": "retail",
+      "floors": 2,
+      "parts": 370,
+      "size_bytes": 67032,
+      "groups": [
+        "Site",
+        "Roof",
+        "Floor_1",
+        "Floor_2"
+      ],
+      "description": "Self-generated illustrated architecture kit. Synthetic scene; not BIM/engineering accuracy."
+    }
+  ]
+}

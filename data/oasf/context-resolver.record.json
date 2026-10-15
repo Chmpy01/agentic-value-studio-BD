@@ -1,0 +1,28 @@
+{
+  "recordStatus": "draft-not-registered",
+  "note": "Candidate OASF-style descriptor for the local Context Resolver. It is not registered with AGNTCY Directory. SLIM is not used. Schema version below follows the public OASF agent-record shape and is validated only for the fields this prototype relies on.",
+  "schema_version": "0.7.0",
+  "name": "cv-context-resolver",
+  "version": "0.1.0",
+  "description": "Read-only logical role that joins a synthetic operational event to a Cognitive Value design graph. It does not call tools that write to buildings, plants or access systems.",
+  "authors": ["Cognitive Value studio prototype"],
+  "created_at": "2026-10-15T00:00:00Z",
+  "skills": [
+    {
+      "id": "resolve-value-context",
+      "name": "Resolve value-graph context",
+      "description": "Return board objectives, accountable owner and graph refs for a compiled value intent."
+    }
+  ],
+  "locators": [
+    {
+      "type": "a2a",
+      "url": "http://127.0.0.1:8877/"
+    }
+  ],
+  "annotations": {
+    "orchestrator": "not-agntcy",
+    "directoryRegistered": false,
+    "slimTransport": false
+  }
+}

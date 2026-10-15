@@ -1,0 +1,223 @@
+{
+  "id": "retail",
+  "name": "Connected Retail Estate",
+  "label": "Retail flagship · 2 levels",
+  "kind": "retail",
+  "floors": 2,
+  "area": 16500,
+  "annualEnergy": 1120000,
+  "annualOperatingCost": 6500000,
+  "summary": "Flagship retail with sales floor, fulfilment hub, energy systems and parking.",
+  "cases": [
+    {
+      "id": "rjourney",
+      "title": "Shopper journey & conversion",
+      "layer": "people",
+      "floor": 1,
+      "x": -4,
+      "z": 1,
+      "unit": "Footfall → basket",
+      "stakeholder": "Commercial / Trading Director",
+      "secondary": "Store Ops, Marketing",
+      "hypothesis": "Relate privacy-safe footfall / dwell signals to POS performance and store layout changes.",
+      "signals": [
+        "Aggregated footfall / visits",
+        "POS sales + conversion",
+        "Planogram and promotion data"
+      ],
+      "baseline": "Conversion, basket and category sales",
+      "value": "Higher revenue through better merchandising and experience",
+      "metric": "Conversion %, £/visit",
+      "illustrative": 380000,
+      "confidence": "Synthetic · attribution required",
+      "partner": "Retail advisory + store analytics subscription",
+      "cisco": "Wireless + location context + ISV POS integration",
+      "next": "Run controlled A/B store pilot and agree data safeguards.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "renergy",
+      "title": "Refrigeration & estate energy",
+      "layer": "energy",
+      "floor": 2,
+      "x": 0,
+      "z": -3,
+      "unit": "Refrigeration load",
+      "stakeholder": "Head of Energy",
+      "secondary": "Facilities, Store Ops",
+      "hypothesis": "Use metering, refrigeration state and weather to identify avoidable operating cost.",
+      "signals": [
+        "Refrigeration controller data",
+        "Smart meters, tariff and weather",
+        "Door events and faults"
+      ],
+      "baseline": "£ per store and kWh/m² adjusted",
+      "value": "Lower energy, fewer food-loss incidents",
+      "metric": "kWh/store and fault frequency",
+      "illustrative": 210000,
+      "confidence": "Synthetic utility savings pool",
+      "partner": "Energy/FM optimisation-as-a-service",
+      "cisco": "Secure site connectivity + BMS specialist",
+      "next": "Select 12 comparable stores for a metered pilot.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "rqueue",
+      "title": "Queue / workforce efficiency",
+      "layer": "space",
+      "floor": 1,
+      "x": 4,
+      "z": 2,
+      "unit": "Wait & service levels",
+      "stakeholder": "Retail Operations VP",
+      "secondary": "Store Managers, HR",
+      "hypothesis": "Align staffing decisions with observed queue pressure and service constraints.",
+      "signals": [
+        "Queue counts",
+        "Roster and transaction volumes",
+        "Service and employee feedback"
+      ],
+      "baseline": "Wait time, labour-to-sales and abandonment",
+      "value": "Better experience and more productive scheduling",
+      "metric": "Queue minutes, labour £/sales",
+      "illustrative": 180000,
+      "confidence": "Avoid double counting with conversion",
+      "partner": "Workplace analytics and managed performance",
+      "cisco": "Network/location context + retail specialist analytics",
+      "next": "Validate queue estimates against actual transaction timestamps.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "rsecurity",
+      "title": "Shrink / safety assurance",
+      "layer": "security",
+      "floor": 1,
+      "x": -5,
+      "z": -3,
+      "unit": "Loss-prevention signals",
+      "stakeholder": "Loss Prevention Director",
+      "secondary": "Legal, Security, Store Ops",
+      "hypothesis": "Understand incident hotspots with privacy and legal controls; avoid unfounded claims about prevention.",
+      "signals": [
+        "Aggregated shrink and exception trends",
+        "Store incident records",
+        "Approved security inputs"
+      ],
+      "baseline": "Known loss patterns, incident resolution",
+      "value": "Lower exposure and improved safety",
+      "metric": "Shrink %, incidents, response",
+      "illustrative": 165000,
+      "confidence": "Scenario contingent on legal approvals",
+      "partner": "Security integration + monitored services",
+      "cisco": "Network cyber and surveillance ecosystem integration",
+      "next": "Legal/privacy review and incident taxonomy validation.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "rfulfil",
+      "title": "Omnichannel collection & stock",
+      "layer": "ecosystem",
+      "floor": 2,
+      "x": 5,
+      "z": -2,
+      "unit": "Pickup fulfilment SLA",
+      "stakeholder": "Omnichannel Director",
+      "secondary": "Supply Chain, IT, Store Ops",
+      "hypothesis": "Join pickup workflows, inventory accuracy and branch operational signals.",
+      "signals": [
+        "Order, inventory, pickup events",
+        "Store capacity and queue",
+        "Exception workflows"
+      ],
+      "baseline": "Order-ready-to-collection time and fulfilment success",
+      "value": "Fewer failed fulfilments and improved experience",
+      "metric": "SLA %, labour hrs/order",
+      "illustrative": 240000,
+      "confidence": "Synthetic, dependent on platform integration",
+      "partner": "Workflow integration + managed fulfilment analytics",
+      "cisco": "Network + secure API fabric + specialist apps",
+      "next": "Map store-level pickup handoffs with ERP/OMS owner.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    }
+  ],
+  "personas": [
+    [
+      "Trading Director",
+      "Conversion and margins"
+    ],
+    [
+      "Store Operations",
+      "Service and staffing"
+    ],
+    [
+      "Merchandising",
+      "Space productivity"
+    ],
+    [
+      "Retail CIO",
+      "Data and platform reliability"
+    ],
+    [
+      "Loss Prevention",
+      "Safety and shrink"
+    ],
+    [
+      "Facilities",
+      "Energy and maintenance"
+    ]
+  ],
+  "partners": [
+    [
+      "Store fitout / FM",
+      "Estate estate services and maintenance"
+    ],
+    [
+      "Cisco / network partner",
+      "Network, location and security"
+    ],
+    [
+      "Retail software ISV",
+      "POS / fulfilment / customer insight"
+    ],
+    [
+      "Data integration SI",
+      "APIs and privacy-safe analytics"
+    ],
+    [
+      "Managed store services",
+      "Multi-site support and optimisation"
+    ]
+  ],
+  "story": "Retail value twins connect shopper journeys, operational efficiency, estate cost and fulfilment.",
+  "provenance": {
+    "classification": "synthetic",
+    "asOf": "2026-10-08",
+    "owner": "Demonstration dataset",
+    "sources": []
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "manufacturing",
+  "moduleId": "03_signals",
+  "payload": {
+    "nodes": [
+      {
+        "id": "s1",
+        "type": "signal",
+        "title": "Repeated micro-stops",
+        "summary": "Historian and shift records suggest recurring losses at a constrained workstation.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "asset",
+        "sourceId": "d1",
+        "sceneXY": [
+          31,
+          38
+        ]
+      },
+      {
+        "id": "d1",
+        "type": "source",
+        "title": "OT historian / MES / PLC events",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      },
+      {
+        "id": "s2",
+        "type": "signal",
+        "title": "Energy per good unit",
+        "summary": "Energy peaks may not align with productive machine time.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "energy",
+        "sourceId": "d2",
+        "sceneXY": [
+          63,
+          28
+        ]
+      },
+      {
+        "id": "d2",
+        "type": "source",
+        "title": "Meters / production counts / tariffs",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      },
+      {
+        "id": "s3",
+        "type": "signal",
+        "title": "Condition alerts vs backlog",
+        "summary": "Maintenance flags coincide with repeat work orders and spares delays.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "signal",
+        "sourceId": "d3",
+        "sceneXY": [
+          56,
+          61
+        ]
+      },
+      {
+        "id": "d3",
+        "type": "source",
+        "title": "CMMS / vibration sensors / work orders",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      }
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "office",
+  "moduleId": "03_signals",
+  "payload": {
+    "nodes": [
+      {
+        "id": "s1",
+        "type": "signal",
+        "title": "Space demand gap",
+        "summary": "Synthetic occupancy observations point to a low midweek utilisation pattern.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "people",
+        "sourceId": "d1",
+        "sceneXY": [
+          32,
+          37
+        ]
+      },
+      {
+        "id": "d1",
+        "type": "source",
+        "title": "Cisco Spaces / booking / badge aggregates",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      },
+      {
+        "id": "s2",
+        "type": "signal",
+        "title": "Energy-performance mismatch",
+        "summary": "HVAC consumption appears poorly aligned to space demand.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "energy",
+        "sourceId": "d2",
+        "sceneXY": [
+          61,
+          30
+        ]
+      },
+      {
+        "id": "d2",
+        "type": "source",
+        "title": "BMS / energy meters / tariffs",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      },
+      {
+        "id": "s3",
+        "type": "signal",
+        "title": "Service friction",
+        "summary": "Meeting-room faults and comfort complaints may be affecting workplace confidence.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "asset",
+        "sourceId": "d3",
+        "sceneXY": [
+          58,
+          65
+        ]
+      },
+      {
+        "id": "d3",
+        "type": "source",
+        "title": "Webex / FM tickets / Splunk events",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      }
+    ]
+  }
+}

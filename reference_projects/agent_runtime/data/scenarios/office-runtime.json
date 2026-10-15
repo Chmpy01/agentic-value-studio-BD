@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "1.0",
+  "packId": "runtime-office",
+  "title": "Adaptive Workplace",
+  "industry": "Workplace & buildings",
+  "subtitle": "Occupancy + HVAC + bookings → energy value without compromising comfort",
+  "status": "synthetic-simulation",
+  "enterprisePackRef": {
+    "packId": "office",
+    "nodeIds": [
+      "b1",
+      "b3",
+      "f4",
+      "s1",
+      "s2",
+      "h2",
+      "k2"
+    ]
+  },
+  "valueIntent": {
+    "objective": "Reduce estate cost and progress decarbonisation",
+    "accountableOwner": "Facilities Director",
+    "metric": "kWh per occupied hour",
+    "baseline": "Reference 11.4 kWh/occupied-hour (illustrative)",
+    "target": "Test 8% improvement (hypothesis)",
+    "benefitHypothesis": "Annual addressable cost: £180k; illustrative 8% opportunity = £14.4k before delivery costs",
+    "riskBoundary": "IEQ / ventilation; variable occupancy and data privacy",
+    "approvalAuthority": "FM operations approval",
+    "autonomy": "L1 recommendation / L2 ticket with approval",
+    "valueStatus": "unvalidated"
+  },
+  "agents": [
+    {
+      "id": "sense",
+      "name": "Signal Steward",
+      "type": "Deterministic ingestion",
+      "mandate": "Normalise source events, provenance, freshness and completeness",
+      "icon": "◉",
+      "tone": "blue"
+    },
+    {
+      "id": "context",
+      "name": "Context & Graph",
+      "type": "Hybrid reasoning",
+      "mandate": "Resolve assets, zones, owners, policy context and source conflicts",
+      "icon": "⌘",
+      "tone": "cyan"
+    },
+    {
+      "id": "value",
+      "name": "Value Reasoner",
+      "type": "Bounded hypothesis reasoning",
+      "mandate": "Evaluate materiality, counterfactuals, benefit ownership and confidence",
+      "icon": "◇",
+      "tone": "violet"
+    },
+    {
+      "id": "plan",
+      "name": "Intervention Planner",
+      "type": "AI-assisted planning",
+      "mandate": "Form choices with expected impact, dependencies and failure modes",
+      "icon": "▤",
+      "tone": "amber"
+    },
+    {
+      "id": "guard",
+      "name": "Policy & Risk Gate",
+      "type": "Deterministic policy enforcement",
+      "mandate": "Enforce role permissions, OT safety, privacy, human approval",
+      "icon": "⬡",
+      "tone": "red"
+    },
+    {
+      "id": "act",
+      "name": "Action Broker",
+      "type": "Permissioned workflow adapter",
+      "mandate": "Issue authorised tickets and controlled commands; handle receipts and rollback",
+      "icon": "↗",
+      "tone": "blue"
+    },
+    {
+      "id": "verify",
+      "name": "Outcome Auditor",
+      "type": "Independent measurement",
+      "mandate": "Compare before/after, control for confounders, sign benefits and improve graph",
+      "icon": "✓",
+      "tone": "green"
+    }
+  ],
+  "connectors": [
+    "Cisco Spaces occupancy (potential Firehose integration)",
+    "BMS HVAC energy meter",
+    "Webex/room booking aggregates",
+    "Facilities work orders"
+  ],
+  "permissions": [
+    "Read anonymised occupancy aggregates",
+    "Read authorised energy & booking data",
+    "Recommend FM work orders",
+    "No autonomous HVAC setpoint changes"
+  ],
+  "signalSnapshot": [
+    {
+      "source": "Cisco Spaces",
+      "name": "West wing occupancy",
+      "value": "14%",
+      "quality": "simulated"
+    },
+    {
+      "source": "BMS / meter",
+      "name": "After-hours HVAC draw",
+      "value": "72 kWh/h",
+      "quality": "simulated"
+    },
+    {
+      "source": "Bookings",
+      "name": "Next 2h meetings",
+      "value": "0",
+      "quality": "simulated"
+    }
+  ],
+  "stakeholders": [
+    "CFO",
+    "Head of Real Estate",
+    "HR",
+    "Facilities / Energy",
+    "CIO / OT"
+  ],
+  "valueStreams": "Save money · Protect experience · Reduce carbon",
+  "partnerRole": "FM & energy services partner",
+  "ciscoRole": "Spaces location/occupancy; enterprise networking; Splunk correlation; Webex/room usage where contractually supported",
+  "scene": "office",
+  "dataLabels": [
+    "Spaces occupancy",
+    "BMS energy",
+    "Meeting bookings",
+    "FM maintenance"
+  ],
+  "workflow": [
+    {
+      "id": "0",
+      "name": "Observe",
+      "agent": "sense",
+      "contract": "Event stream",
+      "description": "New source events arrive and are quality checked.",
+      "detail": "Occupancy has fallen but HVAC remains active in a wing with no scheduled meetings.",
+      "requiresApproval": false,
+      "evidenceState": "observed"
+    },
+    {
+      "id": "1",
+      "name": "Contextualise",
+      "agent": "context",
+      "contract": "Knowledge graph",
+      "description": "Join physical, operational and business context.",
+      "detail": "Occupancy has fallen but HVAC remains active in a wing with no scheduled meetings.",
+      "requiresApproval": false,
+      "evidenceState": "observed"
+    },
+    {
+      "id": "2",
+      "name": "Hypothesise",
+      "agent": "value",
+      "contract": "Value intent",
+      "description": "Estimate significance without asserting causation.",
+      "detail": "A bounded schedule adjustment could reduce waste while preserving accessibility and air quality.",
+      "requiresApproval": false,
+      "evidenceState": "proposed"
+    },
+    {
+      "id": "3",
+      "name": "Plan",
+      "agent": "plan",
+      "contract": "Options",
+      "description": "Compare interventions, cost, confidence and risk.",
+      "detail": "Propose an after-hours HVAC schedule review in the west wing; confirm IEQ and booking overrides before any change.",
+      "requiresApproval": false,
+      "evidenceState": "proposed"
+    },
+    {
+      "id": "4",
+      "name": "Guard",
+      "agent": "guard",
+      "contract": "Policy verdict",
+      "description": "Apply the delegated authority and safety boundaries.",
+      "detail": "Human FM approval required; preserve minimum ventilation, accessible-user exceptions and emergency overrides.",
+      "requiresApproval": false,
+      "evidenceState": "proposed"
+    },
+    {
+      "id": "5",
+      "name": "Approve",
+      "agent": "guard",
+      "contract": "Human decision",
+      "description": "The accountable human accepts or rejects the proposed action.",
+      "detail": "FM operations approval",
+      "requiresApproval": false,
+      "evidenceState": "proposed"
+    },
+    {
+      "id": "6",
+      "name": "Act",
+      "agent": "act",
+      "contract": "Action receipt",
+      "description": "Create authorised workflow actions with audit and rollback.",
+      "detail": "Create a SIMULATED FM work order for a controlled trial; do not send a BMS command.",
+      "requiresApproval": true,
+      "evidenceState": "proposed"
+    },
+    {
+      "id": "7",
+      "name": "Verify",
+      "agent": "verify",
+      "contract": "Evidence ledger",
+      "description": "Check pre/post data and counterfactual validity.",
+      "detail": "Compare normalised kWh per occupied-hour across matched evenings; include weather, exceptions and comfort complaints.",
+      "requiresApproval": true,
+      "evidenceState": "simulated"
+    },
+    {
+      "id": "8",
+      "name": "Learn",
+      "agent": "verify",
+      "contract": "Updated Value Twin",
+      "description": "Publish verified evidence, or record unresolved gaps.",
+      "detail": "If the trial shows attributable benefit, extend the value hypothesis to an operating playbook.",
+      "requiresApproval": true,
+      "evidenceState": "simulated"
+    }
+  ],
+  "outcome": {
+    "baseline": "Reference 11.4 kWh/occupied-hour (illustrative)",
+    "target": "Test 8% improvement (hypothesis)",
+    "metric": "kWh per occupied hour",
+    "benefitHypothesis": "Annual addressable cost: £180k; illustrative 8% opportunity = £14.4k before delivery costs",
+    "verification": "Compare normalised kWh per occupied-hour across matched evenings; include weather, exceptions and comfort complaints.",
+    "certainty": "Hypothesis—not realised savings"
+  },
+  "controls": {
+    "requireHumanApproval": true,
+    "allowPhysicalControl": false,
+    "allowedActions": [
+      "Work order only"
+    ],
+    "riskNotes": "IEQ / ventilation; variable occupancy and data privacy"
+  },
+  "provenance": {
+    "sources": "Illustrative operational values; not live Cisco/BMS data",
+    "verified": false,
+    "generated": "2026-10-09"
+  }
+}

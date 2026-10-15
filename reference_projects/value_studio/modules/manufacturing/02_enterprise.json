@@ -1,0 +1,136 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "manufacturing",
+  "moduleId": "02_enterprise",
+  "payload": {
+    "nodes": [
+      {
+        "id": "b1",
+        "type": "board",
+        "title": "Increase reliable throughput",
+        "summary": "Lift constrained production capacity without unnecessary capital",
+        "icon": "target",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "b2",
+        "type": "board",
+        "title": "Reduce cost per good unit",
+        "summary": "Reduce downtime and energy intensity",
+        "icon": "target",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "b3",
+        "type": "board",
+        "title": "Protect safe, resilient operations",
+        "summary": "Improve safety, cyber resilience and traceability",
+        "icon": "target",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f1",
+        "type": "function",
+        "title": "Plant director",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f2",
+        "type": "function",
+        "title": "Production / Quality",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f3",
+        "type": "function",
+        "title": "Maintenance",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f4",
+        "type": "function",
+        "title": "EHS / Sustainability",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f5",
+        "type": "function",
+        "title": "OT / IT / Finance",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v1",
+        "type": "stream",
+        "title": "Grow",
+        "summary": "Increase revenue or capacity",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v2",
+        "type": "stream",
+        "title": "Optimise",
+        "summary": "Improve asset and resource efficiency",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v3",
+        "type": "stream",
+        "title": "Protect",
+        "summary": "Mitigate financial, operational and cyber risk",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v4",
+        "type": "stream",
+        "title": "Operate",
+        "summary": "Continuously run and improve service",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v5",
+        "type": "stream",
+        "title": "Govern",
+        "summary": "Accountability, evidence, controls and policy",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v6",
+        "type": "stream",
+        "title": "Realise",
+        "summary": "Prove measured, attributable outcomes",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      }
+    ]
+  }
+}

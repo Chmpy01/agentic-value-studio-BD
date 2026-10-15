@@ -1,0 +1,10 @@
+---
+description: Core architecture and delivery rules for Cognitive Value Agentic Studio
+alwaysApply: true
+---
+- Read @MASTER_CURSOR_PROMPT.md and @docs/ASSET_MAP.md before editing.
+- Treat @reference_projects as source references; do not modify them in place.
+- Preserve design-time graph IDs in all runtime events and projections.
+- Distinguish app views Story, Design Twin, Live Operations, Agent Network, Evidence, and Pack Studio. Never show all panels at once.
+- Ship working increments. First an executable deterministic local workflow and UI; then genuine LangGraph; then independent interoperable agents.
+- A 'runtime manifest' is a CUSTOM project contract, NOT a standard AGNTCY manifest.

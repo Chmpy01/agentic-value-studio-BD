@@ -1,0 +1,540 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "retail",
+  "moduleId": "07_presentation",
+  "payload": {
+    "navigation": [
+      {
+        "id": "story",
+        "label": "Guided Story",
+        "icon": "play"
+      },
+      {
+        "id": "signals",
+        "label": "Signal Reasoning",
+        "icon": "activity"
+      },
+      {
+        "id": "explore",
+        "label": "Value Explorer",
+        "icon": "spark"
+      },
+      {
+        "id": "graph",
+        "label": "Value Graph",
+        "icon": "network"
+      },
+      {
+        "id": "evidence",
+        "label": "Evidence & Risk",
+        "icon": "shield"
+      },
+      {
+        "id": "economics",
+        "label": "Economics",
+        "icon": "chart"
+      },
+      {
+        "id": "new",
+        "label": "New Customer",
+        "icon": "users"
+      },
+      {
+        "id": "lab",
+        "label": "Pack Studio",
+        "icon": "database"
+      }
+    ],
+    "lenses": {
+      "customer": {
+        "label": "Customer",
+        "icon": "building",
+        "description": "The customer buys a measurable change to enterprise performance — not a collection of systems."
+      },
+      "partner": {
+        "label": "Partner",
+        "icon": "handshake",
+        "description": "The partner monetises discovery, integration, managed operations and value assurance."
+      },
+      "cisco": {
+        "label": "Cisco + ecosystem",
+        "icon": "network",
+        "description": "Capabilities are selected only after a value hypothesis and delivery dependencies are understood."
+      }
+    },
+    "story": [
+      {
+        "id": "scene-1",
+        "title": "The hidden opportunity",
+        "eyebrow": "01 / 08 · RETAIL",
+        "headline": "Great store systems. Fragmented commercial decisions.",
+        "explanation": "Technology data is useful. But the business question remains unanswered when each function sees only its own system.",
+        "visual": "problem",
+        "focusNodeIds": [
+          "d1",
+          "d2",
+          "d3"
+        ],
+        "keyPoints": [
+          "Product data",
+          "Departmental reports",
+          "Unconnected investment decisions"
+        ],
+        "presenterNotes": "Ask the audience which dashboards they already have. Contrast product insight with enterprise decision quality. Avoid calling current tools broken. Industry-specific context: Retail has excellent store systems data, but the buying decisions are distributed across commercial, operations and IT.",
+        "transition": "Next, connect this to start at the board.",
+        "lensTalkingPoints": {
+          "customer": "Decision owner and measurable change: Chief commercial officer.",
+          "partner": "Commercial action: Store value discovery.",
+          "cisco": "Capability test: Cisco networking / wireless — subject to architecture fit."
+        }
+      },
+      {
+        "id": "scene-2",
+        "title": "Start at the board",
+        "eyebrow": "02 / 08 · RETAIL",
+        "headline": "Lead with growth, cost-to-serve and customer trust.",
+        "explanation": "Begin with strategic demand: decisions and outcomes the leadership team will fund.",
+        "visual": "board",
+        "focusNodeIds": [
+          "b1",
+          "b2",
+          "b3"
+        ],
+        "keyPoints": [
+          "Grow profitable same-store sales",
+          "Reduce store cost to serve",
+          "Protect reputation and stock"
+        ],
+        "presenterNotes": "Ask for three board objectives and one measurable commitment. Where relevant separate revenue, operating costs, risk and sustainability obligations. Industry-specific context: The executive issue is profitable growth, customer experience, stock availability and estate cost.",
+        "transition": "Next, connect this to follow value across functions.",
+        "lensTalkingPoints": {
+          "customer": "Decision owner and measurable change: Chief commercial officer.",
+          "partner": "Commercial action: Store value discovery.",
+          "cisco": "Capability test: Cisco networking / wireless — subject to architecture fit."
+        }
+      },
+      {
+        "id": "scene-3",
+        "title": "Follow value across functions",
+        "eyebrow": "03 / 08 · RETAIL",
+        "headline": "A store outcome cuts across operations and functions.",
+        "explanation": "An outcome is shared across functions; costs, owners and evidence are distributed.",
+        "visual": "functions",
+        "focusNodeIds": [
+          "f1",
+          "f2",
+          "f3",
+          "f4",
+          "f5"
+        ],
+        "keyPoints": [
+          "Chief commercial officer",
+          "Store operations",
+          "Merchandising",
+          "Facilities / Energy"
+        ],
+        "presenterNotes": "Invite stakeholders to identify who controls actions versus who carries cost or benefit. Accessibility, EHS and privacy can change the solution. Industry-specific context: Commercial, merchandising, store operations and facilities each control part of the result.",
+        "transition": "Next, connect this to build the value twin.",
+        "lensTalkingPoints": {
+          "customer": "Decision owner and measurable change: Store operations.",
+          "partner": "Commercial action: Store value discovery.",
+          "cisco": "Capability test: Cisco networking / wireless — subject to architecture fit."
+        }
+      },
+      {
+        "id": "scene-4",
+        "title": "Build the Value Twin",
+        "eyebrow": "04 / 08 · RETAIL",
+        "headline": "Model store value before building a technical twin.",
+        "explanation": "A Value Twin is a semantic model of customer decisions, signals, assumptions and value — before a full operational digital twin.",
+        "visual": "twin",
+        "focusNodeIds": [
+          "d1",
+          "s1",
+          "d2",
+          "s2",
+          "d3",
+          "s3"
+        ],
+        "keyPoints": [
+          "People + place",
+          "Systems + operations",
+          "Business + financial context"
+        ],
+        "presenterNotes": "Explain the conceptual Value Twin is a linked decision graph: it does NOT need live BMS or a rendered BIM model to begin. Source claims remain provisional. Industry-specific context: The Value Twin connects shopper demand, store operations and facilities without requiring a full digital twin.",
+        "transition": "Next, connect this to reason across signals.",
+        "lensTalkingPoints": {
+          "customer": "Decision owner and measurable change: Store operations.",
+          "partner": "Commercial action: Repeatable site deployment.",
+          "cisco": "Capability test: Cisco security — subject to architecture fit."
+        }
+      },
+      {
+        "id": "scene-5",
+        "title": "Reason across signals",
+        "eyebrow": "05 / 08 · RETAIL",
+        "headline": "Correlate shopper, energy and fulfilment signals.",
+        "explanation": "Reason over evidence from multiple domains; discover patterns while marking uncertainty and testing causality.",
+        "visual": "reason",
+        "focusNodeIds": [
+          "s1",
+          "s2",
+          "s3",
+          "h1",
+          "h2"
+        ],
+        "keyPoints": [
+          "Footfall-to-sales gap",
+          "Refrigeration outliers",
+          "Fulfilment strain"
+        ],
+        "presenterNotes": "Discuss correlation versus causation. Confirm data access, quality, time alignment, weather, seasonality, shifts, comparable sites and privacy. Industry-specific context: Consider whether peak queues, footfall and staffing are jointly affecting conversion — a testable hypothesis.",
+        "transition": "Next, connect this to test a business hypothesis.",
+        "lensTalkingPoints": {
+          "customer": "Decision owner and measurable change: Merchandising.",
+          "partner": "Commercial action: Repeatable site deployment.",
+          "cisco": "Capability test: Cisco security — subject to architecture fit."
+        }
+      },
+      {
+        "id": "scene-6",
+        "title": "Test a business hypothesis",
+        "eyebrow": "06 / 08 · RETAIL",
+        "headline": "Test conversion, cost and service hypotheses.",
+        "explanation": "Prioritise measurable interventions, baseline the outcome and design a risk-controlled pilot.",
+        "visual": "hypothesis",
+        "focusNodeIds": [
+          "h1",
+          "k1",
+          "r1"
+        ],
+        "keyPoints": [
+          "Queue-to-conversion improvement",
+          "Refrigeration efficiency",
+          "Omnichannel store orchestration"
+        ],
+        "presenterNotes": "Choose one hypothesis. Agree baseline, test design, owner, benefit formula, risk controls, investment threshold and success/failure triggers. Industry-specific context: An experiment defines interventions and cost-to-serve before the solution architecture.",
+        "transition": "Next, connect this to orchestrate the ecosystem.",
+        "lensTalkingPoints": {
+          "customer": "Decision owner and measurable change: Merchandising.",
+          "partner": "Commercial action: Repeatable site deployment.",
+          "cisco": "Capability test: Cisco security — subject to architecture fit."
+        }
+      },
+      {
+        "id": "scene-7",
+        "title": "Orchestrate the ecosystem",
+        "eyebrow": "07 / 08 · RETAIL",
+        "headline": "Create repeatable joint partner services per site.",
+        "explanation": "Only now select vendor capabilities, partners, services and commercial models necessary to deliver value.",
+        "visual": "ecosystem",
+        "focusNodeIds": [
+          "c1",
+          "c2",
+          "c3",
+          "p1",
+          "p2",
+          "p3",
+          "o3"
+        ],
+        "keyPoints": [
+          "Retail analytics specialist",
+          "Store systems SI",
+          "Retail managed services partner"
+        ],
+        "presenterNotes": "Do not present the Cisco portfolio as the whole solution. Show OT, integrators, FM/industry experts and partner recurring revenue responsibilities. Industry-specific context: Partners combine store systems, networking, analytics and managed services into repeatable site offers.",
+        "transition": "Next, connect this to prove, learn and expand.",
+        "lensTalkingPoints": {
+          "customer": "Decision owner and measurable change: Facilities / Energy.",
+          "partner": "Commercial action: Multi-site optimisation.",
+          "cisco": "Capability test: Splunk / observability — subject to architecture fit."
+        }
+      },
+      {
+        "id": "scene-8",
+        "title": "Prove, learn and expand",
+        "eyebrow": "08 / 08 · RETAIL",
+        "headline": "Verify store economics before expanding the estate.",
+        "explanation": "Operate, measure against the counterfactual, report realised value and feed learning into the next opportunity.",
+        "visual": "loop",
+        "focusNodeIds": [
+          "k1",
+          "k2",
+          "k3",
+          "v6"
+        ],
+        "keyPoints": [
+          "Baseline",
+          "Governed intervention",
+          "Observed outcome",
+          "Repeatable playbook"
+        ],
+        "presenterNotes": "Close the loop: evidence-backed impact, governance, operational ownership, changes in assumptions, and scaling into adjacent sites or value streams. Industry-specific context: Use measured pilot uplift and operating costs to decide if the model scales across the estate.",
+        "transition": "Return to a new discovery conversation or choose a different industry pack.",
+        "lensTalkingPoints": {
+          "customer": "Decision owner and measurable change: Facilities / Energy.",
+          "partner": "Commercial action: Multi-site optimisation.",
+          "cisco": "Capability test: Splunk / observability — subject to architecture fit."
+        }
+      }
+    ],
+    "tracks": [
+      {
+        "id": "value",
+        "label": "Outcome → value → delivery",
+        "nodeIds": [
+          "b1",
+          "f1",
+          "s1",
+          "h1",
+          "k1",
+          "c1",
+          "p1",
+          "o1"
+        ]
+      },
+      {
+        "id": "operations",
+        "label": "Signal → intervention → services",
+        "nodeIds": [
+          "d2",
+          "s2",
+          "h2",
+          "k2",
+          "c2",
+          "p2",
+          "o2"
+        ]
+      },
+      {
+        "id": "risk",
+        "label": "Governed change and risk",
+        "nodeIds": [
+          "b3",
+          "f3",
+          "s3",
+          "h3",
+          "r3",
+          "c3",
+          "p3",
+          "o3"
+        ]
+      }
+    ],
+    "scene": {
+      "imagePath": "assets/retail.webp",
+      "hotspots": [
+        {
+          "nodeId": "s1",
+          "x": 33,
+          "y": 46
+        },
+        {
+          "nodeId": "s2",
+          "x": 60,
+          "y": 29
+        },
+        {
+          "nodeId": "s3",
+          "x": 57,
+          "y": 67
+        }
+      ]
+    },
+    "theme": {
+      "accent": "#e38a39",
+      "visualKey": "retail"
+    },
+    "ui": {
+      "startMode": "story",
+      "layout": "focus",
+      "iconMap": {
+        "board": "target",
+        "function": "users",
+        "signal": "activity",
+        "source": "database",
+        "hypothesis": "spark",
+        "metric": "chart",
+        "capability": "network",
+        "partner": "handshake",
+        "offer": "briefcase",
+        "risk": "shield",
+        "stream": "layers"
+      },
+      "views": [
+        {
+          "id": "story",
+          "label": "Guided Story",
+          "icon": "play",
+          "enabled": true
+        },
+        {
+          "id": "signals",
+          "label": "Signal Reasoning",
+          "icon": "activity",
+          "enabled": true
+        },
+        {
+          "id": "explore",
+          "label": "Value Explorer",
+          "icon": "spark",
+          "enabled": true
+        },
+        {
+          "id": "graph",
+          "label": "Value Graph",
+          "icon": "network",
+          "enabled": true
+        },
+        {
+          "id": "evidence",
+          "label": "Evidence & Risk",
+          "icon": "shield",
+          "enabled": true
+        },
+        {
+          "id": "economics",
+          "label": "Economics",
+          "icon": "chart",
+          "enabled": true
+        },
+        {
+          "id": "new",
+          "label": "New Customer",
+          "icon": "users",
+          "enabled": true
+        },
+        {
+          "id": "lab",
+          "label": "Pack Studio",
+          "icon": "database",
+          "enabled": true
+        }
+      ],
+      "allowedNodeTypes": [
+        "board",
+        "capability",
+        "function",
+        "hypothesis",
+        "metric",
+        "offer",
+        "partner",
+        "risk",
+        "signal",
+        "source",
+        "stream"
+      ]
+    },
+    "evidenceRegister": [
+      {
+        "id": "ev-b1",
+        "nodeId": "b1",
+        "sourceId": null,
+        "status": "illustrative",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Verify statement, relevance and approval"
+      },
+      {
+        "id": "ev-b2",
+        "nodeId": "b2",
+        "sourceId": null,
+        "status": "illustrative",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Verify statement, relevance and approval"
+      },
+      {
+        "id": "ev-b3",
+        "nodeId": "b3",
+        "sourceId": null,
+        "status": "illustrative",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Verify statement, relevance and approval"
+      },
+      {
+        "id": "ev-s1",
+        "nodeId": "s1",
+        "sourceId": "d1",
+        "status": "hypothesis",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+      },
+      {
+        "id": "ev-d1",
+        "nodeId": "d1",
+        "sourceId": null,
+        "status": "unverified",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+      },
+      {
+        "id": "ev-s2",
+        "nodeId": "s2",
+        "sourceId": "d2",
+        "status": "hypothesis",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+      },
+      {
+        "id": "ev-d2",
+        "nodeId": "d2",
+        "sourceId": null,
+        "status": "unverified",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+      },
+      {
+        "id": "ev-s3",
+        "nodeId": "s3",
+        "sourceId": "d3",
+        "status": "hypothesis",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+      },
+      {
+        "id": "ev-d3",
+        "nodeId": "d3",
+        "sourceId": null,
+        "status": "unverified",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Confirm data availability, owner, permitted use and measurement window"
+      },
+      {
+        "id": "ev-h1",
+        "nodeId": "h1",
+        "sourceId": null,
+        "status": "hypothesis",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Agree baseline, sponsor, counterfactual and success criteria"
+      },
+      {
+        "id": "ev-h2",
+        "nodeId": "h2",
+        "sourceId": null,
+        "status": "hypothesis",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Agree baseline, sponsor, counterfactual and success criteria"
+      },
+      {
+        "id": "ev-h3",
+        "nodeId": "h3",
+        "sourceId": null,
+        "status": "hypothesis",
+        "dataOwner": "To confirm",
+        "lastChecked": null,
+        "validationAction": "Agree baseline, sponsor, counterfactual and success criteria"
+      }
+    ]
+  }
+}

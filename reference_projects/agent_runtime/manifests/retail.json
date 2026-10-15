@@ -1,0 +1,450 @@
+{
+  "apiVersion": "cvs.openai.example/v1alpha1",
+  "kind": "ValueIntentRuntime",
+  "metadata": {
+    "name": "retail-value-ops",
+    "version": "0.1.0",
+    "sourcePackId": "retail",
+    "sourceRuntimeId": "runtime-retail",
+    "status": "synthetic/unvalidated",
+    "compiledExampleDate": "2026-10-09",
+    "sha256": "6160ac3f752225be217a5a696c07bf47edfab3e020f264b29e3173064b931ade"
+  },
+  "valueIntent": {
+    "boardObjectives": [
+      {
+        "id": "b1",
+        "name": "Grow profitable same-store sales"
+      },
+      {
+        "id": "b3",
+        "name": "Protect reputation and stock"
+      }
+    ],
+    "owner": "Retail Operations Director",
+    "metric": "Cold-chain compliance / £ spoilage exposure",
+    "baselineText": "Temperature control policy; no verified avoided-loss baseline",
+    "targetText": "Restore policy-compliant temperature safely",
+    "hypothesis": "Exposure avoided is not savings; requires actual spoiled-stock and downtime evidence",
+    "valueStatus": "UNVALIDATED",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "name": "Queue-to-conversion improvement"
+      },
+      {
+        "id": "h2",
+        "name": "Refrigeration efficiency"
+      }
+    ],
+    "metricRefs": [
+      {
+        "id": "k2",
+        "name": "kWh / chilled m³, loss"
+      }
+    ]
+  },
+  "evidence": {
+    "sources": [
+      {
+        "id": "d2",
+        "name": "Metering / BMS / temperature logs"
+      }
+    ],
+    "snapshots": [
+      {
+        "source": "BMS",
+        "name": "Case temperature anomaly",
+        "value": "7.8°C",
+        "quality": "simulated"
+      },
+      {
+        "source": "Energy meter",
+        "name": "Compressor load",
+        "value": "+24%",
+        "quality": "simulated"
+      },
+      {
+        "source": "CMMS",
+        "name": "Prior related incidents",
+        "value": "3",
+        "quality": "simulated"
+      }
+    ],
+    "provenance": "synthetic",
+    "confounders": [
+      "weather and occupancy mix",
+      "bookings, safety overrides",
+      "asset operating state"
+    ],
+    "verification": "counterfactual required; no benefit certified"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "b1",
+        "type": "board",
+        "title": "Grow profitable same-store sales",
+        "summary": "Improve conversion and fulfilment without adding unnecessary labour",
+        "icon": "target",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "b3",
+        "type": "board",
+        "title": "Protect reputation and stock",
+        "summary": "Improve safety, loss prevention and cold-chain assurance",
+        "icon": "target",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f2",
+        "type": "function",
+        "title": "Store operations",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f3",
+        "type": "function",
+        "title": "Merchandising",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f4",
+        "type": "function",
+        "title": "Facilities / Energy",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "s1",
+        "type": "signal",
+        "title": "Footfall-to-sales gap",
+        "summary": "Synthetic traffic and transaction trends suggest queue and layout friction at peak times.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "people",
+        "sourceId": "d1",
+        "sceneXY": [
+          33,
+          46
+        ]
+      },
+      {
+        "id": "s2",
+        "type": "signal",
+        "title": "Refrigeration outliers",
+        "summary": "Selected stores show potential cost and uptime variation after adjusting for site conditions.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "energy",
+        "sourceId": "d2",
+        "sceneXY": [
+          60,
+          29
+        ]
+      },
+      {
+        "id": "d2",
+        "type": "source",
+        "title": "Metering / BMS / temperature logs",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      },
+      {
+        "id": "h1",
+        "type": "hypothesis",
+        "title": "Queue-to-conversion improvement",
+        "summary": "Test checkout and staffing interventions at peak demand with experimental controls.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k1",
+        "financialModel": {
+          "annualPoolGBP": 60000000,
+          "opportunityPct": 1.8,
+          "captureFactor": 0.65,
+          "implementationGBP": 390000,
+          "serviceAnnualGBP": 110000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "h2",
+        "type": "hypothesis",
+        "title": "Refrigeration efficiency",
+        "summary": "Test fault detection and schedule optimisation while protecting food safety requirements.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k2",
+        "financialModel": {
+          "annualPoolGBP": 5000000,
+          "opportunityPct": 8,
+          "captureFactor": 0.65,
+          "implementationGBP": 310000,
+          "serviceAnnualGBP": 85000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k2",
+        "type": "metric",
+        "title": "kWh / chilled m³, loss",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "c2",
+        "type": "capability",
+        "title": "Cisco security",
+        "summary": "Protected store edge, access and segmentation",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r2",
+        "type": "risk",
+        "title": "Assurance control 2",
+        "summary": "POS and conversion require representative comparisons, not simple correlations",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v1",
+        "type": "stream",
+        "title": "Grow",
+        "summary": "Increase revenue or capacity",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v3",
+        "type": "stream",
+        "title": "Protect",
+        "summary": "Mitigate financial, operational and cyber risk",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v6",
+        "type": "stream",
+        "title": "Realise",
+        "summary": "Prove measured, attributable outcomes",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      }
+    ],
+    "edges": [
+      {
+        "from": "f2",
+        "to": "s2",
+        "relation": "informed-by",
+        "rationale": "Function reviews the relevant operational signal."
+      },
+      {
+        "from": "d2",
+        "to": "s2",
+        "relation": "produces",
+        "rationale": "Data supports signal interpretation, subject to access and quality."
+      },
+      {
+        "from": "s2",
+        "to": "h2",
+        "relation": "supports-hypothesis",
+        "rationale": "Signal is evidence for a proposition, not proof of causality."
+      },
+      {
+        "from": "h2",
+        "to": "k2",
+        "relation": "measured-by",
+        "rationale": "The metric quantifies the hypothesised business impact."
+      },
+      {
+        "from": "h2",
+        "to": "c2",
+        "relation": "requires-capability",
+        "rationale": "Technology requirement follows the validated opportunity."
+      },
+      {
+        "from": "h2",
+        "to": "r2",
+        "relation": "constrained-by",
+        "rationale": "Risk and assurance apply before change."
+      },
+      {
+        "from": "h2",
+        "to": "v1",
+        "relation": "contributes-to",
+        "rationale": "Outcome ties to value stream economics."
+      },
+      {
+        "from": "k2",
+        "to": "v6",
+        "relation": "proves",
+        "rationale": "Verification supports realised value."
+      },
+      {
+        "from": "b3",
+        "to": "f3",
+        "relation": "owned-by",
+        "rationale": "Executive priority requires accountable business ownership."
+      },
+      {
+        "from": "b3",
+        "to": "v3",
+        "relation": "contributes-to",
+        "rationale": "The outcome maps to an enterprise value stream."
+      },
+      {
+        "from": "b1",
+        "to": "f4",
+        "relation": "sponsored-by",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "b3",
+        "to": "f2",
+        "relation": "sponsored-by",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "s1",
+        "to": "h2",
+        "relation": "correlates-with",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "s2",
+        "to": "h1",
+        "relation": "correlates-with",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      }
+    ],
+    "primaryRefIds": [
+      "b3",
+      "f4",
+      "s2",
+      "h2",
+      "k2"
+    ]
+  },
+  "agentPlan": {
+    "strategy": "coordinator-with-role-handlers",
+    "agents": [
+      {
+        "id": "sense",
+        "title": "Signal Steward",
+        "authority": "read-only",
+        "purpose": "Collect signals; inspect provenance and freshness"
+      },
+      {
+        "id": "context",
+        "title": "Context Resolver",
+        "authority": "read-only",
+        "purpose": "Join event against value graph and responsibilities"
+      },
+      {
+        "id": "value",
+        "title": "Value Reasoner",
+        "authority": "recommend",
+        "purpose": "Correlate evidence; estimate opportunity without claiming causality"
+      },
+      {
+        "id": "plan",
+        "title": "Intervention Planner",
+        "authority": "recommend",
+        "purpose": "Produce alternatives, assumptions and risk controls"
+      },
+      {
+        "id": "guard",
+        "title": "Policy & Risk Gate",
+        "authority": "deterministic",
+        "purpose": "Check tools, scope and approval conditions"
+      },
+      {
+        "id": "act",
+        "title": "Action Broker",
+        "authority": "simulated-ticket",
+        "purpose": "Draft non-operational work order after human approval"
+      },
+      {
+        "id": "verify",
+        "title": "Outcome Auditor",
+        "authority": "read-only",
+        "purpose": "Record post-action measurement as pending"
+      }
+    ],
+    "flow": [
+      "sense",
+      "context",
+      "value",
+      "plan",
+      "guard",
+      "human-approval",
+      "act",
+      "verify"
+    ]
+  },
+  "governance": {
+    "mode": "SHADOW",
+    "minimumEvidence": "customer-verified before financial claim",
+    "approval": {
+      "required": true,
+      "role": "Store and food-safety owner approval"
+    },
+    "allowedActions": [
+      "read_synthetic_events",
+      "reason_on_graph",
+      "draft_work_order"
+    ],
+    "deniedActions": [
+      "bms.setpoint.write",
+      "plc.write",
+      "access_control.write",
+      "production.system.write"
+    ],
+    "riskBoundary": "Food safety, brand reputation and regulatory reporting",
+    "externalSystemsEnabled": false
+  },
+  "commercial": {
+    "partnerRole": "Retail FM, refrigeration OEM and service partner",
+    "ciscoCapabilityPositioning": "Secure connectivity, estate observability, Spaces only where relevant",
+    "noRevenueOrROIClaimsWithoutMeasuredEvidence": true
+  },
+  "runtime": {
+    "eventSource": "embedded-synthetic-snapshot",
+    "eventTimeoutSeconds": 15,
+    "idempotencyRequired": true,
+    "auditRequired": true,
+    "outcomeState": "NOT_MEASURED"
+  },
+  "presentation": {
+    "title": "Connected Retail Estate",
+    "subtitle": "Refrigeration + energy + maintenance → protect stock and service economics",
+    "scene": "retail",
+    "industry": "Retail stores"
+  }
+}

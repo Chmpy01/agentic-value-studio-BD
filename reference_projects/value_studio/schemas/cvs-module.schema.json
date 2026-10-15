@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cognitive Value Studio graph module",
+  "type": "object",
+  "required": [
+    "moduleType",
+    "schemaVersion",
+    "packId",
+    "moduleId",
+    "payload"
+  ],
+  "properties": {
+    "moduleType": {
+      "const": "cvs-module"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "packId": {
+      "type": "string"
+    },
+    "moduleId": {
+      "type": "string"
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

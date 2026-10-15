@@ -1,0 +1,7 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema", "$id":"https://cognitivevalue.example/schemas/agent-event/1.0",
+ "title":"Agentic Value Operations trace envelope (inspired by CloudEvents)",
+ "type":"object", "required":["specversion","type","source","id","subject","time","data"],
+ "properties":{"specversion":{"const":"1.0"},"type":{"type":"string"},"source":{"type":"string"},"id":{"type":"string"},"subject":{"type":"string"},"time":{"type":"string"},"datacontenttype":{"type":"string"},"data":{"type":"object","required":["intentRef","entityRef","value","quality","provenance"],"properties":{"intentRef":{"type":"string"},"entityRef":{"type":"string"},"value":{},"quality":{"enum":["synthetic","unverified","observed","verified"]},"provenance":{"type":"string"}}}}
+ }
+}

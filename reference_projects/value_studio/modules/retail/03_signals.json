@@ -1,0 +1,85 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "retail",
+  "moduleId": "03_signals",
+  "payload": {
+    "nodes": [
+      {
+        "id": "s1",
+        "type": "signal",
+        "title": "Footfall-to-sales gap",
+        "summary": "Synthetic traffic and transaction trends suggest queue and layout friction at peak times.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "people",
+        "sourceId": "d1",
+        "sceneXY": [
+          33,
+          46
+        ]
+      },
+      {
+        "id": "d1",
+        "type": "source",
+        "title": "Aggregated footfall / POS / staffing",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      },
+      {
+        "id": "s2",
+        "type": "signal",
+        "title": "Refrigeration outliers",
+        "summary": "Selected stores show potential cost and uptime variation after adjusting for site conditions.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "energy",
+        "sourceId": "d2",
+        "sceneXY": [
+          60,
+          29
+        ]
+      },
+      {
+        "id": "d2",
+        "type": "source",
+        "title": "Metering / BMS / temperature logs",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      },
+      {
+        "id": "s3",
+        "type": "signal",
+        "title": "Fulfilment strain",
+        "summary": "Click-and-collect demand may coincide with service queues and staffing peaks.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "asset",
+        "sourceId": "d3",
+        "sceneXY": [
+          57,
+          67
+        ]
+      },
+      {
+        "id": "d3",
+        "type": "source",
+        "title": "Order systems / queue data / service logs",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      }
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "office",
+  "moduleId": "05_ecosystem",
+  "payload": {
+    "nodes": [
+      {
+        "id": "c1",
+        "type": "capability",
+        "title": "Cisco Spaces / network-as-sensor",
+        "summary": "Spatial occupancy context from compatible network estates",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "c2",
+        "type": "capability",
+        "title": "Webex / collaboration intelligence",
+        "summary": "Room utilisation and meeting experience signals",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "c3",
+        "type": "capability",
+        "title": "Splunk / observability",
+        "summary": "Cross-domain operational events and service intelligence",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "p1",
+        "type": "partner",
+        "title": "Workplace strategy advisory",
+        "summary": "Persona discovery, business case, space policy",
+        "icon": "handshake",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "p2",
+        "type": "partner",
+        "title": "SI + OT integration partner",
+        "summary": "Data mediation, BMS interoperability and secure integration",
+        "icon": "handshake",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "p3",
+        "type": "partner",
+        "title": "FM / managed experience provider",
+        "summary": "Continuous operations, monitoring and experience improvement",
+        "icon": "handshake",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "o1",
+        "type": "offer",
+        "title": "Value baseline & business case",
+        "summary": "Fixed-fee discovery and outcome blueprint",
+        "icon": "briefcase",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "o2",
+        "type": "offer",
+        "title": "Secure integration & transformation",
+        "summary": "Design and deployment with milestone revenue",
+        "icon": "briefcase",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "o3",
+        "type": "offer",
+        "title": "Workplace optimisation service",
+        "summary": "Subscription with governance, reporting and service margin",
+        "icon": "briefcase",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      }
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cognitivevalue.example/schemas/runtime-event/v1",
+  "title": "Cognitive Value runtime event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "eventId",
+    "runId",
+    "traceId",
+    "correlationId",
+    "packId",
+    "intentVersion",
+    "intentHash",
+    "agent",
+    "stage",
+    "type",
+    "message",
+    "graphRefs",
+    "evidenceStatus",
+    "actor",
+    "timestamp"
+  ],
+  "properties": {
+    "seq": {"type": "integer"},
+    "eventId": {"type": "string", "minLength": 8},
+    "runId": {"type": "string", "minLength": 8},
+    "traceId": {"type": "string", "minLength": 8},
+    "correlationId": {"type": "string", "minLength": 8},
+    "packId": {"type": "string"},
+    "intentVersion": {"type": "string"},
+    "intentHash": {"type": "string", "minLength": 64},
+    "agent": {"type": "string"},
+    "stage": {"type": "string"},
+    "type": {"type": "string"},
+    "message": {"type": "string"},
+    "details": {"type": "object"},
+    "graphRefs": {"type": "array", "items": {"type": "string"}},
+    "evidenceStatus": {
+      "type": "string",
+      "enum": ["SIMULATED", "STALE_SIMULATED", "ILLUSTRATIVE", "UNVALIDATED", "PROPOSED", "POLICY", "NOT_MEASURED"]
+    },
+    "actor": {"type": "string"},
+    "timestamp": {"type": "string"}
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "1.0",
+  "packId": "runtime-manufacturing",
+  "title": "Resilient Manufacturing Site",
+  "industry": "Industrial facilities",
+  "subtitle": "OT historian + quality + maintenance → production resilience and cost per good unit",
+  "status": "synthetic-simulation",
+  "enterprisePackRef": {
+    "packId": "manufacturing",
+    "nodeIds": [
+      "b1",
+      "b2",
+      "f3",
+      "s1",
+      "h1",
+      "k1"
+    ]
+  },
+  "valueIntent": {
+    "objective": "Increase safe throughput and reduce cost per good unit",
+    "accountableOwner": "Plant Operations Director",
+    "metric": "OEE / cost per good unit",
+    "baseline": "Illustrative 8 stops per shift; no validated cost attribution",
+    "target": "Test reduction of repeat stops",
+    "benefitHypothesis": "Unquantified pending cycle-time, scrap, margin and maintenance baseline",
+    "riskBoundary": "Worker safety, OT segmentation, change control",
+    "approvalAuthority": "Maintenance + OT/EHS approval",
+    "autonomy": "L1 recommendation / L2 ticket with approval",
+    "valueStatus": "unvalidated"
+  },
+  "agents": [
+    {
+      "id": "sense",
+      "name": "Signal Steward",
+      "type": "Deterministic ingestion",
+      "mandate": "Normalise source events, provenance, freshness and completeness",
+      "icon": "◉",
+      "tone": "blue"
+    },
+    {
+      "id": "context",
+      "name": "Context & Graph",
+      "type": "Hybrid reasoning",
+      "mandate": "Resolve assets, zones, owners, policy context and source conflicts",
+      "icon": "⌘",
+      "tone": "cyan"
+    },
+    {
+      "id": "value",
+      "name": "Value Reasoner",
+      "type": "Bounded hypothesis reasoning",
+      "mandate": "Evaluate materiality, counterfactuals, benefit ownership and confidence",
+      "icon": "◇",
+      "tone": "violet"
+    },
+    {
+      "id": "plan",
+      "name": "Intervention Planner",
+      "type": "AI-assisted planning",
+      "mandate": "Form choices with expected impact, dependencies and failure modes",
+      "icon": "▤",
+      "tone": "amber"
+    },
+    {
+      "id": "guard",
+      "name": "Policy & Risk Gate",
+      "type": "Deterministic policy enforcement",
+      "mandate": "Enforce role permissions, OT safety, privacy, human approval",
+      "icon": "⬡",
+      "tone": "red"
+    },
+    {
+      "id": "act",
+      "name": "Action Broker",
+      "type": "Permissioned workflow adapter",
+      "mandate": "Issue authorised tickets and controlled commands; handle receipts and rollback",
+      "icon": "↗",
+      "tone": "blue"
+    },
+    {
+      "id": "verify",
+      "name": "Outcome Auditor",
+      "type": "Independent measurement",
+      "mandate": "Compare before/after, control for confounders, sign benefits and improve graph",
+      "icon": "✓",
+      "tone": "green"
+    }
+  ],
+  "connectors": [
+    "OT historian and SCADA",
+    "MES counts and quality",
+    "Condition monitoring",
+    "CMMS work orders"
+  ],
+  "permissions": [
+    "Read de-identified equipment events",
+    "Read MES production aggregates",
+    "Suggest inspection workflow",
+    "No direct PLC/SCADA control"
+  ],
+  "signalSnapshot": [
+    {
+      "source": "OT historian",
+      "name": "Compressor micro-stops",
+      "value": "8 / shift",
+      "quality": "simulated"
+    },
+    {
+      "source": "MES",
+      "name": "Output variance",
+      "value": "−6.4%",
+      "quality": "simulated"
+    },
+    {
+      "source": "CMMS",
+      "name": "Backlog",
+      "value": "5 open",
+      "quality": "simulated"
+    }
+  ],
+  "stakeholders": [
+    "Plant Director",
+    "Production Manager",
+    "Maintenance",
+    "EHS / OT",
+    "Finance"
+  ],
+  "valueStreams": "Make money · Save money · Mitigate risk",
+  "partnerRole": "OT integrator, reliability MSP, machine OEM",
+  "ciscoRole": "Industrial networking, OT visibility/security, observability integrations",
+  "scene": "manufacturing",
+  "dataLabels": [
+    "SCADA historian",
+    "MES / quality",
+    "Condition sensor",
+    "CMMS backlog"
+  ],
+  "workflow": [
+    {
+      "id": "0",
+      "name": "Observe",
+      "agent": "sense",
+      "contract": "Event stream",
+      "description": "New source events arrive and are quality checked.",
+      "detail": "Micro-stops, lower good-unit throughput and unresolved condition reports share a possible equipment dependency.",
+      "requiresApproval": false,
+      "evidenceState": "observed"
+    },
+    {
+      "id": "1",
+      "name": "Contextualise",
+      "agent": "context",
+      "contract": "Knowledge graph",
+      "description": "Join physical, operational and business context.",
+      "detail": "Micro-stops, lower good-unit throughput and unresolved condition reports share a possible equipment dependency.",
+      "requiresApproval": false,
+      "evidenceState": "observed"
+    },
+    {
+      "id": "2",
+      "name": "Hypothesise",
+      "agent": "value",
+      "contract": "Value intent",
+      "description": "Estimate significance without asserting causation.",
+      "detail": "A targeted maintenance check may reduce recurring downtime without introducing unsafe OT changes.",
+      "requiresApproval": false,
+      "evidenceState": "proposed"
+    },
+    {
+      "id": "3",
+      "name": "Plan",
+      "agent": "plan",
+      "contract": "Options",
+      "description": "Compare interventions, cost, confidence and risk.",
+      "detail": "Schedule a controlled mechanical inspection and coordinate production-window access.",
+      "requiresApproval": false,
+      "evidenceState": "proposed"
+    },
+    {
+      "id": "4",
+      "name": "Guard",
+      "agent": "guard",
+      "contract": "Policy verdict",
+      "description": "Apply the delegated authority and safety boundaries.",
+      "detail": "Safety-critical industrial controls stay under OT/EHS authority. Human approval and site lockout procedures required.",
+      "requiresApproval": false,
+      "evidenceState": "proposed"
+    },
+    {
+      "id": "5",
+      "name": "Approve",
+      "agent": "guard",
+      "contract": "Human decision",
+      "description": "The accountable human accepts or rejects the proposed action.",
+      "detail": "Maintenance + OT/EHS approval",
+      "requiresApproval": false,
+      "evidenceState": "proposed"
+    },
+    {
+      "id": "6",
+      "name": "Act",
+      "agent": "act",
+      "contract": "Action receipt",
+      "description": "Create authorised workflow actions with audit and rollback.",
+      "detail": "Create a SIMULATED CMMS inspection work order; no PLC/SCADA commands.",
+      "requiresApproval": true,
+      "evidenceState": "proposed"
+    },
+    {
+      "id": "7",
+      "name": "Verify",
+      "agent": "verify",
+      "contract": "Evidence ledger",
+      "description": "Check pre/post data and counterfactual validity.",
+      "detail": "Compare failure frequency and good-unit throughput across matched shifts after maintenance; control for product mix.",
+      "requiresApproval": true,
+      "evidenceState": "simulated"
+    },
+    {
+      "id": "8",
+      "name": "Learn",
+      "agent": "verify",
+      "contract": "Updated Value Twin",
+      "description": "Publish verified evidence, or record unresolved gaps.",
+      "detail": "Publish root-cause evidence and extend only if reliability gain is sustained and independently verified.",
+      "requiresApproval": true,
+      "evidenceState": "simulated"
+    }
+  ],
+  "outcome": {
+    "baseline": "Illustrative 8 stops per shift; no validated cost attribution",
+    "target": "Test reduction of repeat stops",
+    "metric": "OEE / cost per good unit",
+    "benefitHypothesis": "Unquantified pending cycle-time, scrap, margin and maintenance baseline",
+    "verification": "Compare failure frequency and good-unit throughput across matched shifts after maintenance; control for product mix.",
+    "certainty": "Exploratory; production impact not proven"
+  },
+  "controls": {
+    "requireHumanApproval": true,
+    "allowPhysicalControl": false,
+    "allowedActions": [
+      "Inspection ticket only"
+    ],
+    "riskNotes": "Worker safety, OT segmentation, change control"
+  },
+  "provenance": {
+    "sources": "Illustrative operational values; not live Cisco/BMS data",
+    "verified": false,
+    "generated": "2026-10-09"
+  }
+}

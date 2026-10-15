@@ -1,0 +1,91 @@
+{
+  "moduleType": "cvs-module",
+  "schemaVersion": "1.0.0",
+  "packId": "manufacturing",
+  "moduleId": "05_ecosystem",
+  "payload": {
+    "nodes": [
+      {
+        "id": "c1",
+        "type": "capability",
+        "title": "Cisco industrial networking",
+        "summary": "Resilient plant connectivity and segmentation",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "c2",
+        "type": "capability",
+        "title": "Cisco security for IT/OT",
+        "summary": "Visibility, policy and protected remote access",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "c3",
+        "type": "capability",
+        "title": "Splunk / observability",
+        "summary": "Correlated events from authorised operational sources",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "p1",
+        "type": "partner",
+        "title": "Industrial engineering / OT SI",
+        "summary": "Safety-aligned integration with MES, historian and PLC estates",
+        "icon": "handshake",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "p2",
+        "type": "partner",
+        "title": "OEM / machine specialist",
+        "summary": "Asset performance and control expertise",
+        "icon": "handshake",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "p3",
+        "type": "partner",
+        "title": "Industrial managed services partner",
+        "summary": "Reliability analytics and governed operational support",
+        "icon": "handshake",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "o1",
+        "type": "offer",
+        "title": "Value stream diagnostic",
+        "summary": "Plant baseline and economic opportunity sizing",
+        "icon": "briefcase",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "o2",
+        "type": "offer",
+        "title": "Industrial integration programme",
+        "summary": "Scoped OT integration with change-control assurance",
+        "icon": "briefcase",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "o3",
+        "type": "offer",
+        "title": "Reliability service",
+        "summary": "Outcome monitoring, subscription and continuous improvement",
+        "icon": "briefcase",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      }
+    ]
+  }
+}

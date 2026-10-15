@@ -1,0 +1,505 @@
+{
+  "apiVersion": "cvs.openai.example/v1alpha1",
+  "kind": "ValueIntentRuntime",
+  "metadata": {
+    "name": "office-value-ops",
+    "version": "0.1.0",
+    "sourcePackId": "office",
+    "sourceRuntimeId": "runtime-office",
+    "status": "synthetic/unvalidated",
+    "compiledExampleDate": "2026-10-09",
+    "sha256": "48662f5a9dcfa6347db9bacf001b91cfc4af505996fe2bce64c79cd957e95eba"
+  },
+  "valueIntent": {
+    "boardObjectives": [
+      {
+        "id": "b1",
+        "name": "Reduce portfolio cost"
+      },
+      {
+        "id": "b3",
+        "name": "Deliver net-zero progress"
+      }
+    ],
+    "owner": "Facilities Director",
+    "metric": "kWh per occupied hour",
+    "baselineText": "Reference 11.4 kWh/occupied-hour (illustrative)",
+    "targetText": "Test 8% improvement (hypothesis)",
+    "hypothesis": "Annual addressable cost: £180k; illustrative 8% opportunity = £14.4k before delivery costs",
+    "valueStatus": "UNVALIDATED",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "name": "Optimise the estate footprint"
+      },
+      {
+        "id": "h2",
+        "name": "Adaptive HVAC scheduling"
+      }
+    ],
+    "metricRefs": [
+      {
+        "id": "k2",
+        "name": "kWh / occupied hour"
+      }
+    ]
+  },
+  "evidence": {
+    "sources": [
+      {
+        "id": "d1",
+        "name": "Cisco Spaces / booking / badge aggregates"
+      },
+      {
+        "id": "d2",
+        "name": "BMS / energy meters / tariffs"
+      }
+    ],
+    "snapshots": [
+      {
+        "source": "Cisco Spaces",
+        "name": "West wing occupancy",
+        "value": "14%",
+        "quality": "simulated"
+      },
+      {
+        "source": "BMS / meter",
+        "name": "After-hours HVAC draw",
+        "value": "72 kWh/h",
+        "quality": "simulated"
+      },
+      {
+        "source": "Bookings",
+        "name": "Next 2h meetings",
+        "value": "0",
+        "quality": "simulated"
+      }
+    ],
+    "provenance": "synthetic",
+    "confounders": [
+      "weather and occupancy mix",
+      "bookings, safety overrides",
+      "asset operating state"
+    ],
+    "verification": "counterfactual required; no benefit certified"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "b1",
+        "type": "board",
+        "title": "Reduce portfolio cost",
+        "summary": "Reduce cost without weakening employee experience",
+        "icon": "target",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "b3",
+        "type": "board",
+        "title": "Deliver net-zero progress",
+        "summary": "Verify lower energy and emissions intensity",
+        "icon": "target",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f1",
+        "type": "function",
+        "title": "CFO / Finance",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f2",
+        "type": "function",
+        "title": "Corporate real estate",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f3",
+        "type": "function",
+        "title": "HR / Workplace",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "f4",
+        "type": "function",
+        "title": "Facilities / Energy",
+        "summary": "Accountable decision maker in this value stream.",
+        "icon": "users",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "s1",
+        "type": "signal",
+        "title": "Space demand gap",
+        "summary": "Synthetic occupancy observations point to a low midweek utilisation pattern.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "people",
+        "sourceId": "d1",
+        "sceneXY": [
+          32,
+          37
+        ]
+      },
+      {
+        "id": "d1",
+        "type": "source",
+        "title": "Cisco Spaces / booking / badge aggregates",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      },
+      {
+        "id": "s2",
+        "type": "signal",
+        "title": "Energy-performance mismatch",
+        "summary": "HVAC consumption appears poorly aligned to space demand.",
+        "icon": "activity",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "layer": "energy",
+        "sourceId": "d2",
+        "sceneXY": [
+          61,
+          30
+        ]
+      },
+      {
+        "id": "d2",
+        "type": "source",
+        "title": "BMS / energy meters / tariffs",
+        "summary": "Potential source of evidence; availability must be confirmed.",
+        "icon": "database",
+        "evidenceStatus": "unverified",
+        "confidence": "to-validate",
+        "dataClassification": "operational / restricted"
+      },
+      {
+        "id": "h1",
+        "type": "hypothesis",
+        "title": "Optimise the estate footprint",
+        "summary": "Test whether a floor can be consolidated while keeping accessible space and collaboration quality.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k1",
+        "financialModel": {
+          "annualPoolGBP": 9500000,
+          "opportunityPct": 10,
+          "captureFactor": 0.65,
+          "implementationGBP": 420000,
+          "serviceAnnualGBP": 85000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "h2",
+        "type": "hypothesis",
+        "title": "Adaptive HVAC scheduling",
+        "summary": "Test schedule adjustments based on aggregated demand while maintaining ventilation and thermal constraints.",
+        "icon": "spark",
+        "evidenceStatus": "hypothesis",
+        "confidence": "to-validate",
+        "metricId": "k2",
+        "financialModel": {
+          "annualPoolGBP": 4000000,
+          "opportunityPct": 12,
+          "captureFactor": 0.65,
+          "implementationGBP": 210000,
+          "serviceAnnualGBP": 56000,
+          "currency": "GBP"
+        }
+      },
+      {
+        "id": "k2",
+        "type": "metric",
+        "title": "kWh / occupied hour",
+        "summary": "Outcome metric requiring baseline, owner and method.",
+        "icon": "chart",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "c2",
+        "type": "capability",
+        "title": "Webex / collaboration intelligence",
+        "summary": "Room utilisation and meeting experience signals",
+        "icon": "network",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "r2",
+        "type": "risk",
+        "title": "Assurance control 2",
+        "summary": "Energy savings must not compromise air quality, comfort or access needs",
+        "icon": "shield",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v1",
+        "type": "stream",
+        "title": "Grow",
+        "summary": "Increase revenue or capacity",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v3",
+        "type": "stream",
+        "title": "Protect",
+        "summary": "Mitigate financial, operational and cyber risk",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      },
+      {
+        "id": "v6",
+        "type": "stream",
+        "title": "Realise",
+        "summary": "Prove measured, attributable outcomes",
+        "icon": "layers",
+        "evidenceStatus": "illustrative",
+        "confidence": "to-validate"
+      }
+    ],
+    "edges": [
+      {
+        "from": "b1",
+        "to": "f1",
+        "relation": "owned-by",
+        "rationale": "Executive priority requires accountable business ownership."
+      },
+      {
+        "from": "b1",
+        "to": "v1",
+        "relation": "contributes-to",
+        "rationale": "The outcome maps to an enterprise value stream."
+      },
+      {
+        "from": "f1",
+        "to": "s1",
+        "relation": "informed-by",
+        "rationale": "Function reviews the relevant operational signal."
+      },
+      {
+        "from": "d1",
+        "to": "s1",
+        "relation": "produces",
+        "rationale": "Data supports signal interpretation, subject to access and quality."
+      },
+      {
+        "from": "s1",
+        "to": "h1",
+        "relation": "supports-hypothesis",
+        "rationale": "Signal is evidence for a proposition, not proof of causality."
+      },
+      {
+        "from": "f2",
+        "to": "s2",
+        "relation": "informed-by",
+        "rationale": "Function reviews the relevant operational signal."
+      },
+      {
+        "from": "d2",
+        "to": "s2",
+        "relation": "produces",
+        "rationale": "Data supports signal interpretation, subject to access and quality."
+      },
+      {
+        "from": "s2",
+        "to": "h2",
+        "relation": "supports-hypothesis",
+        "rationale": "Signal is evidence for a proposition, not proof of causality."
+      },
+      {
+        "from": "h2",
+        "to": "k2",
+        "relation": "measured-by",
+        "rationale": "The metric quantifies the hypothesised business impact."
+      },
+      {
+        "from": "h2",
+        "to": "c2",
+        "relation": "requires-capability",
+        "rationale": "Technology requirement follows the validated opportunity."
+      },
+      {
+        "from": "h2",
+        "to": "r2",
+        "relation": "constrained-by",
+        "rationale": "Risk and assurance apply before change."
+      },
+      {
+        "from": "h2",
+        "to": "v1",
+        "relation": "contributes-to",
+        "rationale": "Outcome ties to value stream economics."
+      },
+      {
+        "from": "k2",
+        "to": "v6",
+        "relation": "proves",
+        "rationale": "Verification supports realised value."
+      },
+      {
+        "from": "b3",
+        "to": "f3",
+        "relation": "owned-by",
+        "rationale": "Executive priority requires accountable business ownership."
+      },
+      {
+        "from": "b3",
+        "to": "v3",
+        "relation": "contributes-to",
+        "rationale": "The outcome maps to an enterprise value stream."
+      },
+      {
+        "from": "b1",
+        "to": "f4",
+        "relation": "sponsored-by",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "b3",
+        "to": "f2",
+        "relation": "sponsored-by",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "s1",
+        "to": "h2",
+        "relation": "correlates-with",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      },
+      {
+        "from": "s2",
+        "to": "h1",
+        "relation": "correlates-with",
+        "rationale": "Cross-functional link included to avoid siloed value modelling."
+      }
+    ],
+    "primaryRefIds": [
+      "b1",
+      "b3",
+      "f4",
+      "s1",
+      "s2",
+      "h2",
+      "k2"
+    ]
+  },
+  "agentPlan": {
+    "strategy": "coordinator-with-role-handlers",
+    "agents": [
+      {
+        "id": "sense",
+        "title": "Signal Steward",
+        "authority": "read-only",
+        "purpose": "Collect signals; inspect provenance and freshness"
+      },
+      {
+        "id": "context",
+        "title": "Context Resolver",
+        "authority": "read-only",
+        "purpose": "Join event against value graph and responsibilities"
+      },
+      {
+        "id": "value",
+        "title": "Value Reasoner",
+        "authority": "recommend",
+        "purpose": "Correlate evidence; estimate opportunity without claiming causality"
+      },
+      {
+        "id": "plan",
+        "title": "Intervention Planner",
+        "authority": "recommend",
+        "purpose": "Produce alternatives, assumptions and risk controls"
+      },
+      {
+        "id": "guard",
+        "title": "Policy & Risk Gate",
+        "authority": "deterministic",
+        "purpose": "Check tools, scope and approval conditions"
+      },
+      {
+        "id": "act",
+        "title": "Action Broker",
+        "authority": "simulated-ticket",
+        "purpose": "Draft non-operational work order after human approval"
+      },
+      {
+        "id": "verify",
+        "title": "Outcome Auditor",
+        "authority": "read-only",
+        "purpose": "Record post-action measurement as pending"
+      }
+    ],
+    "flow": [
+      "sense",
+      "context",
+      "value",
+      "plan",
+      "guard",
+      "human-approval",
+      "act",
+      "verify"
+    ]
+  },
+  "governance": {
+    "mode": "SHADOW",
+    "minimumEvidence": "customer-verified before financial claim",
+    "approval": {
+      "required": true,
+      "role": "FM operations approval"
+    },
+    "allowedActions": [
+      "read_synthetic_events",
+      "reason_on_graph",
+      "draft_work_order"
+    ],
+    "deniedActions": [
+      "bms.setpoint.write",
+      "plc.write",
+      "access_control.write",
+      "production.system.write"
+    ],
+    "riskBoundary": "IEQ / ventilation; variable occupancy and data privacy",
+    "externalSystemsEnabled": false
+  },
+  "commercial": {
+    "partnerRole": "FM & energy services partner",
+    "ciscoCapabilityPositioning": "Spaces location/occupancy; enterprise networking; Splunk correlation; Webex/room usage where contractually supported",
+    "noRevenueOrROIClaimsWithoutMeasuredEvidence": true
+  },
+  "runtime": {
+    "eventSource": "embedded-synthetic-snapshot",
+    "eventTimeoutSeconds": 15,
+    "idempotencyRequired": true,
+    "auditRequired": true,
+    "outcomeState": "NOT_MEASURED"
+  },
+  "presentation": {
+    "title": "Adaptive Workplace",
+    "subtitle": "Occupancy + HVAC + bookings → energy value without compromising comfort",
+    "scene": "office",
+    "industry": "Workplace & buildings"
+  }
+}

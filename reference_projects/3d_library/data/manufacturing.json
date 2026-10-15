@@ -1,0 +1,223 @@
+{
+  "id": "manufacturing",
+  "name": "Connected Manufacturing",
+  "label": "Industrial plant · 2 levels",
+  "kind": "manufacturing",
+  "floors": 2,
+  "area": 41500,
+  "annualEnergy": 6100000,
+  "annualOperatingCost": 19800000,
+  "summary": "Plant, equipment, production cells, site utilities, loading and safety zones.",
+  "cases": [
+    {
+      "id": "mprod",
+      "title": "Throughput & production flow",
+      "layer": "space",
+      "floor": 1,
+      "x": -3,
+      "z": 1,
+      "unit": "OEE / cycle-time hypothesis",
+      "stakeholder": "Plant Manager",
+      "secondary": "Operations, Finance",
+      "hypothesis": "Bring equipment state, congestion and materials flow together to pinpoint production bottlenecks.",
+      "signals": [
+        "MES/OEE shift records",
+        "Line PLC events and historian",
+        "Material flow / downtime codes"
+      ],
+      "baseline": "OEE, scrap, output and losses by shift",
+      "value": "More saleable output without adding capacity",
+      "metric": "OEE pts, throughput units/day",
+      "illustrative": 520000,
+      "confidence": "Synthetic production scenario",
+      "partner": "OT data integration, line advisory and managed analytics",
+      "cisco": "Industrial Ethernet, OT segmentation, edge connectivity",
+      "next": "Pick one constrained line and validate bottleneck timestamps.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "menergy",
+      "title": "Energy intensity & peak demand",
+      "layer": "energy",
+      "floor": 2,
+      "x": -3,
+      "z": -3,
+      "unit": "kWh per finished unit",
+      "stakeholder": "Energy / Sustainability Lead",
+      "secondary": "CFO, Plant Engineering",
+      "hypothesis": "Identify idle loads and peak tariff exposure while preserving process quality.",
+      "signals": [
+        "Process + building submetering",
+        "Tariffs and demand peaks",
+        "Production volumes / shifts"
+      ],
+      "baseline": "kWh per unit weather and production adjusted",
+      "value": "Avoided energy spend and carbon",
+      "metric": "£/unit, kWh/production unit",
+      "illustrative": 290000,
+      "confidence": "Synthetic savings pool",
+      "partner": "Energy managed optimisation with controls OEM",
+      "cisco": "IT/OT connectivity and visibility foundation",
+      "next": "Reconcile plant loads to shift and utility meters.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "massets",
+      "title": "Reliability and maintenance",
+      "layer": "asset",
+      "floor": 2,
+      "x": 4,
+      "z": -2,
+      "unit": "14 critical assets",
+      "stakeholder": "Head of Maintenance",
+      "secondary": "Plant Manager, Finance",
+      "hypothesis": "Combine condition alarms, asset criticality, maintenance history and spare part lead-times.",
+      "signals": [
+        "Vibration and condition data",
+        "CMMS / maintenance records",
+        "Critical spares and downtime costs"
+      ],
+      "baseline": "MTBF, MTTR and planned/reactive mix",
+      "value": "Reduced production loss and lower maintenance cost",
+      "metric": "Downtime hrs and £/lost hr",
+      "illustrative": 440000,
+      "confidence": "Synthetic; potential overlap with OEE",
+      "partner": "Predictive maintenance + subscription + field services",
+      "cisco": "Industrial network and cyber resilience + analytics ISV",
+      "next": "Rank the top ten losses and validate failure signatures.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "msafe",
+      "title": "Worker & vehicle safety",
+      "layer": "security",
+      "floor": 1,
+      "x": 5,
+      "z": 3,
+      "unit": "Risk / near-miss signals",
+      "stakeholder": "EHS Director",
+      "secondary": "Operations, Unions / Workforce Representatives",
+      "hypothesis": "Identify site safety exposure without replacing certified safety controls.",
+      "signals": [
+        "Near-miss and event logs",
+        "Safe zones and site procedures",
+        "Permitted video analytics"
+      ],
+      "baseline": "Near misses, exposures and response latency",
+      "value": "Safety assurance and reduced disruption risk",
+      "metric": "Incidents, response time, exposure",
+      "illustrative": 80000,
+      "confidence": "Non-safety-critical visualisation",
+      "partner": "Safety design / change management / managed monitoring",
+      "cisco": "OT segmentation + secure transport with safety specialist",
+      "next": "Confirm worker consultation, purpose limitation and safety authority.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    },
+    {
+      "id": "mot",
+      "title": "Industrial cyber exposure",
+      "layer": "ecosystem",
+      "floor": 1,
+      "x": -5,
+      "z": -3,
+      "unit": "OT asset inventory",
+      "stakeholder": "OT Security Lead",
+      "secondary": "CISO, OEM, Operations",
+      "hypothesis": "Reduce unmanaged dependencies and connectivity risks in production networks.",
+      "signals": [
+        "Passive OT discovery",
+        "Segmentation and flow maps",
+        "Incident / vulnerability controls"
+      ],
+      "baseline": "OT asset coverage and high-risk flows",
+      "value": "Business continuity and lower disruption exposure",
+      "metric": "Asset coverage, policy drift, time-to-contain",
+      "illustrative": 100000,
+      "confidence": "Risk proxy only",
+      "partner": "Managed OT security and cyber assessment",
+      "cisco": "Industrial security, network assurance and visibility",
+      "next": "Build a production-safe passive discovery plan.",
+      "provenance": {
+        "classification": "hypothesis",
+        "asOf": "2026-10-08",
+        "owner": "Workshop validation required",
+        "sources": []
+      }
+    }
+  ],
+  "personas": [
+    [
+      "Plant Manager",
+      "OEE, output and bottlenecks"
+    ],
+    [
+      "Maintenance",
+      "Uptime and asset integrity"
+    ],
+    [
+      "EHS",
+      "Worker protection"
+    ],
+    [
+      "OT / IT",
+      "Resilience and secure data"
+    ],
+    [
+      "Finance",
+      "Unit economics"
+    ],
+    [
+      "Supply Chain",
+      "Flow and fulfilment"
+    ]
+  ],
+  "partners": [
+    [
+      "Industrial OEM / OT",
+      "PLCs, historian, operational context"
+    ],
+    [
+      "Cisco / network partner",
+      "Industrial secure networking"
+    ],
+    [
+      "SI / MES partner",
+      "Production integration and digitalisation"
+    ],
+    [
+      "Maintenance specialist",
+      "Reliability models / field response"
+    ],
+    [
+      "Managed services",
+      "Operational monitoring and cyber"
+    ]
+  ],
+  "story": "Industrial use cases extend from the intelligent facility into throughput, maintenance and supply-chain outcomes.",
+  "provenance": {
+    "classification": "synthetic",
+    "asOf": "2026-10-08",
+    "owner": "Demonstration dataset",
+    "sources": []
+  }
+}
