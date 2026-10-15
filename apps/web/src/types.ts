@@ -1,16 +1,163 @@
-export type ModeId = 'story' | 'twin' | 'live' | 'network' | 'evidence' | 'studio'
+export type ModeId =
+  | 'story'
+  | 'signals'
+  | 'explore'
+  | 'graph'
+  | 'compound'
+  | 'risk'
+  | 'economics'
+  | 'new'
+  | 'studio'
+  | 'reasoning'
+  | 'live'
+  | 'network'
+  | 'evidence'
 export type LensId = 'customer' | 'partner' | 'cisco'
 
 export interface NavItem {
   id: string
   label: string
   icon: string
+  group?: string
+}
+
+export interface NavGroup {
+  id: string
+  label: string
+  icon: string
+  modes: NavItem[]
 }
 
 export interface Navigation {
   product: string
+  groups: NavGroup[]
   modes: NavItem[]
   lenses: NavItem[]
+}
+
+export interface Persona {
+  id: string
+  functionId: string
+  title: string
+  archetype: string
+  quote?: string
+  goals: string[]
+  pains: string[]
+  decisions: string[]
+  kpis: string[]
+  signalIds: string[]
+  hypothesisIds: string[]
+  evidenceStatus: string
+}
+
+export interface Synergy {
+  id: string
+  title: string
+  hypothesisIds: string[]
+  mechanism: string
+  extendedOutcome: string
+  bridgeNodeIds: string[]
+  overlapPct: number
+  sharedImplementationPct: number
+  evidenceNeeded: string[]
+  evidenceStatus: string
+}
+
+export interface Reading {
+  id: string
+  signalId: string
+  sourceId: string
+  metric: string
+  value: number | null
+  unit: string
+  threshold: { op: 'gt' | 'lt'; value: number }
+  quality: string
+  ageMinutes: number
+}
+
+export interface ReasoningScenario {
+  id: string
+  label: string
+  description: string
+  readings: Reading[]
+}
+
+export interface Overlay {
+  packId: string
+  status: string
+  provenance: string
+  personas: Persona[]
+  synergies: Synergy[]
+  reasoning: { freshnessMinutes: number; scenarios: ReasoningScenario[] }
+}
+
+export interface Assessment {
+  hypothesisId: string
+  title: string
+  score: number
+  band: 'strong' | 'emerging' | 'weak'
+  contributions: { signalId: string; relation: string; severity: number; qualityFactor: number; contribution: number }[]
+  missingEvidence: string[]
+  metricIds: string[]
+  riskIds: string[]
+  riskNotes: string[]
+  capabilityIds: string[]
+  boardIds: string[]
+  functionIds: string[]
+  personas: { id: string; title: string; functionId: string }[]
+  claim: string
+}
+
+export interface Recommendation {
+  action: string
+  hypothesisId?: string
+  reason: string
+  missingEvidence?: string[]
+  policy: { passed: boolean; reason: string; allowlist: string[]; denied: string[] }
+  executesAction: boolean
+  requiresHumanApproval: boolean
+  valueStatus: string
+}
+
+export interface ReasoningEvent {
+  seq: number
+  eventId: string
+  runId: string
+  traceId: string
+  packId: string
+  node: string
+  type: string
+  message: string
+  details: Record<string, unknown>
+  graphRefs: string[]
+  evidenceStatus: string
+  timestamp: string
+}
+
+export interface ReasoningRun {
+  id: string
+  pack: string
+  scenario: string
+  state: string
+  traceId: string
+  created: string
+  updated: string
+  result: {
+    recommendation: Recommendation
+    ranking: Assessment[]
+    compound: { id: string; title: string; hypothesisIds: string[]; extendedOutcome: string; overlapPct: number } | null
+    triggered: (Reading & { severity: number })[]
+    rejected: (Reading & { reason: string })[]
+  } | null
+  events: ReasoningEvent[]
+}
+
+export interface Topology {
+  engine: string
+  nodes: { id: string }[]
+  edges: { source: string; target: string; conditional: boolean }[]
+  parallel: string[]
+  llm: boolean
 }
 
 export interface PackSummary {
@@ -38,6 +185,7 @@ export interface GraphNode {
     currency?: string
   }
   dataClassification?: string
+  persona?: Persona
 }
 
 export interface GraphEdge {
@@ -78,7 +226,9 @@ export interface DesignPack {
   scene: { hotspots: { nodeId: string; x: number; y: number }[] }
   validation?: { missingData?: string[]; stage?: string }
   evidenceRegister?: { id: string; nodeId: string; status: string; dataOwner: string; validationAction: string }[]
-  customer?: { name?: string; scope?: string }
+  customer?: { name?: string; scope?: string; sector?: string }
+  schemaVersion?: string
+  ui?: { iconMap?: Record<string, string> }
 }
 
 export interface Scenario {
@@ -167,6 +317,7 @@ export interface PackDetail {
   lineage: { design: string; scenario: string; legacyManifest: string; modules: string[] }
   network: AgentInfo[]
   imageUrl: string
+  overlay: Overlay
   legacy: { apiVersion?: string; sha256?: string; outcomeState: string; externalSystemsEnabled: boolean }
 }
 

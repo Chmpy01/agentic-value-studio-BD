@@ -1,4 +1,4 @@
-import type { Interop, Navigation, PackDetail, PackSummary, PublicRun } from './types'
+import type { Interop, Navigation, PackDetail, PackSummary, PublicRun, ReasoningRun, ReasoningScenario, Topology } from './types'
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, {
@@ -40,6 +40,11 @@ export const api = {
     id: string,
     body: { decision: string; actor: string; intentHash: string; planHash: string; rationale: string },
   ) => request<PublicRun>(`/api/runs/${id}/approval`, { method: 'POST', body: JSON.stringify(body) }),
+  reasoningTopology: () => request<Topology>('/api/reasoning/topology'),
+  reasoningScenarios: (pack: string) => request<ReasoningScenario[]>(`/api/reasoning/scenarios/${pack}`),
+  startReasoning: (body: { pack: string; scenario: string; idempotencyKey?: string }) =>
+    request<ReasoningRun>('/api/reasoning', { method: 'POST', body: JSON.stringify(body) }),
+  reasoning: (id: string) => request<ReasoningRun>(`/api/reasoning/${id}`),
   validate: (document: unknown) =>
     request<{ ok: boolean; errors: string[]; kind?: string }>('/api/studio/validate', {
       method: 'POST',

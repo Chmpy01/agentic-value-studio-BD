@@ -1,9 +1,14 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Boxes, Layers, Moon, Sun } from 'lucide-react'
 import { api } from './api'
+import { CompoundView } from './compound'
+import { EconomicsView, EvidenceRiskView, ExplorerView, NewCustomerView, SignalsView } from './design'
+import { buildGraph } from './graph'
+import { ValueGraphView } from './graphview'
 import { Icon } from './icons'
+import { ReasoningView } from './reasoning'
 import type { LensId, ModeId, Navigation, PackDetail, PackSummary, PublicRun } from './types'
-import { EvidenceView, LiveView, NetworkView, StoryView, StudioView, TwinView } from './views'
+import { EvidenceView, LiveView, NetworkView, StoryView, StudioView } from './views'
 
 export default function App() {
   const [nav, setNav] = useState<Navigation | null>(null)
@@ -21,6 +26,8 @@ export default function App() {
   const [error, setError] = useState('')
   const [bootError, setBootError] = useState('')
   const [busy, setBusy] = useState(false)
+  const [selected, setSelected] = useState('b1')
+  const [synergyId, setSynergyId] = useState('')
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -39,12 +46,16 @@ export default function App() {
     setRun(null)
     setScene(0)
     setError('')
+    setSelected('b1')
+    setSynergyId('')
     api.pack(packId).then(setPack).catch((reason: Error) => setBootError(reason.message))
   }, [packId])
 
   useEffect(() => {
     if (pack) document.documentElement.style.setProperty('--accent', pack.design.theme.accent)
   }, [pack])
+
+  const graph = useMemo(() => (pack ? buildGraph(pack) : null), [pack])
 
   const runId = run?.run.id
   useEffect(() => {
@@ -66,6 +77,10 @@ export default function App() {
   }, [runId])
 
   const chooseScene = useCallback((value: number) => setScene(value), [])
+  const pickToExplorer = useCallback((id: string) => {
+    setSelected(id)
+    setMode('explore')
+  }, [])
 
   async function startRun(auto: boolean) {
     setBusy(true)
@@ -121,7 +136,7 @@ export default function App() {
       </main>
     )
   }
-  if (!nav || !pack) {
+  if (!nav || !pack || !graph) {
     return (
       <main className="boot">
         <p>Loading value packs…</p>
@@ -129,8 +144,7 @@ export default function App() {
     )
   }
 
-  const nodeCount = pack.design.nodes.length
-  const edgeCount = pack.design.edges.length
+  const activeGroup = nav.groups.find((group) => group.modes.some((item) => item.id === mode)) || nav.groups[0]
   return (
     <div className="app">
       <a className="skip" href="#workspace">Skip to content</a>
@@ -141,7 +155,7 @@ export default function App() {
           </span>
           <div>
             <h1>Cognitive Value Studio</h1>
-            <p>Value Twin → governed agent operations</p>
+            <p>Connected intelligence → measurable value</p>
           </div>
         </div>
         <div className="top-actions">
@@ -166,20 +180,21 @@ export default function App() {
       </header>
       <div className="shell">
         <div className="toprow">
-          <nav className="nav" aria-label="Studio modes">
-            {nav.modes.map((item) => (
+          <div className="group-switch" role="tablist" aria-label="Studio area">
+            {nav.groups.map((group) => (
               <button
-                key={item.id}
+                key={group.id}
                 type="button"
-                className={mode === item.id ? 'active' : ''}
-                aria-current={mode === item.id ? 'page' : undefined}
-                onClick={() => setMode(item.id as ModeId)}
+                role="tab"
+                aria-selected={group.id === activeGroup.id}
+                className={group.id === activeGroup.id ? 'active' : ''}
+                onClick={() => group.id !== activeGroup.id && setMode(group.modes[0].id as ModeId)}
               >
-                <Icon name={item.icon} size={16} />
-                {item.label}
+                <Icon name={group.icon} size={15} />
+                {group.label}
               </button>
             ))}
-          </nav>
+          </div>
           <div className="lens" role="group" aria-label="Economic lens">
             {nav.lenses.map((item) => (
               <button
@@ -194,41 +209,76 @@ export default function App() {
             ))}
           </div>
         </div>
+        <nav className="nav" aria-label={`${activeGroup.label} views`}>
+          {activeGroup.modes.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={mode === item.id ? 'active' : ''}
+              aria-current={mode === item.id ? 'page' : undefined}
+              onClick={() => setMode(item.id as ModeId)}
+            >
+              <Icon name={item.icon} size={16} />
+              {item.label}
+            </button>
+          ))}
+        </nav>
         <div className="microbar">
           <p>
             <span className="industry">{pack.design.industry}</span>
             <span className="desc"> · {pack.design.subtitle}</span>
           </p>
           <div className="meta">
-            <span className="pill synthetic">Synthetic · no live control</span>
-            <span className="pill">{nodeCount} knowledge nodes · {edgeCount} links</span>
+            <span className="pill synthetic">Synthetic demonstration</span>
+            <span className="pill">{graph.nodes.length} knowledge nodes · {graph.edges.length} links</span>
           </div>
         </div>
-      <main id="workspace">
-        {mode === 'story' && (
-          <StoryView pack={pack} lens={lens} index={scene} setIndex={chooseScene} notes={notes} setNotes={setNotes} />
-        )}
-        {mode === 'twin' && <TwinView pack={pack} lens={lens} />}
-        {mode === 'live' && (
-          <LiveView
-            pack={pack}
-            run={run}
-            busy={busy}
-            error={error}
-            orchestrator={orchestrator}
-            setOrchestrator={setOrchestrator}
-            transport={transport}
-            setTransport={setTransport}
-            onRun={() => void startRun(true)}
-            onPause={() => run && api.pause(run.run.id).then(setRun).catch((reason: Error) => setError(reason.message))}
-            onStep={() => void onStep()}
-            onDecide={onDecide}
-          />
-        )}
-        {mode === 'network' && <NetworkView pack={pack} run={run} />}
-        {mode === 'evidence' && <EvidenceView pack={pack} lens={lens} run={run} />}
-        {mode === 'studio' && <StudioView pack={pack} />}
-      </main>
+        <main id="workspace" key={`${packId}-${mode}`} className="view-enter">
+          {mode === 'story' && (
+            <StoryView pack={pack} lens={lens} index={scene} setIndex={chooseScene} notes={notes} setNotes={setNotes} />
+          )}
+          {mode === 'signals' && <SignalsView pack={pack} graph={graph} lens={lens} onPick={pickToExplorer} onNavigate={setMode} />}
+          {mode === 'explore' && <ExplorerView pack={pack} graph={graph} selected={selected} onSelect={setSelected} />}
+          {mode === 'graph' && <ValueGraphView pack={pack} graph={graph} lens={lens} selected={selected} onSelect={setSelected} />}
+          {mode === 'compound' && (
+            <CompoundView pack={pack} graph={graph} lens={lens} synergyId={synergyId} setSynergyId={setSynergyId} onPick={pickToExplorer} />
+          )}
+          {mode === 'risk' && <EvidenceRiskView pack={pack} graph={graph} onPick={pickToExplorer} />}
+          {mode === 'economics' && <EconomicsView graph={graph} lens={lens} />}
+          {mode === 'new' && <NewCustomerView pack={pack} />}
+          {mode === 'studio' && <StudioView pack={pack} />}
+          {mode === 'reasoning' && (
+            <ReasoningView
+              pack={pack}
+              graph={graph}
+              lens={lens}
+              onPick={pickToExplorer}
+              onNavigate={setMode}
+              onCompound={(id) => {
+                setSynergyId(id)
+                setMode('compound')
+              }}
+            />
+          )}
+          {mode === 'live' && (
+            <LiveView
+              pack={pack}
+              run={run}
+              busy={busy}
+              error={error}
+              orchestrator={orchestrator}
+              setOrchestrator={setOrchestrator}
+              transport={transport}
+              setTransport={setTransport}
+              onRun={() => void startRun(true)}
+              onPause={() => run && api.pause(run.run.id).then(setRun).catch((reason: Error) => setError(reason.message))}
+              onStep={() => void onStep()}
+              onDecide={onDecide}
+            />
+          )}
+          {mode === 'network' && <NetworkView pack={pack} run={run} />}
+          {mode === 'evidence' && <EvidenceView pack={pack} lens={lens} run={run} />}
+        </main>
       </div>
     </div>
   )
