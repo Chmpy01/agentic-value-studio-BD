@@ -862,8 +862,9 @@ button:disabled { cursor: not-allowed; opacity: 0.45; }
 .canvas-caption { position: relative; font-size: 11px; text-align: center; color: #a9c6e2; margin: 30px auto 0; max-width: 680px; }
 
 /* ---------- Knowledge graph ---------- */
-.kg-wrap { position: relative; height: 640px; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-sm); }
-.kg-toolbar { position: absolute; z-index: 5; top: 12px; left: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+.kg-wrap { position: relative; height: 640px; display: flex; flex-direction: column; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-sm); }
+.kg-wrap .react-flow { flex: 1; min-height: 0; }
+.kg-toolbar { display: flex; gap: 6px; flex-wrap: wrap; padding: 12px; border-bottom: 1px solid var(--line); }
 .kg-toolbar .chip { box-shadow: var(--shadow-sm); }
 .kg-node {
   width: 178px;
@@ -901,8 +902,6 @@ button:disabled { cursor: not-allowed; opacity: 0.45; }
 .react-flow__edge-textbg { fill: var(--surface); }
 :root[data-theme='dark'] .react-flow__background { background: var(--surface); }
 :root[data-theme='dark'] .react-flow__controls button { background: var(--surface-2); color: var(--ink); border-color: var(--line); }
-.kg-minimap { border-radius: 12px; overflow: hidden; }
-
 /* ---------- Board → function → persona ---------- */
 .people { display: flex; flex-direction: column; gap: 12px; }
 .crumbs { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13px; font-weight: 700; color: var(--sub); }

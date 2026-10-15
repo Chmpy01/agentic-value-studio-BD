@@ -3,7 +3,6 @@ import {
   Background,
   Controls,
   Handle,
-  MiniMap,
   Position,
   ReactFlow,
   ReactFlowProvider,
@@ -274,9 +273,7 @@ function KnowledgeGraphInner({ pack, graph, lens, selected, onSelect }: { pack: 
           onPaneClick={() => onSelect('')}
         >
           <Background gap={22} />
-          <Controls showInteractive={false} />
-          <MiniMap pannable zoomable className="kg-minimap" />
-        </ReactFlow>
+          <Controls showInteractive={false} />        </ReactFlow>
       </div>
       <aside className="panel">
         {hasSelection ? (
