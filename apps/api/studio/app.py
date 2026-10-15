@@ -11,7 +11,7 @@ from fastapi.responses import FileResponse, StreamingResponse
 from jsonschema import Draft202012Validator
 from pydantic import BaseModel, Field
 
-from studio import ledger
+from studio import ledger, signal_reasoner
 from studio.adapters import PolicyDenied
 from studio.catalog import (
     contract_schema,
@@ -24,7 +24,7 @@ from studio.catalog import (
     media_path,
 )
 from studio.compiler import ContractError, compile_pack
-from studio.config import PACKS
+from studio.config import PACKS, web_dist
 from studio.orchestrator import TERMINAL, RunError, decide, pause, start, step
 
 _EVENT_VALIDATOR = Draft202012Validator(contract_schema("runtime-event.schema.json"))
@@ -52,6 +52,12 @@ class ToolIn(BaseModel):
     pack: str = "office"
 
 
+class ReasoningIn(BaseModel):
+    pack: str = Field(default="office", max_length=40)
+    scenario: str = Field(max_length=60, pattern=r"^[a-z0-9-]+$")
+    idempotencyKey: str | None = Field(default=None, max_length=80)
+
+
 def create_app() -> FastAPI:
     ledger.init()
     app = FastAPI(title="Cognitive Value Studio", version="0.1.0")
@@ -62,8 +68,12 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
-    @app.get("/")
-    def root() -> dict:
+    dist = web_dist()
+
+    @app.get("/", response_model=None)
+    def root() -> dict | FileResponse:
+        if dist:
+            return FileResponse(dist / "index.html")
         return {
             "service": "cognitive-value-studio",
             "mode": "SHADOW",
@@ -215,6 +225,31 @@ def create_app() -> FastAPI:
 
         return StreamingResponse(generate(), media_type="text/event-stream")
 
+    @app.get("/api/reasoning/topology")
+    def reasoning_topology() -> dict:
+        return signal_reasoner.topology()
+
+    @app.get("/api/reasoning/scenarios/{pack}")
+    def reasoning_scenarios(pack: str) -> list[dict]:
+        try:
+            return signal_reasoner.scenarios(pack)
+        except signal_reasoner.ReasoningError as exc:
+            raise HTTPException(exc.status, str(exc)) from exc
+
+    @app.post("/api/reasoning", status_code=201)
+    def create_reasoning(body: ReasoningIn) -> dict:
+        try:
+            return signal_reasoner.start(body.pack, body.scenario, idempotency_key=body.idempotencyKey)
+        except signal_reasoner.ReasoningError as exc:
+            raise HTTPException(exc.status, str(exc)) from exc
+
+    @app.get("/api/reasoning/{run_id}")
+    def read_reasoning(run_id: str) -> dict:
+        run = ledger.get_reasoning_run(run_id)
+        if run is None:
+            raise HTTPException(404, "reasoning run not found")
+        return run
+
     @app.post("/api/tools/invoke")
     def invoke_tool(body: ToolIn) -> dict:
         from studio.adapters import adapter_for
@@ -231,6 +266,17 @@ def create_app() -> FastAPI:
         if path is None:
             raise HTTPException(404, "no image")
         return FileResponse(path, media_type="image/webp")
+
+    if dist:
+
+        @app.get("/{path:path}", include_in_schema=False)
+        def web(path: str) -> FileResponse:
+            if path.startswith(("api/", "media/")):
+                raise HTTPException(404, "not found")
+            target = (dist / path).resolve()
+            if target.is_relative_to(dist) and target.is_file():
+                return FileResponse(target)
+            return FileResponse(dist / "index.html")
 
     return app
 

@@ -57,5 +57,14 @@ def langgraph_db_path() -> Path:
     return path
 
 
+def web_dist() -> Path | None:
+    """Built web app to serve from the API (single-process mode). Off unless STUDIO_WEB_DIST is set."""
+    raw = os.environ.get("STUDIO_WEB_DIST")
+    if not raw:
+        return None
+    path = Path(raw).resolve()
+    return path if (path / "index.html").is_file() else None
+
+
 def agntcy_directory_enabled() -> bool:
     return os.environ.get("AGNTCY_DIRECTORY_ENABLED", "false").lower() in {"1", "true", "yes"}

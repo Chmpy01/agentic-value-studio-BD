@@ -9,7 +9,8 @@ import {
 } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
 import { api } from './api'
-import { Building, Chain, Drawer, money, nodeById, StatusPill } from './components'
+import { Building, Drawer, nodeById, StatusPill } from './components'
+import { download } from './util'
 import { Icon } from './icons'
 import type { LensId, PackDetail, PublicRun, TraceEvent } from './types'
 
@@ -135,93 +136,6 @@ export function StoryView({
           {scene.lensTalkingPoints[lens]}
         </p>
       </Drawer>
-    </section>
-  )
-}
-
-export function TwinView({ pack, lens, onPick }: { pack: PackDetail; lens: LensId; onPick?: (id: string) => void }) {
-  const [trackId, setTrackId] = useState(pack.design.tracks[0]?.id || '')
-  const [selected, setSelected] = useState(pack.design.tracks[0]?.nodeIds[0] || '')
-  useEffect(() => {
-    const track = pack.design.tracks[0]
-    setTrackId(track?.id || '')
-    setSelected(track?.nodeIds[0] || '')
-  }, [pack])
-  const track = pack.design.tracks.find((item) => item.id === trackId) || pack.design.tracks[0]
-  const node = nodeById(pack.design.nodes, selected)
-  const related = pack.design.edges.filter((edge) => edge.from === selected || edge.to === selected)
-  const lensNodes = pack.design.nodes.filter((item) =>
-    lens === 'customer' ? ['board', 'metric', 'hypothesis'].includes(item.type) : lens === 'partner' ? item.type === 'offer' || item.type === 'partner' : item.type === 'capability',
-  )
-  return (
-    <section className="stage column-stage">
-      <div className="visual-stack">
-        <Building
-          src={pack.imageUrl}
-          hotspots={pack.design.scene.hotspots}
-          nodes={pack.design.nodes}
-          active={track?.nodeIds || []}
-          onPick={(id) => {
-            setSelected(id)
-            onPick?.(id)
-          }}
-        />
-        <div className="track-bar">
-          {pack.design.tracks.map((item) => (
-            <button key={item.id} type="button" className={item.id === track?.id ? 'chip on' : 'chip'} onClick={() => { setTrackId(item.id); setSelected(item.nodeIds[0] || '') }}>
-              {item.label}
-            </button>
-          ))}
-        </div>
-        {track && (
-          <Chain
-            ids={track.nodeIds}
-            nodes={pack.design.nodes}
-            edges={pack.design.edges}
-            selected={selected}
-            onSelect={setSelected}
-          />
-        )}
-      </div>
-      <aside className="panel">
-        {node ? (
-          <>
-            <p className="kicker">{node.type} · {node.evidenceStatus}</p>
-            <h2>{node.title}</h2>
-            <p>{node.summary}</p>
-            {node.financialModel && (
-              <div className="callout">
-                <StatusPill tone="warn">Illustrative model inputs</StatusPill>
-                <p>These figures are pack assumptions. They are not a measured customer result.</p>
-                <ul>
-                  {node.financialModel.annualPoolGBP != null && <li>Addressable pool {money(node.financialModel.annualPoolGBP)}</li>}
-                  {node.financialModel.opportunityPct != null && <li>Opportunity assumption {node.financialModel.opportunityPct}%</li>}
-                  {node.financialModel.serviceAnnualGBP != null && <li>Partner service hypothesis {money(node.financialModel.serviceAnnualGBP)}</li>}
-                </ul>
-              </div>
-            )}
-            <h3>Relationships</h3>
-            <ul className="rel-list">
-              {related.map((edge) => (
-                <li key={`${edge.from}-${edge.relation}-${edge.to}`}>
-                  <button type="button" onClick={() => setSelected(edge.from === selected ? edge.to : edge.from)}>
-                    <span>{edge.relation}</span>
-                    {nodeById(pack.design.nodes, edge.from === selected ? edge.to : edge.from)?.title}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <p>Select a node on the chain.</p>
-        )}
-        <h3>{pack.design.lenses[lens]?.label}</h3>
-        <ul className="quiet-list">
-          {lensNodes.slice(0, 4).map((item) => (
-            <li key={item.id}>{item.title}</li>
-          ))}
-        </ul>
-      </aside>
     </section>
   )
 }
@@ -606,25 +520,46 @@ export function StudioView({ pack }: { pack: PackDetail }) {
       setResult(error instanceof Error ? error.message : 'Could not validate')
     }
   }
-  function download() {
-    const blob = new Blob([JSON.stringify(pack.intent, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = `${pack.design.packId}-value-intent.json`
-    link.click()
-    URL.revokeObjectURL(url)
-  }
+  const design = pack.design
+  const talkTrack = () =>
+    `# ${design.name} — presenter guide\n\n> SYNTHETIC / DRAFT. Confirm all claims against customer-owned data before external use.\n\n` +
+    design.story
+      .map(
+        (scene, index) =>
+          `## ${index + 1}. ${scene.title}\n\n**On screen:** ${scene.headline}\n\n${scene.explanation}\n\n**Presenter notes:** ${scene.presenterNotes}\n\n**Transition:** ${scene.transition}\n\n**Customer:** ${scene.lensTalkingPoints.customer || ''}\n\n**Partner:** ${scene.lensTalkingPoints.partner || ''}\n\n**Cisco + ecosystem:** ${scene.lensTalkingPoints.cisco || ''}\n`,
+      )
+      .join('\n---\n\n')
+  const checks = [
+    `${design.nodes.length} unique nodes; ${design.edges.length} link references resolved`,
+    `${design.story.length} ordered presenter scenes with speaker notes`,
+    `${design.tracks.length} reusable business graph paths`,
+    `${design.scene.hotspots.length} bound scene hotspots`,
+    `${pack.overlay.personas.length} personas and ${pack.overlay.synergies.length} combined outcomes in the overlay, all references resolved`,
+    `${pack.overlay.reasoning.scenarios.length} synthetic signal situations for the reasoning graph`,
+  ]
   return (
     <section className="stage">
       <div className="panel studio-main">
         <p className="kicker">Lineage · {pack.intent.schemaVersion}</p>
         <h2>{pack.design.name}</h2>
         <p>{pack.design.provenance?.disclaimer || 'Synthetic pack. Not a customer-verified baseline.'}</p>
+        <div className="row-actions">
+          <button type="button" onClick={() => download(JSON.stringify(design, null, 2), `${design.packId}.json`, 'application/json')}>Export pack JSON</button>
+          <button type="button" onClick={() => download(talkTrack(), `${design.packId}-presenter-guide.md`, 'text/markdown')}>Export talk track</button>
+          <button type="button" className="primary" onClick={() => download(JSON.stringify(pack.intent, null, 2), `${design.packId}-value-intent.json`, 'application/json')}>Export intent</button>
+        </div>
+        <h3>Pack integrity · {pack.validation.ok ? 'passed link checks' : 'review required'}</h3>
+        <ul className="validation-list">
+          {checks.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <h3>Lineage</h3>
         <ul className="quiet-list">
           <li>{pack.lineage.design}</li>
           <li>{pack.lineage.scenario}</li>
           <li>{pack.lineage.legacyManifest}</li>
+          <li>data/overlays/{design.packId}.json (project overlay: personas, synergies, signal situations)</li>
           {pack.lineage.modules.map((module) => (
             <li key={module}>{module}</li>
           ))}
@@ -638,8 +573,7 @@ export function StudioView({ pack }: { pack: PackDetail }) {
           aria-label="Pack JSON"
         />
         <div className="row-actions">
-          <button type="button" onClick={check}>Validate</button>
-          <button type="button" className="primary" onClick={download}>Export intent</button>
+          <button type="button" className="primary" onClick={check}>Validate</button>
         </div>
         {result && <pre>{result}</pre>}
       </div>

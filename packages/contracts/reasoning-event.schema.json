@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.studio/contracts/reasoning-event.schema.json",
+  "title": "Signal reasoning trace event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["seq", "eventId", "runId", "traceId", "packId", "node", "type", "message", "details", "graphRefs", "evidenceStatus", "timestamp"],
+  "properties": {
+    "seq": {"type": "integer", "minimum": 1},
+    "eventId": {"type": "string", "minLength": 8},
+    "runId": {"type": "string", "minLength": 8},
+    "traceId": {"type": "string", "minLength": 8},
+    "packId": {"type": "string"},
+    "node": {"enum": ["ingest", "detect", "evaluate", "monitor", "request_evidence", "synthesise", "policy_gate", "narrate", "system"]},
+    "type": {"type": "string", "pattern": "^[a-z_]+\\.[a-z_]+$"},
+    "message": {"type": "string"},
+    "details": {"type": "object"},
+    "graphRefs": {"type": "array", "items": {"type": "string"}},
+    "evidenceStatus": {"enum": ["SYNTHETIC", "REJECTED", "CORRELATED", "POLICY", "NARRATIVE"]},
+    "timestamp": {"type": "string", "format": "date-time"}
+  }
+}

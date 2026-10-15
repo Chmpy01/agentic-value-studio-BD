@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0.0",
+  "packId": "retail",
+  "status": "illustrative",
+  "provenance": "Project-authored overlay for the supplied retail pack. Personas are archetypes, not named people. Synergy factors and signal readings are synthetic and unvalidated.",
+  "personas": [
+    {
+      "id": "pe1",
+      "functionId": "f1",
+      "title": "Commercial Director",
+      "archetype": "Owns like-for-like sales and margin",
+      "quote": "Footfall is up and conversion is flat. Which stores, which hours, and why?",
+      "goals": ["Grow same-store sales", "Protect margin", "Test before rollout"],
+      "pains": ["Pilots without control stores", "Conflicting numbers from each system"],
+      "decisions": ["Which stores join a trial", "Rollout investment"],
+      "kpis": ["Conversion", "Basket value"],
+      "signalIds": ["s1"],
+      "hypothesisIds": ["h1"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe2",
+      "functionId": "f2",
+      "title": "Regional Operations Manager",
+      "archetype": "Runs a cluster of stores day to day",
+      "quote": "My stores juggle queues, collections and fridge alarms with the same few people.",
+      "goals": ["Stable service levels", "Fewer site call-outs", "Consistent standards"],
+      "pains": ["Alarms without priority", "Staffing set weeks in advance"],
+      "decisions": ["Staff deployment rules", "Escalation priorities"],
+      "kpis": ["Collection SLA", "Call-outs per store"],
+      "signalIds": ["s2", "s3"],
+      "hypothesisIds": ["h2", "h3"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe3",
+      "functionId": "f2",
+      "title": "Store Manager",
+      "archetype": "Balances tills, collections and staff on the floor",
+      "quote": "When the queue builds I pull someone off click-and-collect, then that queue builds instead.",
+      "goals": ["Short queues", "Collections ready on time"],
+      "pains": ["No early warning of peaks", "Two queues competing for one team"],
+      "decisions": ["Who covers tills vs collections"],
+      "kpis": ["Wait time", "Collections on time"],
+      "signalIds": ["s1", "s3"],
+      "hypothesisIds": ["h1", "h3"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe4",
+      "functionId": "f3",
+      "title": "Category & Merchandising Lead",
+      "archetype": "Owns range, layout and availability",
+      "quote": "Availability and layout move conversion. I need to separate that from queue effects.",
+      "goals": ["Availability on shelf", "Layout that converts"],
+      "pains": ["Attribution mixed with promotions", "Chilled waste hidden in shrink"],
+      "decisions": ["Range and layout changes"],
+      "kpis": ["Availability", "Waste %"],
+      "signalIds": ["s1", "s2"],
+      "hypothesisIds": ["h1", "h2"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe5",
+      "functionId": "f4",
+      "title": "Refrigeration & Energy Engineer",
+      "archetype": "Keeps the cold chain efficient and compliant",
+      "quote": "Most outliers are door seals and defrost cycles. I need them ranked, not just flagged.",
+      "goals": ["Lower kWh per chilled m³", "No food-safety breaches"],
+      "pains": ["Alarm fatigue", "Maintenance not linked to energy"],
+      "decisions": ["Maintenance priority", "Defrost schedule reviews"],
+      "kpis": ["kWh / chilled m³", "Temperature excursions"],
+      "signalIds": ["s2"],
+      "hypothesisIds": ["h2"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe6",
+      "functionId": "f5",
+      "title": "Head of Loss Prevention",
+      "archetype": "Protects stock and reputation",
+      "quote": "Spoiled stock is still loss, even when nobody stole it.",
+      "goals": ["Lower stock loss", "Evidence for insurers"],
+      "pains": ["Loss categories mixed together"],
+      "decisions": ["Loss-reduction priorities"],
+      "kpis": ["Shrink %", "Write-offs"],
+      "signalIds": ["s2", "s3"],
+      "hypothesisIds": ["h2", "h3"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe7",
+      "functionId": "f5",
+      "title": "Retail IT Security Lead",
+      "archetype": "Governs store networks and customer data",
+      "quote": "Footfall analytics must stay anonymous and segmented from payment systems.",
+      "goals": ["PCI segmentation", "Privacy by design"],
+      "pains": ["Vendor devices on flat store networks"],
+      "decisions": ["Integration security sign-off"],
+      "kpis": ["Segmented sites", "Open exceptions"],
+      "signalIds": ["s1"],
+      "hypothesisIds": ["h1"],
+      "evidenceStatus": "illustrative"
+    }
+  ],
+  "synergies": [
+    {
+      "id": "x1",
+      "title": "Queue-aware omnichannel staffing",
+      "hypothesisIds": ["h1", "h3"],
+      "mechanism": "Till queues and collection backlogs compete for the same staff. Forecasting both lets the store move people before either queue breaks.",
+      "extendedOutcome": "Higher conversion without missing collection SLAs, from one staffing decision instead of two competing ones.",
+      "bridgeNodeIds": ["d1", "d3"],
+      "overlapPct": 10,
+      "sharedImplementationPct": 25,
+      "evidenceNeeded": ["Matched control stores", "Shared staffing baseline", "Promotion and seasonality normalisation"],
+      "evidenceStatus": "hypothesis"
+    },
+    {
+      "id": "x2",
+      "title": "Protected cold-chain fulfilment",
+      "hypothesisIds": ["h2", "h3"],
+      "mechanism": "Refrigeration health can order the pick sequence for chilled collection items, so outliers lead to fewer spoiled orders as well as lower energy.",
+      "extendedOutcome": "Lower energy, less chilled waste and fewer failed collections from one prioritised maintenance queue.",
+      "bridgeNodeIds": ["d2", "p2", "p3"],
+      "overlapPct": 6,
+      "sharedImplementationPct": 15,
+      "evidenceNeeded": ["Food-safety sign-off", "Waste attribution by cause", "Pick-sequence trial design"],
+      "evidenceStatus": "hypothesis"
+    },
+    {
+      "id": "x3",
+      "title": "Store operating rhythm",
+      "hypothesisIds": ["h1", "h2", "h3"],
+      "mechanism": "Footfall, refrigeration and order signals become one daily store plan for staffing, maintenance and fulfilment.",
+      "extendedOutcome": "A repeatable multi-site operating rhythm with one evidence ledger across sales, cost and stock protection.",
+      "bridgeNodeIds": ["d1", "d2", "d3"],
+      "overlapPct": 15,
+      "sharedImplementationPct": 30,
+      "evidenceNeeded": ["Interaction effects measured separately", "Single benefits owner", "Programme-level double-counting review"],
+      "evidenceStatus": "hypothesis"
+    }
+  ],
+  "reasoning": {
+    "freshnessMinutes": 60,
+    "scenarios": [
+      {
+        "id": "steady",
+        "label": "Typical trading day",
+        "description": "All synthetic readings inside their thresholds.",
+        "readings": [
+          {"id": "r-r1", "signalId": "s1", "sourceId": "d1", "metric": "Footfall-to-sale conversion", "value": 31, "unit": "%", "threshold": {"op": "lt", "value": 24}, "quality": "good", "ageMinutes": 10},
+          {"id": "r-r2", "signalId": "s2", "sourceId": "d2", "metric": "Chiller kWh vs fleet median", "value": 104, "unit": "%", "threshold": {"op": "gt", "value": 125}, "quality": "good", "ageMinutes": 15},
+          {"id": "r-r3", "signalId": "s3", "sourceId": "d3", "metric": "Collections past SLA", "value": 3, "unit": "%", "threshold": {"op": "gt", "value": 8}, "quality": "good", "ageMinutes": 10}
+        ]
+      },
+      {
+        "id": "queue-and-collect",
+        "label": "Lunch peak: queues and collections",
+        "description": "Conversion drops while collection backlog grows in the same hours.",
+        "readings": [
+          {"id": "r-r1", "signalId": "s1", "sourceId": "d1", "metric": "Footfall-to-sale conversion", "value": 18, "unit": "%", "threshold": {"op": "lt", "value": 24}, "quality": "good", "ageMinutes": 10},
+          {"id": "r-r4", "signalId": "s1", "sourceId": "d1", "metric": "Average till wait", "value": 6.5, "unit": "min", "threshold": {"op": "gt", "value": 4}, "quality": "good", "ageMinutes": 10},
+          {"id": "r-r2", "signalId": "s2", "sourceId": "d2", "metric": "Chiller kWh vs fleet median", "value": 108, "unit": "%", "threshold": {"op": "gt", "value": 125}, "quality": "good", "ageMinutes": 15},
+          {"id": "r-r3", "signalId": "s3", "sourceId": "d3", "metric": "Collections past SLA", "value": 14, "unit": "%", "threshold": {"op": "gt", "value": 8}, "quality": "good", "ageMinutes": 10}
+        ]
+      },
+      {
+        "id": "cold-chain",
+        "label": "Refrigeration outlier",
+        "description": "One store's chillers draw far above the fleet median.",
+        "readings": [
+          {"id": "r-r1", "signalId": "s1", "sourceId": "d1", "metric": "Footfall-to-sale conversion", "value": 29, "unit": "%", "threshold": {"op": "lt", "value": 24}, "quality": "good", "ageMinutes": 10},
+          {"id": "r-r2", "signalId": "s2", "sourceId": "d2", "metric": "Chiller kWh vs fleet median", "value": 162, "unit": "%", "threshold": {"op": "gt", "value": 125}, "quality": "good", "ageMinutes": 15},
+          {"id": "r-r5", "signalId": "s2", "sourceId": "d2", "metric": "Door-open minutes per hour", "value": 11, "unit": "min", "threshold": {"op": "gt", "value": 6}, "quality": "good", "ageMinutes": 15},
+          {"id": "r-r3", "signalId": "s3", "sourceId": "d3", "metric": "Collections past SLA", "value": 5, "unit": "%", "threshold": {"op": "gt", "value": 8}, "quality": "good", "ageMinutes": 10}
+        ]
+      },
+      {
+        "id": "degraded",
+        "label": "Store gateway offline",
+        "description": "Conversion is low, but refrigeration logs are stale and order data is missing.",
+        "readings": [
+          {"id": "r-r1", "signalId": "s1", "sourceId": "d1", "metric": "Footfall-to-sale conversion", "value": 21, "unit": "%", "threshold": {"op": "lt", "value": 24}, "quality": "good", "ageMinutes": 10},
+          {"id": "r-r2", "signalId": "s2", "sourceId": "d2", "metric": "Chiller kWh vs fleet median", "value": 140, "unit": "%", "threshold": {"op": "gt", "value": 125}, "quality": "stale", "ageMinutes": 300},
+          {"id": "r-r3", "signalId": "s3", "sourceId": "d3", "metric": "Collections past SLA", "value": 12, "unit": "%", "threshold": {"op": "gt", "value": 8}, "quality": "missing", "ageMinutes": 10}
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0.0",
+  "packId": "manufacturing",
+  "status": "illustrative",
+  "provenance": "Project-authored overlay for the supplied manufacturing pack. Personas are archetypes, not named people. Synergy factors and signal readings are synthetic and unvalidated.",
+  "personas": [
+    {
+      "id": "pe1",
+      "functionId": "f1",
+      "title": "Plant Director",
+      "archetype": "Accountable for throughput and plant P&L",
+      "quote": "We lose a shift a week to stops nobody logs. I need that visible and owned.",
+      "goals": ["Reliable throughput", "Lower cost per good unit", "Safe operations"],
+      "pains": ["OEE reported weekly, too late to act", "Initiatives claim the same gains"],
+      "decisions": ["Improvement portfolio", "Capex for constraint assets"],
+      "kpis": ["OEE", "Good units per shift"],
+      "signalIds": ["s1"],
+      "hypothesisIds": ["h1"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe2",
+      "functionId": "f2",
+      "title": "Production Shift Manager",
+      "archetype": "Runs the line hour by hour",
+      "quote": "Micro-stops do not trigger an alarm. They just eat the shift.",
+      "goals": ["Hit the shift plan", "Fewer unplanned stops"],
+      "pains": ["Stop reasons not captured", "Handover notes lost"],
+      "decisions": ["Line priorities within a shift"],
+      "kpis": ["Availability", "Stops per hour"],
+      "signalIds": ["s1"],
+      "hypothesisIds": ["h1"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe3",
+      "functionId": "f2",
+      "title": "Quality Engineer",
+      "archetype": "Owns scrap, rework and process capability",
+      "quote": "Scrap spikes after restarts. I can see it, I cannot prove it yet.",
+      "goals": ["Lower scrap", "Stable process after restarts"],
+      "pains": ["Quality data separate from stop data"],
+      "decisions": ["Process parameter reviews"],
+      "kpis": ["Scrap %", "First-pass yield"],
+      "signalIds": ["s1", "s3"],
+      "hypothesisIds": ["h3", "h1"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe4",
+      "functionId": "f3",
+      "title": "Reliability Engineer",
+      "archetype": "Turns condition data into maintenance strategy",
+      "quote": "Vibration alerts are rising and the backlog is rising. Which asset first?",
+      "goals": ["Higher MTBF", "Condition-based maintenance"],
+      "pains": ["Alerts without production context", "Backlog ranked by age, not risk"],
+      "decisions": ["Maintenance strategy per asset"],
+      "kpis": ["MTBF", "Alert-to-action time"],
+      "signalIds": ["s3"],
+      "hypothesisIds": ["h3"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe5",
+      "functionId": "f3",
+      "title": "Maintenance Planner",
+      "archetype": "Schedules work into permitted change windows",
+      "quote": "I can fit two jobs into Sunday's window. Tell me which two matter most.",
+      "goals": ["Right work in each window", "Parts ready before the job"],
+      "pains": ["Priorities change mid-week"],
+      "decisions": ["Work-order sequencing"],
+      "kpis": ["Schedule compliance", "MTTR"],
+      "signalIds": ["s3"],
+      "hypothesisIds": ["h3"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe6",
+      "functionId": "f4",
+      "title": "Energy & EHS Manager",
+      "archetype": "Reports energy intensity and safety performance",
+      "quote": "Energy per good unit falls whenever uptime rises. I must not claim both.",
+      "goals": ["Lower kWh per good unit", "Safe, compliant changes"],
+      "pains": ["Energy and production data unaligned", "Tariff effects hidden"],
+      "decisions": ["Energy reporting method", "EHS sign-off"],
+      "kpis": ["kWh / good unit", "Safety incidents"],
+      "signalIds": ["s2"],
+      "hypothesisIds": ["h2"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe7",
+      "functionId": "f5",
+      "title": "OT Security Architect",
+      "archetype": "Guards segmentation and change control",
+      "quote": "Read-only from the historian, through the DMZ. Nothing writes to a PLC.",
+      "goals": ["Segmented OT network", "Controlled change windows"],
+      "pains": ["Vendor remote access sprawl"],
+      "decisions": ["Integration security sign-off"],
+      "kpis": ["Segmented cells", "Open exceptions"],
+      "signalIds": ["s1", "s3"],
+      "hypothesisIds": ["h1", "h3"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe8",
+      "functionId": "f5",
+      "title": "Plant Controller",
+      "archetype": "Finance partner for the plant",
+      "quote": "Show me the benefit once. Uptime, energy and maintenance all claim the same hours.",
+      "goals": ["Single benefits ledger", "Honest payback"],
+      "pains": ["Double-counted savings"],
+      "decisions": ["Benefit recognition"],
+      "kpis": ["Cost per good unit"],
+      "signalIds": ["s2"],
+      "hypothesisIds": ["h1", "h2"],
+      "evidenceStatus": "illustrative"
+    }
+  ],
+  "synergies": [
+    {
+      "id": "x1",
+      "title": "Predict, then prevent micro-stops",
+      "hypothesisIds": ["h1", "h3"],
+      "mechanism": "Condition alerts on constraint assets often precede clusters of micro-stops. Ranking the maintenance backlog by constraint impact targets the stops that cost throughput.",
+      "extendedOutcome": "Throughput recovered at the constraint, with maintenance effort aimed where it moves OEE.",
+      "bridgeNodeIds": ["d1", "d3", "p2", "p3"],
+      "overlapPct": 15,
+      "sharedImplementationPct": 30,
+      "evidenceNeeded": ["Asset-to-stop mapping", "Shift and product-mix normalisation", "Change-window plan"],
+      "evidenceStatus": "hypothesis"
+    },
+    {
+      "id": "x2",
+      "title": "Throughput-normalised energy",
+      "hypothesisIds": ["h1", "h2"],
+      "mechanism": "Energy per good unit falls automatically when uptime rises. Most of the apparent energy gain is the uptime gain counted twice.",
+      "extendedOutcome": "An honest energy-intensity claim: only the improvement beyond the uptime effect is counted as energy value.",
+      "bridgeNodeIds": ["d1", "d2"],
+      "overlapPct": 35,
+      "sharedImplementationPct": 20,
+      "evidenceNeeded": ["Regression of energy on good units", "Tariff normalisation", "Single benefits owner"],
+      "evidenceStatus": "hypothesis"
+    },
+    {
+      "id": "x3",
+      "title": "Reliability-led plant performance",
+      "hypothesisIds": ["h1", "h2", "h3"],
+      "mechanism": "Stops, energy and condition data share the same historian and CMMS. One review cycle ranks every intervention by net, de-duplicated value.",
+      "extendedOutcome": "One plant performance ledger where uptime, energy and maintenance benefits are recognised once.",
+      "bridgeNodeIds": ["d1", "d2", "d3"],
+      "overlapPct": 28,
+      "sharedImplementationPct": 30,
+      "evidenceNeeded": ["Interaction effects measured separately", "Plant controller sign-off", "Programme-level double-counting review"],
+      "evidenceStatus": "hypothesis"
+    }
+  ],
+  "reasoning": {
+    "freshnessMinutes": 60,
+    "scenarios": [
+      {
+        "id": "steady",
+        "label": "Stable shift",
+        "description": "All synthetic readings inside their thresholds.",
+        "readings": [
+          {"id": "m-r1", "signalId": "s1", "sourceId": "d1", "metric": "Micro-stops per hour at constraint", "value": 2, "unit": "stops", "threshold": {"op": "gt", "value": 6}, "quality": "good", "ageMinutes": 5},
+          {"id": "m-r2", "signalId": "s2", "sourceId": "d2", "metric": "kWh per good unit vs baseline", "value": 101, "unit": "%", "threshold": {"op": "gt", "value": 112}, "quality": "good", "ageMinutes": 15},
+          {"id": "m-r3", "signalId": "s3", "sourceId": "d3", "metric": "Open condition alerts on constraint", "value": 1, "unit": "alerts", "threshold": {"op": "gt", "value": 3}, "quality": "good", "ageMinutes": 20}
+        ]
+      },
+      {
+        "id": "micro-stops",
+        "label": "Micro-stops with rising alerts",
+        "description": "Stops cluster on the constraint while condition alerts and backlog grow.",
+        "readings": [
+          {"id": "m-r1", "signalId": "s1", "sourceId": "d1", "metric": "Micro-stops per hour at constraint", "value": 11, "unit": "stops", "threshold": {"op": "gt", "value": 6}, "quality": "good", "ageMinutes": 5},
+          {"id": "m-r2", "signalId": "s2", "sourceId": "d2", "metric": "kWh per good unit vs baseline", "value": 106, "unit": "%", "threshold": {"op": "gt", "value": 112}, "quality": "good", "ageMinutes": 15},
+          {"id": "m-r3", "signalId": "s3", "sourceId": "d3", "metric": "Open condition alerts on constraint", "value": 6, "unit": "alerts", "threshold": {"op": "gt", "value": 3}, "quality": "good", "ageMinutes": 20},
+          {"id": "m-r4", "signalId": "s3", "sourceId": "d3", "metric": "Maintenance backlog", "value": 19, "unit": "days", "threshold": {"op": "gt", "value": 10}, "quality": "good", "ageMinutes": 60}
+        ]
+      },
+      {
+        "id": "energy-drift",
+        "label": "Energy drift during stops",
+        "description": "Energy per good unit rises at the same time as micro-stops.",
+        "readings": [
+          {"id": "m-r1", "signalId": "s1", "sourceId": "d1", "metric": "Micro-stops per hour at constraint", "value": 9, "unit": "stops", "threshold": {"op": "gt", "value": 6}, "quality": "good", "ageMinutes": 5},
+          {"id": "m-r2", "signalId": "s2", "sourceId": "d2", "metric": "kWh per good unit vs baseline", "value": 131, "unit": "%", "threshold": {"op": "gt", "value": 112}, "quality": "good", "ageMinutes": 15},
+          {"id": "m-r3", "signalId": "s3", "sourceId": "d3", "metric": "Open condition alerts on constraint", "value": 2, "unit": "alerts", "threshold": {"op": "gt", "value": 3}, "quality": "good", "ageMinutes": 20}
+        ]
+      },
+      {
+        "id": "degraded",
+        "label": "Historian gap",
+        "description": "Condition alerts rise, but stop and energy readings are stale or malformed.",
+        "readings": [
+          {"id": "m-r1", "signalId": "s1", "sourceId": "d1", "metric": "Micro-stops per hour at constraint", "value": null, "unit": "stops", "threshold": {"op": "gt", "value": 6}, "quality": "good", "ageMinutes": 5},
+          {"id": "m-r2", "signalId": "s2", "sourceId": "d2", "metric": "kWh per good unit vs baseline", "value": 125, "unit": "%", "threshold": {"op": "gt", "value": 112}, "quality": "stale", "ageMinutes": 180},
+          {"id": "m-r3", "signalId": "s3", "sourceId": "d3", "metric": "Open condition alerts on constraint", "value": 4, "unit": "alerts", "threshold": {"op": "gt", "value": 3}, "quality": "estimated", "ageMinutes": 20}
+        ]
+      }
+    ]
+  }
+}

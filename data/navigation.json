@@ -1,13 +1,34 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "product": "Cognitive Value → Agentic Operations Studio",
-  "modes": [
-    {"id": "story", "label": "Guided Story", "icon": "play"},
-    {"id": "twin", "label": "Design-Time Value Twin", "icon": "waypoints"},
-    {"id": "live", "label": "Live Agent Operations", "icon": "radio"},
-    {"id": "network", "label": "Agent Network", "icon": "network"},
-    {"id": "evidence", "label": "Value Evidence", "icon": "shield"},
-    {"id": "studio", "label": "Pack Studio", "icon": "layers"}
+  "groups": [
+    {
+      "id": "design",
+      "label": "Design-time value twin",
+      "icon": "waypoints",
+      "modes": [
+        {"id": "story", "label": "Guided Story", "icon": "play"},
+        {"id": "signals", "label": "Signal Reasoning", "icon": "activity"},
+        {"id": "explore", "label": "Value Explorer", "icon": "spark"},
+        {"id": "graph", "label": "Value Graph", "icon": "network"},
+        {"id": "compound", "label": "Compound Value", "icon": "merge"},
+        {"id": "risk", "label": "Evidence & Risk", "icon": "shield"},
+        {"id": "economics", "label": "Economics", "icon": "chart"},
+        {"id": "new", "label": "New Customer", "icon": "users"},
+        {"id": "studio", "label": "Pack Studio", "icon": "database"}
+      ]
+    },
+    {
+      "id": "runtime",
+      "label": "Agentic runtime",
+      "icon": "radio",
+      "modes": [
+        {"id": "reasoning", "label": "Agent Reasoning", "icon": "brain"},
+        {"id": "live", "label": "Live Operations", "icon": "radio"},
+        {"id": "network", "label": "Agent Network", "icon": "workflow"},
+        {"id": "evidence", "label": "Value Evidence", "icon": "badge"}
+      ]
+    }
   ],
   "lenses": [
     {"id": "customer", "label": "Customer", "icon": "building"},

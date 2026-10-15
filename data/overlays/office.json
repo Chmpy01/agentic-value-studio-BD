@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0.0",
+  "packId": "office",
+  "status": "illustrative",
+  "provenance": "Project-authored overlay for the supplied office pack. Personas are archetypes, not named people. Synergy factors and signal readings are synthetic and unvalidated.",
+  "personas": [
+    {
+      "id": "pe1",
+      "functionId": "f1",
+      "title": "Group Finance Director",
+      "archetype": "Owns occupancy cost and capital approval",
+      "quote": "Show me which lease decision this changes, and how we will know it worked.",
+      "goals": ["Lower occupancy cost per head", "Fund change from released opex", "Defensible benefit tracking"],
+      "pains": ["Lease decisions made on anecdote", "Benefits double counted across programmes"],
+      "decisions": ["Lease exit or renewal", "Capex release for integration"],
+      "kpis": ["£ / m²", "Opex per FTE"],
+      "signalIds": ["s1"],
+      "hypothesisIds": ["h1"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe2",
+      "functionId": "f2",
+      "title": "Head of Portfolio Strategy",
+      "archetype": "Shapes the estate plan across buildings",
+      "quote": "I need demand by floor and hour, not badge counts by month.",
+      "goals": ["Right-size the portfolio", "Protect collaboration space", "Sequence consolidations safely"],
+      "pains": ["Utilisation data arrives too late", "No link between space and energy plans"],
+      "decisions": ["Which floors to consolidate", "Where to invest in collaboration space"],
+      "kpis": ["Peak utilisation", "Cost per occupied desk"],
+      "signalIds": ["s1", "s2"],
+      "hypothesisIds": ["h1", "h2"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe3",
+      "functionId": "f3",
+      "title": "Workplace Experience Lead",
+      "archetype": "Represents employee experience and accessibility",
+      "quote": "Consolidation only works if people can still find a room that works.",
+      "goals": ["Reliable rooms and AV", "Accessible, comfortable space", "Fewer repeat complaints"],
+      "pains": ["Ticket data is siloed from room data", "Complaints arrive after people stop coming in"],
+      "decisions": ["Service priorities", "Workplace policy changes"],
+      "kpis": ["Tickets per 100 rooms", "Experience score"],
+      "signalIds": ["s3", "s1"],
+      "hypothesisIds": ["h3", "h1"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe4",
+      "functionId": "f3",
+      "title": "Hybrid Team Lead",
+      "archetype": "Voice of the people who use the space",
+      "quote": "Tuesdays are packed and Fridays are empty. The building does not seem to know.",
+      "goals": ["Space available on team days", "Rooms that just work"],
+      "pains": ["Booked rooms left empty", "Too hot or too cold on quiet days"],
+      "decisions": ["Team anchor days"],
+      "kpis": ["Booking no-show rate"],
+      "signalIds": ["s1", "s3"],
+      "hypothesisIds": ["h1", "h3"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe5",
+      "functionId": "f4",
+      "title": "Energy & Sustainability Manager",
+      "archetype": "Reports energy intensity and net-zero progress",
+      "quote": "I can report total kWh. I cannot yet report kWh per occupied hour.",
+      "goals": ["Lower energy intensity", "Auditable carbon reporting"],
+      "pains": ["Schedules ignore actual occupancy", "Weather and tariff normalisation missing"],
+      "decisions": ["Approve HVAC schedule reviews", "Carbon reporting method"],
+      "kpis": ["kWh / occupied hour", "tCO2e"],
+      "signalIds": ["s2"],
+      "hypothesisIds": ["h2"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe6",
+      "functionId": "f4",
+      "title": "Facilities Operations Manager",
+      "archetype": "Approves simulated work orders in the runtime demo",
+      "quote": "Give me a proposed change I can review. Never change the BMS for me.",
+      "goals": ["Safe schedule changes", "Fewer reactive call-outs"],
+      "pains": ["Alarms without business context", "Change requests with no rationale"],
+      "decisions": ["Approve or reject a work-order draft"],
+      "kpis": ["MTTR", "Planned vs reactive work"],
+      "signalIds": ["s2", "s3"],
+      "hypothesisIds": ["h2", "h3"],
+      "evidenceStatus": "illustrative"
+    },
+    {
+      "id": "pe7",
+      "functionId": "f5",
+      "title": "CISO / Data Protection Officer",
+      "archetype": "Governs data use, privacy and segmentation",
+      "quote": "Aggregate occupancy is fine. Individual tracking is not.",
+      "goals": ["Privacy by design", "Segmented building systems"],
+      "pains": ["Shadow integrations to BMS", "Unclear data retention"],
+      "decisions": ["Data-access approval", "Integration security sign-off"],
+      "kpis": ["Approved data flows", "Open security exceptions"],
+      "signalIds": ["s1"],
+      "hypothesisIds": ["h1", "h2"],
+      "evidenceStatus": "illustrative"
+    }
+  ],
+  "synergies": [
+    {
+      "id": "x1",
+      "title": "Consolidate and de-energise",
+      "hypothesisIds": ["h1", "h2"],
+      "mechanism": "Consolidating a floor only saves energy if that floor's HVAC zone moves to setback. The occupancy signal that justifies the space decision also justifies the schedule change.",
+      "extendedOutcome": "One decision that lowers portfolio cost and gives a defensible energy-intensity figure for net-zero reporting.",
+      "bridgeNodeIds": ["d1", "d2"],
+      "overlapPct": 12,
+      "sharedImplementationPct": 25,
+      "evidenceNeeded": ["Factorial test: consolidated floor with and without schedule change", "Weather and tariff normalisation", "Comfort and ventilation limits signed off"],
+      "evidenceStatus": "hypothesis"
+    },
+    {
+      "id": "x2",
+      "title": "Self-tuning workplace operations",
+      "hypothesisIds": ["h2", "h3"],
+      "mechanism": "Comfort complaints and room tickets show where HVAC schedules hurt experience. Feeding them into schedule reviews avoids saving energy at the cost of people.",
+      "extendedOutcome": "Energy reduction that is bounded by experience, run as one managed service instead of two.",
+      "bridgeNodeIds": ["d3", "p2", "p3"],
+      "overlapPct": 8,
+      "sharedImplementationPct": 20,
+      "evidenceNeeded": ["Complaint-to-zone mapping", "Agreed comfort bands", "Service ownership between SI and FM partner"],
+      "evidenceStatus": "hypothesis"
+    },
+    {
+      "id": "x3",
+      "title": "Adaptive workplace operating model",
+      "hypothesisIds": ["h1", "h2", "h3"],
+      "mechanism": "Space, energy and service decisions share the same occupancy, BMS and ticket signals. Run together, each decision informs the next review cycle.",
+      "extendedOutcome": "A portfolio that adjusts space, energy and service to demand every quarter, with one evidence ledger for all three board objectives.",
+      "bridgeNodeIds": ["d1", "d2", "d3"],
+      "overlapPct": 18,
+      "sharedImplementationPct": 30,
+      "evidenceNeeded": ["Interaction effects measured separately", "Single benefits owner", "Programme-level double-counting review"],
+      "evidenceStatus": "hypothesis"
+    }
+  ],
+  "reasoning": {
+    "freshnessMinutes": 60,
+    "scenarios": [
+      {
+        "id": "steady",
+        "label": "Steady week",
+        "description": "All synthetic readings inside their thresholds.",
+        "readings": [
+          {"id": "o-r1", "signalId": "s1", "sourceId": "d1", "metric": "East wing peak occupancy", "value": 68, "unit": "%", "threshold": {"op": "lt", "value": 40}, "quality": "good", "ageMinutes": 5},
+          {"id": "o-r2", "signalId": "s1", "sourceId": "d1", "metric": "Booked-but-unused desks", "value": 9, "unit": "%", "threshold": {"op": "gt", "value": 25}, "quality": "good", "ageMinutes": 5},
+          {"id": "o-r3", "signalId": "s2", "sourceId": "d2", "metric": "HVAC kWh per occupied hour", "value": 3.1, "unit": "kWh", "threshold": {"op": "gt", "value": 4.5}, "quality": "good", "ageMinutes": 15},
+          {"id": "o-r4", "signalId": "s3", "sourceId": "d3", "metric": "Room / AV tickets per 100 rooms", "value": 4, "unit": "tickets", "threshold": {"op": "gt", "value": 9}, "quality": "good", "ageMinutes": 30}
+        ]
+      },
+      {
+        "id": "underused-wing",
+        "label": "Underused wing, HVAC running",
+        "description": "Low occupancy and high energy per occupied hour in the same wing.",
+        "readings": [
+          {"id": "o-r1", "signalId": "s1", "sourceId": "d1", "metric": "East wing peak occupancy", "value": 31, "unit": "%", "threshold": {"op": "lt", "value": 40}, "quality": "good", "ageMinutes": 5},
+          {"id": "o-r2", "signalId": "s1", "sourceId": "d1", "metric": "Booked-but-unused desks", "value": 34, "unit": "%", "threshold": {"op": "gt", "value": 25}, "quality": "good", "ageMinutes": 5},
+          {"id": "o-r3", "signalId": "s2", "sourceId": "d2", "metric": "HVAC kWh per occupied hour", "value": 6.8, "unit": "kWh", "threshold": {"op": "gt", "value": 4.5}, "quality": "good", "ageMinutes": 15},
+          {"id": "o-r4", "signalId": "s3", "sourceId": "d3", "metric": "Room / AV tickets per 100 rooms", "value": 5, "unit": "tickets", "threshold": {"op": "gt", "value": 9}, "quality": "good", "ageMinutes": 30}
+        ]
+      },
+      {
+        "id": "friction-spike",
+        "label": "Meeting-room friction spike",
+        "description": "Ticket volume rises; occupancy and energy look normal. Ticket counts are estimated.",
+        "readings": [
+          {"id": "o-r1", "signalId": "s1", "sourceId": "d1", "metric": "East wing peak occupancy", "value": 64, "unit": "%", "threshold": {"op": "lt", "value": 40}, "quality": "good", "ageMinutes": 5},
+          {"id": "o-r3", "signalId": "s2", "sourceId": "d2", "metric": "HVAC kWh per occupied hour", "value": 3.6, "unit": "kWh", "threshold": {"op": "gt", "value": 4.5}, "quality": "good", "ageMinutes": 15},
+          {"id": "o-r4", "signalId": "s3", "sourceId": "d3", "metric": "Room / AV tickets per 100 rooms", "value": 14, "unit": "tickets", "threshold": {"op": "gt", "value": 9}, "quality": "estimated", "ageMinutes": 30},
+          {"id": "o-r5", "signalId": "s3", "sourceId": "d3", "metric": "Repeat comfort complaints", "value": 7, "unit": "per week", "threshold": {"op": "gt", "value": 5}, "quality": "estimated", "ageMinutes": 45}
+        ]
+      },
+      {
+        "id": "degraded",
+        "label": "Stale BMS feed",
+        "description": "Occupancy is low but the energy feed is stale and one ticket reading is malformed.",
+        "readings": [
+          {"id": "o-r1", "signalId": "s1", "sourceId": "d1", "metric": "East wing peak occupancy", "value": 33, "unit": "%", "threshold": {"op": "lt", "value": 40}, "quality": "good", "ageMinutes": 5},
+          {"id": "o-r3", "signalId": "s2", "sourceId": "d2", "metric": "HVAC kWh per occupied hour", "value": 6.1, "unit": "kWh", "threshold": {"op": "gt", "value": 4.5}, "quality": "stale", "ageMinutes": 240},
+          {"id": "o-r4", "signalId": "s3", "sourceId": "d3", "metric": "Room / AV tickets per 100 rooms", "value": null, "unit": "tickets", "threshold": {"op": "gt", "value": 9}, "quality": "good", "ageMinutes": 30}
+        ]
+      }
+    ]
+  }
+}

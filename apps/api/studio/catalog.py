@@ -14,11 +14,14 @@ from studio.compiler import (
     validate_design,
 )
 from studio.config import CONTRACTS, DATA, PACKS, REFERENCE, agntcy_directory_enabled, a2a_url
+from studio.overlay import load_overlay
 from studio.transport import a2a_health
 
 
 def navigation() -> dict:
-    return json.loads((DATA / "navigation.json").read_text())
+    document = json.loads((DATA / "navigation.json").read_text())
+    document["modes"] = [{**mode, "group": group["id"]} for group in document["groups"] for mode in group["modes"]]
+    return document
 
 
 def oasf_record() -> dict:
@@ -131,6 +134,7 @@ def pack_detail(pack: str) -> dict:
         },
         "network": agents,
         "imageUrl": f"/media/{pack}.webp",
+        "overlay": load_overlay(pack),
     }
 
 
