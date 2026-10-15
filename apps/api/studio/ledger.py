@@ -74,6 +74,140 @@ def init() -> None:
             )
             """
         )
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS reasoning_runs (
+                id TEXT PRIMARY KEY,
+                pack TEXT NOT NULL,
+                scenario TEXT NOT NULL,
+                state TEXT NOT NULL,
+                trace_id TEXT NOT NULL,
+                idempotency_key TEXT UNIQUE,
+                result_json TEXT,
+                created TEXT NOT NULL,
+                updated TEXT NOT NULL
+            )
+            """
+        )
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS reasoning_events (
+                seq INTEGER PRIMARY KEY AUTOINCREMENT,
+                event_id TEXT NOT NULL UNIQUE,
+                run_id TEXT NOT NULL,
+                trace_id TEXT NOT NULL,
+                pack_id TEXT NOT NULL,
+                node TEXT NOT NULL,
+                event_type TEXT NOT NULL,
+                message TEXT NOT NULL,
+                details TEXT NOT NULL,
+                graph_refs TEXT NOT NULL,
+                evidence_status TEXT NOT NULL,
+                created TEXT NOT NULL
+            )
+            """
+        )
+
+
+def create_reasoning_run(*, pack: str, scenario: str, idempotency_key: str | None) -> tuple[dict, bool]:
+    """Return (run, created). A repeated idempotency key returns the existing run."""
+    now = utc_now()
+    run_id = str(uuid.uuid4())
+    with _LOCK, connect() as connection:
+        if idempotency_key:
+            row = connection.execute(
+                "SELECT id FROM reasoning_runs WHERE idempotency_key=?", (idempotency_key,)
+            ).fetchone()
+            if row is not None:
+                return get_reasoning_run(row["id"]), False
+        connection.execute(
+            """
+            INSERT INTO reasoning_runs (id, pack, scenario, state, trace_id, idempotency_key, result_json, created, updated)
+            VALUES (?, ?, ?, 'QUEUED', ?, ?, NULL, ?, ?)
+            """,
+            (run_id, pack, scenario, str(uuid.uuid4()), idempotency_key, now, now),
+        )
+    return get_reasoning_run(run_id), True
+
+
+def update_reasoning_run(run_id: str, *, state: str, result: dict | None = None) -> None:
+    with _LOCK, connect() as connection:
+        if result is None:
+            connection.execute("UPDATE reasoning_runs SET state=?, updated=? WHERE id=?", (state, utc_now(), run_id))
+        else:
+            connection.execute(
+                "UPDATE reasoning_runs SET state=?, result_json=?, updated=? WHERE id=?",
+                (state, json.dumps(result, ensure_ascii=False), utc_now(), run_id),
+            )
+
+
+def append_reasoning_event(
+    run: dict,
+    *,
+    node: str,
+    event_type: str,
+    message: str,
+    details: dict,
+    graph_refs: list[str],
+    evidence_status: str,
+) -> None:
+    with _LOCK, connect() as connection:
+        connection.execute(
+            """
+            INSERT INTO reasoning_events (event_id, run_id, trace_id, pack_id, node, event_type, message, details, graph_refs, evidence_status, created)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                str(uuid.uuid4()),
+                run["id"],
+                run["traceId"],
+                run["pack"],
+                node,
+                event_type,
+                message,
+                json.dumps(details, ensure_ascii=False),
+                json.dumps(graph_refs),
+                evidence_status,
+                utc_now(),
+            ),
+        )
+
+
+def get_reasoning_run(run_id: str) -> dict | None:
+    with connect() as connection:
+        row = connection.execute("SELECT * FROM reasoning_runs WHERE id=?", (run_id,)).fetchone()
+        if row is None:
+            return None
+        rows = connection.execute(
+            "SELECT * FROM reasoning_events WHERE run_id=? ORDER BY seq", (run_id,)
+        ).fetchall()
+    return {
+        "id": row["id"],
+        "pack": row["pack"],
+        "scenario": row["scenario"],
+        "state": row["state"],
+        "traceId": row["trace_id"],
+        "created": row["created"],
+        "updated": row["updated"],
+        "result": json.loads(row["result_json"]) if row["result_json"] else None,
+        "events": [
+            {
+                "seq": item["seq"],
+                "eventId": item["event_id"],
+                "runId": item["run_id"],
+                "traceId": item["trace_id"],
+                "packId": item["pack_id"],
+                "node": item["node"],
+                "type": item["event_type"],
+                "message": item["message"],
+                "details": json.loads(item["details"]),
+                "graphRefs": json.loads(item["graph_refs"]),
+                "evidenceStatus": item["evidence_status"],
+                "timestamp": item["created"],
+            }
+            for item in rows
+        ],
+    }
 
 
 def create_run(

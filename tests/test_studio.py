@@ -215,10 +215,12 @@ class StudioTests(unittest.TestCase):
 
     def test_navigation_and_pack_studio_upload(self) -> None:
         nav = self.client.get("/api/navigation").json()
+        self.assertEqual([group["id"] for group in nav["groups"]], ["design", "runtime"])
         self.assertEqual(
             [mode["id"] for mode in nav["modes"]],
-            ["story", "twin", "live", "network", "evidence", "studio"],
+            ["story", "signals", "explore", "graph", "compound", "risk", "economics", "new", "studio", "reasoning", "live", "network", "evidence"],
         )
+        self.assertEqual({mode["group"] for mode in nav["modes"] if mode["id"] in {"live", "network", "reasoning"}}, {"runtime"})
         design = load_json(ROOT / "reference_projects" / "value_studio" / "packs" / "manufacturing.json")
         ok = self.client.post("/api/studio/validate", json=design)
         self.assertTrue(ok.json()["ok"])

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.studio/contracts/pack-overlay.schema.json",
+  "title": "Pack overlay: personas, outcome synergies and synthetic signal scenarios",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "packId", "status", "provenance", "personas", "synergies", "reasoning"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "packId": {"type": "string", "minLength": 1},
+    "status": {"enum": ["illustrative", "draft"]},
+    "provenance": {"type": "string", "minLength": 10},
+    "personas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "functionId", "title", "archetype", "goals", "pains", "decisions", "kpis", "signalIds", "hypothesisIds", "evidenceStatus"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^pe[0-9]+$"},
+          "functionId": {"type": "string"},
+          "title": {"type": "string", "minLength": 2},
+          "archetype": {"type": "string"},
+          "quote": {"type": "string"},
+          "goals": {"type": "array", "items": {"type": "string"}},
+          "pains": {"type": "array", "items": {"type": "string"}},
+          "decisions": {"type": "array", "items": {"type": "string"}},
+          "kpis": {"type": "array", "items": {"type": "string"}},
+          "signalIds": {"type": "array", "items": {"type": "string"}},
+          "hypothesisIds": {"type": "array", "items": {"type": "string"}},
+          "evidenceStatus": {"enum": ["illustrative", "unverified"]}
+        }
+      }
+    },
+    "synergies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "hypothesisIds", "mechanism", "extendedOutcome", "bridgeNodeIds", "overlapPct", "sharedImplementationPct", "evidenceNeeded", "evidenceStatus"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^x[0-9]+$"},
+          "title": {"type": "string"},
+          "hypothesisIds": {"type": "array", "minItems": 2, "maxItems": 3, "uniqueItems": true, "items": {"type": "string"}},
+          "mechanism": {"type": "string"},
+          "extendedOutcome": {"type": "string"},
+          "bridgeNodeIds": {"type": "array", "items": {"type": "string"}},
+          "overlapPct": {"type": "number", "minimum": 0, "maximum": 100},
+          "sharedImplementationPct": {"type": "number", "minimum": 0, "maximum": 100},
+          "evidenceNeeded": {"type": "array", "items": {"type": "string"}},
+          "evidenceStatus": {"enum": ["hypothesis", "illustrative"]}
+        }
+      }
+    },
+    "reasoning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["freshnessMinutes", "scenarios"],
+      "properties": {
+        "freshnessMinutes": {"type": "integer", "minimum": 1, "maximum": 1440},
+        "scenarios": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label", "description", "readings"],
+            "properties": {
+              "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+              "label": {"type": "string"},
+              "description": {"type": "string"},
+              "readings": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "signalId", "sourceId", "metric", "unit", "threshold", "quality", "ageMinutes"],
+                  "properties": {
+                    "id": {"type": "string"},
+                    "signalId": {"type": "string"},
+                    "sourceId": {"type": "string"},
+                    "metric": {"type": "string"},
+                    "value": {},
+                    "unit": {"type": "string"},
+                    "threshold": {
+                      "type": "object",
+                      "required": ["op", "value"],
+                      "properties": {"op": {"enum": ["gt", "lt"]}, "value": {"type": "number"}}
+                    },
+                    "quality": {"type": "string"},
+                    "ageMinutes": {"type": "number"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
