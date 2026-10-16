@@ -1,4 +1,4 @@
-export type ModeId = 'story' | 'twin' | 'live' | 'network' | 'evidence' | 'studio'
+export type ModeId = 'story' | 'discovery' | 'twin' | 'live' | 'network' | 'evidence' | 'studio'
 export type LensId = 'customer' | 'partner' | 'cisco'
 
 export interface NavItem {
@@ -220,6 +220,179 @@ export interface RunRecord {
 export interface PublicRun {
   run: RunRecord
   events: TraceEvent[]
+}
+
+export type DiscoveryLayerId =
+  | 'industry_context'
+  | 'industry_value_stream'
+  | 'customer_value_stream'
+  | 'function'
+  | 'persona'
+
+export interface DiscoveryLayer {
+  id: DiscoveryLayerId
+  label: string
+  order: number
+  description: string
+}
+
+export interface DiscoveryGraphNode {
+  id: string
+  layer: DiscoveryLayerId
+  title: string
+  summary: string
+  evidence_type: string
+  confidence: string
+  validation_status: string
+  source_refs: string[]
+  validation_questions: string[]
+  design_pack_refs: string[]
+  detail: Record<string, unknown>
+}
+
+export interface DiscoveryEvidenceRow {
+  id: string
+  claim: string
+  evidence_type: string
+  confidence: string
+  validation_status: string
+  sensitivity: string
+  source_refs: string[]
+  applies_to: string[]
+  validation_question: string | null
+}
+
+export interface DiscoverySourceNote {
+  id: string
+  name: string
+  source_class: string
+  reference: string
+  reference_type: string
+  content_status: string
+  date_observed: string
+  confidence: string
+  sensitivity: string
+  cited_in_graph: boolean
+}
+
+export interface DiscoveryGate {
+  id: string
+  question: string
+  blocks: string[]
+  owner_to_confirm: string
+  status: string
+  raised_by: string
+}
+
+export interface DiscoveryAiCase {
+  id: string
+  name: string
+  value_stream_ref: string
+  impact: string
+  complexity: string
+  confidence: string
+  rai_risk: string
+  rai_notes: string
+  data_dependencies: string[]
+  human_in_the_loop: string
+  next_validation_action: string
+}
+
+export interface DiscoveryDocument {
+  schemaVersion: string
+  discoveryHash: string
+  meta: {
+    template_name: string
+    template_version: string
+    pack_id: string
+    generated_by: string
+    outcome_state: string
+    external_research_calls: boolean
+    disclaimer: string
+    research_corpus: string
+    source_register: string
+  }
+  customer: {
+    name: string
+    industry: string
+    geography: string
+    business_model: string
+    account_stage: string
+    input_provenance: string
+    strategic_context: { signal: string; source_type: string; confidence: string; sensitivity?: string }[]
+  }
+  evidence_register: DiscoveryEvidenceRow[]
+  company_insights: {
+    industry_context: { name: string; definition: string; scope_notes: string }
+    industry_pressures: { id: string; statement: string; evidence_type: string; confidence: string }[]
+    known: string[]
+    inferred: string[]
+    unknown: string[]
+    evidence_coverage: { counts: Record<string, number>; total: number; validatedShare: number }
+  }
+  knowledge_graph: {
+    layers: DiscoveryLayer[]
+    nodes: DiscoveryGraphNode[]
+    edges: { from: string; to: string; relation: string; evidence_type?: string }[]
+    counts: Record<string, number>
+    note: string
+  }
+  value_twin_nodes: {
+    node_id: string
+    node_name: string
+    business_function: string
+    frictions: string[]
+    capability_needs: string[]
+    validation_questions: string[]
+  }[]
+  current_state: {
+    maturity_stage: string
+    operating_model_gaps: { gap: string; value_stream_ref: string; confidence: string }[]
+    technical_model_gaps: { gap: string; value_stream_ref: string }[]
+    organisational_model_gaps: { gap: string; function_ref: string }[]
+    missing_data: string[]
+  }
+  outcomes: { id: string; outcome: string; kpi: string; stakeholders: string[]; status: string; note: string }[]
+  portfolio_mapping: {
+    gap: string
+    capability_need: string
+    portfolio_domain: string | null
+    priority: string
+    confidence: string
+    status: string
+  }[]
+  partner_landscape: {
+    id: string
+    name: string
+    role: string
+    evidence_type: string
+    confidence: string
+    validation_question: string
+    p360_guidance: string
+  }[]
+  role_insights: { role: string; focus: string; next_actions: string[] }[]
+  ai_value_twin: DiscoveryAiCase[]
+  validation_gates: DiscoveryGate[]
+  roadmap: { step: number; action: string; depends_on: string[]; evidence_needed: string }[]
+  source_notes: DiscoverySourceNote[]
+}
+
+export interface DiscoveryStageAgent {
+  id: string
+  title: string
+  authority: string
+  purpose: string
+  evidenceStatus: string
+}
+
+export interface DiscoveryInput {
+  pack: string
+  customerName: string
+  geography: string
+  businessModel: string
+  accountStage: string
+  signals: { signal: string; sensitivity: string; confidence: string }[]
+  auto: boolean
 }
 
 export interface Interop {

@@ -217,7 +217,7 @@ class StudioTests(unittest.TestCase):
         nav = self.client.get("/api/navigation").json()
         self.assertEqual(
             [mode["id"] for mode in nav["modes"]],
-            ["story", "twin", "live", "network", "evidence", "studio"],
+            ["story", "discovery", "twin", "live", "network", "evidence", "studio"],
         )
         design = load_json(ROOT / "reference_projects" / "value_studio" / "packs" / "manufacturing.json")
         ok = self.client.post("/api/studio/validate", json=design)

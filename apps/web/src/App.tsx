@@ -2,8 +2,28 @@ import { useCallback, useEffect, useState } from 'react'
 import { Boxes, Layers, Moon, Sun } from 'lucide-react'
 import { api } from './api'
 import { Icon } from './icons'
-import type { LensId, ModeId, Navigation, PackDetail, PackSummary, PublicRun } from './types'
-import { EvidenceView, LiveView, NetworkView, StoryView, StudioView, TwinView } from './views'
+import type {
+  DiscoveryDocument,
+  DiscoveryInput,
+  DiscoveryStageAgent,
+  LensId,
+  ModeId,
+  Navigation,
+  PackDetail,
+  PackSummary,
+  PublicRun,
+} from './types'
+import { DiscoveryView, EvidenceView, LiveView, NetworkView, StoryView, StudioView, TwinView } from './views'
+
+const EMPTY_DISCOVERY: DiscoveryInput = {
+  pack: 'office',
+  customerName: '',
+  geography: '',
+  businessModel: '',
+  accountStage: 'discovery',
+  signals: [],
+  auto: true,
+}
 
 export default function App() {
   const [nav, setNav] = useState<Navigation | null>(null)
@@ -21,6 +41,11 @@ export default function App() {
   const [error, setError] = useState('')
   const [bootError, setBootError] = useState('')
   const [busy, setBusy] = useState(false)
+  const [stages, setStages] = useState<DiscoveryStageAgent[]>([])
+  const [discoveryRun, setDiscoveryRun] = useState<PublicRun | null>(null)
+  const [discoveryDoc, setDiscoveryDoc] = useState<DiscoveryDocument | null>(null)
+  const [discoveryForm, setDiscoveryForm] = useState<DiscoveryInput>(EMPTY_DISCOVERY)
+  const [discoveryError, setDiscoveryError] = useState('')
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -36,9 +61,17 @@ export default function App() {
   }, [])
 
   useEffect(() => {
+    api.discoveryAgents().then(setStages).catch(() => setStages([]))
+  }, [])
+
+  useEffect(() => {
     setRun(null)
     setScene(0)
     setError('')
+    setDiscoveryRun(null)
+    setDiscoveryDoc(null)
+    setDiscoveryError('')
+    setDiscoveryForm({ ...EMPTY_DISCOVERY, pack: packId })
     api.pack(packId).then(setPack).catch((reason: Error) => setBootError(reason.message))
   }, [packId])
 
@@ -65,7 +98,69 @@ export default function App() {
     }
   }, [runId])
 
+  const discoveryRunId = discoveryRun?.run.id
+  useEffect(() => {
+    if (!discoveryRunId) return
+    let stop = false
+    const refresh = () => {
+      api
+        .discoveryRun(discoveryRunId)
+        .then((data) => {
+          if (stop) return
+          setDiscoveryRun(data)
+          if (data.run.state === 'DISCOVERY_COMPLETE') {
+            api
+              .discoveryPack(discoveryRunId)
+              .then((document) => {
+                if (!stop) setDiscoveryDoc(document)
+              })
+              .catch((reason: Error) => setDiscoveryError(reason.message))
+          }
+        })
+        .catch(() => undefined)
+    }
+    refresh()
+    const source = new EventSource(`/api/runs/${discoveryRunId}/stream`)
+    source.onmessage = () => refresh()
+    source.addEventListener('done', () => refresh())
+    return () => {
+      stop = true
+      source.close()
+    }
+  }, [discoveryRunId])
+
   const chooseScene = useCallback((value: number) => setScene(value), [])
+
+  async function startDiscovery() {
+    setBusy(true)
+    setDiscoveryError('')
+    try {
+      setDiscoveryRun(await api.createDiscovery({ ...discoveryForm, pack: packId }))
+    } catch (reason) {
+      setDiscoveryError(reason instanceof Error ? reason.message : 'Discovery failed')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function stepDiscovery() {
+    if (!discoveryRun) return
+    setDiscoveryError('')
+    try {
+      const next = await api.discoveryStep(discoveryRun.run.id)
+      setDiscoveryRun(next)
+      if (next.run.state === 'DISCOVERY_COMPLETE') setDiscoveryDoc(await api.discoveryPack(next.run.id))
+    } catch (reason) {
+      setDiscoveryError(reason instanceof Error ? reason.message : 'Step failed')
+    }
+  }
+
+  function resetDiscovery() {
+    setDiscoveryRun(null)
+    setDiscoveryDoc(null)
+    setDiscoveryError('')
+    setDiscoveryForm({ ...EMPTY_DISCOVERY, pack: packId })
+  }
 
   async function startRun(auto: boolean) {
     setBusy(true)
@@ -207,6 +302,22 @@ export default function App() {
       <main id="workspace">
         {mode === 'story' && (
           <StoryView pack={pack} lens={lens} index={scene} setIndex={chooseScene} notes={notes} setNotes={setNotes} />
+        )}
+        {mode === 'discovery' && (
+          <DiscoveryView
+            pack={pack}
+            lens={lens}
+            run={discoveryRun}
+            document={discoveryDoc}
+            stages={stages}
+            busy={busy}
+            error={discoveryError}
+            form={discoveryForm}
+            setForm={setDiscoveryForm}
+            onRun={() => void startDiscovery()}
+            onStep={() => void stepDiscovery()}
+            onReset={resetDiscovery}
+          />
         )}
         {mode === 'twin' && <TwinView pack={pack} lens={lens} />}
         {mode === 'live' && (

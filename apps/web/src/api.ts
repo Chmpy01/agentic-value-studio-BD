@@ -1,4 +1,13 @@
-import type { Interop, Navigation, PackDetail, PackSummary, PublicRun } from './types'
+import type {
+  DiscoveryDocument,
+  DiscoveryInput,
+  DiscoveryStageAgent,
+  Interop,
+  Navigation,
+  PackDetail,
+  PackSummary,
+  PublicRun,
+} from './types'
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, {
@@ -40,6 +49,13 @@ export const api = {
     id: string,
     body: { decision: string; actor: string; intentHash: string; planHash: string; rationale: string },
   ) => request<PublicRun>(`/api/runs/${id}/approval`, { method: 'POST', body: JSON.stringify(body) }),
+  discoveryAgents: () => request<DiscoveryStageAgent[]>('/api/discovery/agents'),
+  createDiscovery: (body: DiscoveryInput) =>
+    request<PublicRun>('/api/discovery/runs', { method: 'POST', body: JSON.stringify(body) }),
+  discoveryRun: (id: string) => request<PublicRun>(`/api/discovery/runs/${id}`),
+  discoveryStep: (id: string) => request<PublicRun>(`/api/discovery/runs/${id}/step`, { method: 'POST' }),
+  discoveryPause: (id: string) => request<PublicRun>(`/api/discovery/runs/${id}/pause`, { method: 'POST' }),
+  discoveryPack: (id: string) => request<DiscoveryDocument>(`/api/discovery/runs/${id}/pack`),
   validate: (document: unknown) =>
     request<{ ok: boolean; errors: string[]; kind?: string }>('/api/studio/validate', {
       method: 'POST',

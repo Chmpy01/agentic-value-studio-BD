@@ -63,4 +63,19 @@ tests/              new suite (reference tests stay where they are)
 5. **Phase 4 — read-only fixture adapters.** Spaces-style, Webex-style, BMS, Splunk-style and FM ticket interfaces return fixtures or an explicit "not connected" receipt. Writes to the denied actions fail in the adapter.
 6. **Phase 5 — presentation pass.** One primary visual, presenter notes in a drawer, lens economics kept apart, keyboard and reduced-motion support, screenshots.
 
-Phases 1–5 of this plan are implemented in the new tree only. External measurement, customer connectors and AGNTCY registration remain open.
+7. **Phase 6 — research and discovery.** A deterministic eight-stage agent builds a first-view
+   knowledge graph from a local labelled corpus, following the supplied `cvs_twin_template`. Output
+   is `cvs.discovery/v1`, validated against `packages/contracts/discovery-pack.schema.json`. See
+   `docs/decisions/0002-discovery-knowledge-graph.md`.
+
+   - Corpus: `data/research/{corpus,sources,cvs_template}.json`. Local, labelled, synthetic, no retrieval.
+   - Stages: scope, industry, customer, evidence, organisation, graph, gaps, publish. One audit event each.
+   - Graph layers: industry context → industry value streams → customer value streams → functions → personas.
+   - Evidence class drives validation status in code, so industry material cannot be promoted to `validated`.
+   - Missing evidence becomes a validation gate and a sequenced roadmap step rather than an answer.
+   - UI: the **Research & Discovery** tab, with the pack concept outline, the layered graph, the
+     evidence register with provenance, the validation backlog with Responsible AI notes, and the
+     exportable pack.
+
+Phases 1–6 of this plan are implemented in the new tree only. External measurement, customer
+connectors, real research retrieval and AGNTCY registration remain open.

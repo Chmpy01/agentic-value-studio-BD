@@ -225,7 +225,7 @@ def create_app() -> FastAPI:
                 if current is None:
                     yield 'event: done\ndata: {"error":"missing"}\n\n'
                     return
-                if current["state"] in TERMINAL and not ledger.events_after(run_id, last):
+                if current["state"] in (TERMINAL | discovery.TERMINAL) and not ledger.events_after(run_id, last):
                     yield f"event: done\ndata: {json.dumps({'state': current['state']})}\n\n"
                     return
                 await asyncio.sleep(0.2)

@@ -3,6 +3,7 @@
   "product": "Cognitive Value → Agentic Operations Studio",
   "modes": [
     {"id": "story", "label": "Guided Story", "icon": "play"},
+    {"id": "discovery", "label": "Research & Discovery", "icon": "compass"},
     {"id": "twin", "label": "Design-Time Value Twin", "icon": "waypoints"},
     {"id": "live", "label": "Live Agent Operations", "icon": "radio"},
     {"id": "network", "label": "Agent Network", "icon": "network"},
