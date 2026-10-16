@@ -11,7 +11,7 @@ from fastapi.responses import FileResponse, StreamingResponse
 from jsonschema import Draft202012Validator
 from pydantic import BaseModel, Field
 
-from studio import ledger
+from studio import discovery, ledger, research
 from studio.adapters import PolicyDenied
 from studio.catalog import (
     contract_schema,
@@ -29,6 +29,7 @@ from studio.orchestrator import TERMINAL, RunError, decide, pause, start, step
 
 _EVENT_VALIDATOR = Draft202012Validator(contract_schema("runtime-event.schema.json"))
 _INTENT_VALIDATOR = Draft202012Validator(contract_schema("value-intent.schema.json"))
+_DISCOVERY_VALIDATOR = Draft202012Validator(contract_schema("discovery-pack.schema.json"))
 
 
 class RunIn(BaseModel):
@@ -50,6 +51,23 @@ class ApprovalIn(BaseModel):
 class ToolIn(BaseModel):
     action: str
     pack: str = "office"
+
+
+class SignalIn(BaseModel):
+    signal: str = Field(max_length=400)
+    sensitivity: str = "internal"
+    confidence: str = "low"
+
+
+class DiscoveryIn(BaseModel):
+    pack: str = "office"
+    customerName: str = Field(default="", max_length=120)
+    geography: str = Field(default="", max_length=120)
+    businessModel: str = Field(default="", max_length=160)
+    accountStage: str = "discovery"
+    signals: list[SignalIn] = Field(default_factory=list, max_length=12)
+    auto: bool = True
+    ttlSeconds: int = Field(default=1800, ge=0, le=86400)
 
 
 def create_app() -> FastAPI:
@@ -214,6 +232,91 @@ def create_app() -> FastAPI:
             yield 'event: done\ndata: {"state":"stream-timeout"}\n\n'
 
         return StreamingResponse(generate(), media_type="text/event-stream")
+
+    @app.get("/api/research/sources")
+    def research_sources(pack: str | None = None) -> dict:
+        if pack is not None and pack not in PACKS:
+            raise HTTPException(404, "unknown pack")
+        register = research.source_register()
+        return {
+            "provenanceNotice": register["provenanceNotice"],
+            "sourceClasses": register["sourceClasses"],
+            "sources": research.sources_for(pack),
+            "coverage": research.coverage(pack) if pack else None,
+        }
+
+    @app.get("/api/research/template")
+    def research_template() -> dict:
+        template = research.template()
+        return {
+            "templateName": template["templateName"],
+            "templateVersion": template["templateVersion"],
+            "source": template["source"],
+            "cvsFlow": template["cvsFlow"],
+            "sellingComparison": template["sellingComparison"],
+            "evidenceModel": template["evidenceModel"],
+            "knowledgeGraphLayers": template["knowledgeGraphLayers"],
+            "generationRules": template["generationRules"],
+        }
+
+    @app.get("/api/discovery/agents")
+    def discovery_agents() -> list[dict]:
+        return discovery.agents()
+
+    @app.post("/api/discovery/runs", status_code=201)
+    def create_discovery_run(body: DiscoveryIn) -> dict:
+        try:
+            run = discovery.start(
+                body.pack,
+                {
+                    "customerName": body.customerName,
+                    "geography": body.geography,
+                    "businessModel": body.businessModel,
+                    "accountStage": body.accountStage,
+                    "signals": [item.model_dump() for item in body.signals],
+                },
+                auto=body.auto,
+                ttl_seconds=body.ttlSeconds,
+            )
+        except discovery.DiscoveryError as exc:
+            raise HTTPException(exc.status, str(exc)) from exc
+        except research.ResearchError as exc:
+            raise HTTPException(404, str(exc)) from exc
+        return ledger.public_run(run)
+
+    @app.get("/api/discovery/runs/{run_id}")
+    def read_discovery_run(run_id: str) -> dict:
+        run = ledger.get_run(run_id)
+        if run is None or run["orchestrator"] != "discovery":
+            raise HTTPException(404, "discovery run not found")
+        return ledger.public_run(run)
+
+    @app.post("/api/discovery/runs/{run_id}/step")
+    def step_discovery_run(run_id: str) -> dict:
+        try:
+            run = discovery.step(run_id)
+        except discovery.DiscoveryError as exc:
+            raise HTTPException(exc.status, str(exc)) from exc
+        return ledger.public_run(run)
+
+    @app.post("/api/discovery/runs/{run_id}/pause")
+    def pause_discovery_run(run_id: str) -> dict:
+        try:
+            run = discovery.pause(run_id)
+        except discovery.DiscoveryError as exc:
+            raise HTTPException(exc.status, str(exc)) from exc
+        return ledger.public_run(run)
+
+    @app.get("/api/discovery/runs/{run_id}/pack")
+    def read_discovery_pack(run_id: str) -> dict:
+        try:
+            document = discovery.pack_for_run(run_id)
+        except discovery.DiscoveryError as exc:
+            raise HTTPException(exc.status, str(exc)) from exc
+        errors = sorted(_DISCOVERY_VALIDATOR.iter_errors(document), key=lambda item: list(item.path))
+        if errors:
+            raise HTTPException(500, f"{'/'.join(str(part) for part in errors[0].path)}: {errors[0].message}")
+        return document
 
     @app.post("/api/tools/invoke")
     def invoke_tool(body: ToolIn) -> dict:

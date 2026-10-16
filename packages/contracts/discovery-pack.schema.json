@@ -1,0 +1,426 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cognitive-value-studio.local/contracts/discovery-pack.schema.json",
+  "title": "cvs.discovery/v1",
+  "description": "First-view discovery pack produced by the research agent. Follows the supplied cvs_twin_template JSON contract and adds an explicit knowledge graph. Nothing in this document may assert a realised customer outcome.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "kind",
+    "discoveryHash",
+    "meta",
+    "customer",
+    "evidence_register",
+    "cvs_flow",
+    "selling_comparison",
+    "company_insights",
+    "knowledge_graph",
+    "value_twin_nodes",
+    "current_state",
+    "outcomes",
+    "portfolio_mapping",
+    "partner_landscape",
+    "role_insights",
+    "ai_value_twin",
+    "validation_gates",
+    "roadmap",
+    "dashboard_config",
+    "source_notes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "cvs.discovery/v1" },
+    "kind": { "const": "DiscoveryPack" },
+    "discoveryHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "meta": {
+      "type": "object",
+      "required": [
+        "template_name",
+        "template_version",
+        "pack_id",
+        "generated_by",
+        "status",
+        "outcome_state",
+        "external_systems_enabled",
+        "external_research_calls",
+        "realised_value",
+        "disclaimer"
+      ],
+      "properties": {
+        "template_name": { "type": "string" },
+        "template_version": { "type": "string" },
+        "pack_id": { "type": "string" },
+        "generated_by": { "type": "string" },
+        "status": { "enum": ["synthetic/unvalidated"] },
+        "outcome_state": { "const": "NOT_MEASURED" },
+        "external_systems_enabled": { "const": false },
+        "external_research_calls": { "const": false },
+        "realised_value": { "type": "null" },
+        "disclaimer": { "type": "string", "minLength": 20 }
+      }
+    },
+    "customer": {
+      "type": "object",
+      "required": ["name", "industry", "geography", "business_model", "account_stage", "input_provenance"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "industry": { "type": "string" },
+        "geography": { "type": "string" },
+        "business_model": { "type": "string" },
+        "account_stage": {
+          "enum": ["discovery", "early_pursuit", "active_opportunity", "renewal", "expansion", "transformation"]
+        },
+        "input_provenance": { "type": "string" },
+        "strategic_context": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["signal", "source_type", "confidence"],
+            "properties": {
+              "signal": { "type": "string" },
+              "source_type": { "$ref": "#/$defs/evidenceType" },
+              "confidence": { "$ref": "#/$defs/confidence" },
+              "sensitivity": { "$ref": "#/$defs/sensitivity" }
+            }
+          }
+        }
+      }
+    },
+    "evidence_register": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "claim", "evidence_type", "confidence", "validation_status", "sensitivity", "source_refs", "applies_to"],
+        "properties": {
+          "id": { "type": "string" },
+          "claim": { "type": "string", "minLength": 1 },
+          "evidence_type": { "$ref": "#/$defs/evidenceType" },
+          "confidence": { "$ref": "#/$defs/confidence" },
+          "validation_status": { "$ref": "#/$defs/validationStatus" },
+          "sensitivity": { "$ref": "#/$defs/sensitivity" },
+          "source_refs": { "type": "array", "items": { "type": "string" } },
+          "applies_to": { "type": "array", "items": { "type": "string" } },
+          "validation_question": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "cvs_flow": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description", "shows", "tells_us", "output"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "shows": { "type": "string" },
+          "tells_us": { "type": "string" },
+          "output": { "type": "string" }
+        }
+      }
+    },
+    "selling_comparison": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["lens", "solution_led", "outcome_aligned"],
+        "properties": {
+          "lens": { "type": "string" },
+          "solution_led": { "type": "string" },
+          "outcome_aligned": { "type": "string" }
+        }
+      }
+    },
+    "company_insights": {
+      "type": "object",
+      "required": ["industry_context", "industry_pressures", "report_signals", "known", "inferred", "unknown"],
+      "properties": {
+        "industry_context": {
+          "type": "object",
+          "required": ["id", "name", "definition", "evidence_type", "confidence"],
+          "properties": {
+            "id": { "type": "string" },
+            "name": { "type": "string" },
+            "definition": { "type": "string" },
+            "scope_notes": { "type": "string" },
+            "evidence_type": { "$ref": "#/$defs/evidenceType" },
+            "confidence": { "$ref": "#/$defs/confidence" },
+            "source_refs": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "industry_pressures": { "type": "array", "items": { "type": "object" } },
+        "report_signals": { "type": "array", "items": { "type": "object" } },
+        "known": { "type": "array", "items": { "type": "string" } },
+        "inferred": { "type": "array", "items": { "type": "string" } },
+        "unknown": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "knowledge_graph": {
+      "type": "object",
+      "required": ["layers", "nodes", "edges"],
+      "properties": {
+        "layers": {
+          "type": "array",
+          "minItems": 5,
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "order", "description"],
+            "properties": {
+              "id": { "enum": ["industry_context", "industry_value_stream", "customer_value_stream", "function", "persona"] },
+              "label": { "type": "string" },
+              "order": { "type": "integer", "minimum": 1 },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 5,
+          "items": {
+            "type": "object",
+            "required": ["id", "layer", "title", "summary", "evidence_type", "confidence", "validation_status", "source_refs"],
+            "properties": {
+              "id": { "type": "string" },
+              "layer": { "enum": ["industry_context", "industry_value_stream", "customer_value_stream", "function", "persona"] },
+              "title": { "type": "string" },
+              "summary": { "type": "string" },
+              "evidence_type": { "$ref": "#/$defs/evidenceType" },
+              "confidence": { "$ref": "#/$defs/confidence" },
+              "validation_status": { "$ref": "#/$defs/validationStatus" },
+              "source_refs": { "type": "array", "items": { "type": "string" } },
+              "validation_questions": { "type": "array", "items": { "type": "string" } },
+              "design_pack_refs": { "type": "array", "items": { "type": "string" } },
+              "detail": { "type": "object" }
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "object",
+            "required": ["from", "to", "relation"],
+            "properties": {
+              "from": { "type": "string" },
+              "to": { "type": "string" },
+              "relation": { "enum": ["scopes", "instantiated-as", "operated-by", "represented-by"] },
+              "evidence_type": { "$ref": "#/$defs/evidenceType" }
+            }
+          }
+        }
+      }
+    },
+    "value_twin_nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "node_id",
+          "node_name",
+          "value_stream_stage",
+          "description",
+          "business_function",
+          "stakeholders",
+          "signals",
+          "metrics",
+          "frictions",
+          "opportunities",
+          "capability_needs",
+          "data_dependencies",
+          "partner_relevance",
+          "evidence_refs",
+          "confidence",
+          "validation_questions"
+        ],
+        "properties": {
+          "node_id": { "type": "string" },
+          "node_name": { "type": "string" },
+          "value_stream_stage": { "type": "string" },
+          "description": { "type": "string" },
+          "business_function": { "type": "string" },
+          "stakeholders": { "type": "array", "items": { "type": "string" } },
+          "signals": { "type": "array", "items": { "type": "string" } },
+          "metrics": { "type": "array", "items": { "type": "string" } },
+          "frictions": { "type": "array", "items": { "type": "string" } },
+          "opportunities": { "type": "array", "items": { "type": "string" } },
+          "capability_needs": { "type": "array", "items": { "type": "string" } },
+          "data_dependencies": { "type": "array", "items": { "type": "string" } },
+          "partner_relevance": { "type": "string" },
+          "evidence_refs": { "type": "array", "items": { "type": "string" } },
+          "evidence_type": { "$ref": "#/$defs/evidenceType" },
+          "confidence": { "$ref": "#/$defs/confidence" },
+          "validation_status": { "$ref": "#/$defs/validationStatus" },
+          "validation_questions": { "type": "array", "items": { "type": "string" } },
+          "ai_use_cases": { "type": "array", "items": { "type": "string" } },
+          "risk_flags": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "current_state": {
+      "type": "object",
+      "required": ["operating_model_gaps", "technical_model_gaps", "organisational_model_gaps", "maturity_stage"],
+      "properties": {
+        "maturity_stage": { "type": "string" },
+        "operating_model_gaps": { "type": "array", "items": { "type": "object" } },
+        "technical_model_gaps": { "type": "array", "items": { "type": "object" } },
+        "organisational_model_gaps": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "outcomes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "outcome", "kpi", "value_stream_refs", "stakeholders", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "outcome": { "type": "string" },
+          "kpi": { "type": "string" },
+          "baseline": { "type": ["string", "null"] },
+          "target": { "type": ["string", "null"] },
+          "value_stream_refs": { "type": "array", "items": { "type": "string" } },
+          "stakeholders": { "type": "array", "items": { "type": "string" } },
+          "status": { "const": "NOT_MEASURED" }
+        }
+      }
+    },
+    "portfolio_mapping": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["gap", "capability_need", "value_stream_refs", "priority", "confidence", "status"],
+        "properties": {
+          "gap": { "type": "string" },
+          "capability_need": { "type": "string" },
+          "portfolio_domain": { "type": ["string", "null"] },
+          "value_stream_refs": { "type": "array", "items": { "type": "string" } },
+          "priority": { "enum": ["low", "medium", "high"] },
+          "confidence": { "$ref": "#/$defs/confidence" },
+          "status": { "type": "string" }
+        }
+      }
+    },
+    "partner_landscape": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "role", "evidence_type", "confidence", "validation_question"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "role": { "type": "string" },
+          "evidence_type": { "$ref": "#/$defs/evidenceType" },
+          "confidence": { "$ref": "#/$defs/confidence" },
+          "validation_question": { "type": "string" },
+          "p360_guidance": { "type": "string" }
+        }
+      }
+    },
+    "role_insights": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["role", "focus", "next_actions"],
+        "properties": {
+          "role": { "type": "string" },
+          "focus": { "type": "string" },
+          "next_actions": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "ai_value_twin": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "value_stream_ref",
+          "impact",
+          "complexity",
+          "confidence",
+          "rai_risk",
+          "rai_notes",
+          "data_dependencies",
+          "human_in_the_loop",
+          "next_validation_action"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "value_stream_ref": { "type": "string" },
+          "impact": { "enum": ["low", "medium", "high"] },
+          "complexity": { "enum": ["low", "medium", "high"] },
+          "confidence": { "$ref": "#/$defs/confidence" },
+          "rai_risk": { "enum": ["low", "medium", "high"] },
+          "rai_notes": { "type": "string", "minLength": 10 },
+          "data_dependencies": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "human_in_the_loop": { "type": "string", "minLength": 5 },
+          "next_validation_action": { "type": "string", "minLength": 5 }
+        }
+      }
+    },
+    "validation_gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "question", "blocks", "owner_to_confirm", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "question": { "type": "string" },
+          "blocks": { "type": "array", "items": { "type": "string" } },
+          "owner_to_confirm": { "type": "string" },
+          "status": { "$ref": "#/$defs/validationStatus" }
+        }
+      }
+    },
+    "roadmap": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["step", "action", "depends_on", "evidence_needed"],
+        "properties": {
+          "step": { "type": "integer", "minimum": 1 },
+          "action": { "type": "string" },
+          "depends_on": { "type": "array", "items": { "type": "string" } },
+          "evidence_needed": { "type": "string" }
+        }
+      }
+    },
+    "dashboard_config": { "type": "object" },
+    "source_notes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "source_class", "reference", "reference_type", "content_status", "confidence"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "source_class": { "type": "string" },
+          "reference": { "type": "string" },
+          "reference_type": { "enum": ["repository-file", "synthetic-placeholder", "user-provided"] },
+          "content_status": { "const": "synthetic" },
+          "confidence": { "$ref": "#/$defs/confidence" },
+          "sensitivity": { "$ref": "#/$defs/sensitivity" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "evidenceType": {
+      "enum": ["validated", "public_signal", "user_provided", "industry_pattern", "inferred", "assumption", "unknown"]
+    },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "validationStatus": {
+      "enum": ["validated", "partially_validated", "hypothesis", "requires_discovery", "do_not_use_without_validation"]
+    },
+    "sensitivity": { "enum": ["public", "internal", "confidential", "restricted"] }
+  }
+}

@@ -74,6 +74,31 @@ def init() -> None:
             )
             """
         )
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS discovery_inputs (
+                run_id TEXT PRIMARY KEY,
+                payload TEXT NOT NULL,
+                created TEXT NOT NULL
+            )
+            """
+        )
+
+
+def save_discovery_input(run_id: str, payload: dict) -> None:
+    with _LOCK, connect() as connection:
+        connection.execute(
+            "INSERT OR REPLACE INTO discovery_inputs (run_id, payload, created) VALUES (?, ?, ?)",
+            (run_id, json.dumps(payload, ensure_ascii=False), utc_now()),
+        )
+
+
+def discovery_input(run_id: str) -> dict | None:
+    with connect() as connection:
+        row = connection.execute(
+            "SELECT payload FROM discovery_inputs WHERE run_id=?", (run_id,)
+        ).fetchone()
+    return json.loads(row["payload"]) if row else None
 
 
 def create_run(

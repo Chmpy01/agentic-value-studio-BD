@@ -135,6 +135,28 @@ def pack_detail(pack: str) -> dict:
 
 
 def validate_upload(document: dict) -> dict:
+    if document.get("schemaVersion") == "cvs.discovery/v1" or document.get("kind") == "DiscoveryPack":
+        from jsonschema import Draft202012Validator
+
+        validator = Draft202012Validator(contract_schema("discovery-pack.schema.json"))
+        errors = [
+            f"{'/'.join(str(part) for part in error.path)}: {error.message}".lstrip(": ")
+            for error in sorted(validator.iter_errors(document), key=lambda item: list(item.path))
+        ]
+        claims = [
+            row
+            for row in document.get("evidence_register") or []
+            if row.get("evidence_type") in {"industry_pattern", "inferred", "assumption"}
+            and row.get("validation_status") == "validated"
+        ]
+        if claims:
+            errors.append("an inferred or pattern claim is marked validated")
+        return {
+            "ok": not errors,
+            "errors": errors[:20],
+            "kind": "discovery-pack",
+            "nodeCount": len((document.get("knowledge_graph") or {}).get("nodes") or []),
+        }
     if document.get("schemaVersion") == "cvs.intent/v1" or document.get("kind") == "ValueIntent":
         errors = []
         governance = document.get("governance") or {}

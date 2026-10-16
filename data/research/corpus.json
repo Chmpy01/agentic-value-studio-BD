@@ -1,0 +1,671 @@
+{
+  "schemaVersion": "cvs.research-corpus/v1",
+  "generated": "2026-10-16",
+  "notice": "Every statement here is synthetic and carries an evidence class. Industry material is a pattern until a customer confirms it. Customer material is a public signal until the customer confirms it. Nothing here is a measured outcome.",
+  "industries": {
+    "office": {
+      "packId": "office",
+      "industryContext": {
+        "id": "ind-office",
+        "name": "Intelligent workplace & smart buildings",
+        "definition": "Organisations that run a corporate property estate as a cost base and as a place of work, where occupancy, energy and service quality all affect the result.",
+        "scopeNotes": "Covers corporate offices and mixed-use campuses. Excludes data centres and industrial sites.",
+        "evidenceType": "industry_pattern",
+        "confidence": "medium",
+        "sourceRefs": ["src-office-body", "src-office-analyst", "src-office-pack"],
+        "pressures": [
+          {
+            "id": "prs-office-1",
+            "statement": "Desk supply often exceeds observed demand after hybrid working settled.",
+            "evidenceType": "industry_pattern",
+            "confidence": "medium",
+            "sourceRefs": ["src-office-body"]
+          },
+          {
+            "id": "prs-office-2",
+            "statement": "Occupancy, energy and service data sit with different owners, so portfolio decisions are taken without a joined view.",
+            "evidenceType": "industry_pattern",
+            "confidence": "medium",
+            "sourceRefs": ["src-office-analyst"]
+          },
+          {
+            "id": "prs-office-3",
+            "statement": "Published decarbonisation commitments create a reporting obligation that competes with cost reduction.",
+            "evidenceType": "industry_pattern",
+            "confidence": "low",
+            "sourceRefs": ["src-office-body", "src-office-report"]
+          }
+        ]
+      },
+      "industryValueStreams": [
+        {
+          "id": "ivs-office-1",
+          "name": "Plan and supply workspace",
+          "stages": ["Forecast demand", "Hold or release space", "Fit out", "Publish the plan"],
+          "description": "How an estate decides how much space to hold, where, and on what lease terms.",
+          "typicalKpis": ["cost per m²", "utilisation %", "lease exposure"],
+          "evidenceType": "industry_pattern",
+          "confidence": "medium",
+          "sourceRefs": ["src-pattern-library", "src-office-body"]
+        },
+        {
+          "id": "ivs-office-2",
+          "name": "Operate the building day to day",
+          "stages": ["Sense conditions", "Schedule plant", "Respond to requests", "Close the loop"],
+          "description": "How heating, cooling, lighting and services are scheduled against real use.",
+          "typicalKpis": ["kWh per occupied hour", "comfort complaints", "plant runtime"],
+          "evidenceType": "industry_pattern",
+          "confidence": "medium",
+          "sourceRefs": ["src-pattern-library", "src-office-analyst"]
+        },
+        {
+          "id": "ivs-office-3",
+          "name": "Serve the workforce",
+          "stages": ["Raise request", "Triage", "Despatch", "Confirm resolution"],
+          "description": "How workplace services are requested, prioritised and resolved.",
+          "typicalKpis": ["tickets per 100 rooms", "mean time to resolve", "experience score"],
+          "evidenceType": "industry_pattern",
+          "confidence": "medium",
+          "sourceRefs": ["src-pattern-library"]
+        },
+        {
+          "id": "ivs-office-4",
+          "name": "Report and govern",
+          "stages": ["Collect evidence", "Assure the data", "Report", "Act on the finding"],
+          "description": "How cost, carbon and risk positions are evidenced for the board and for external reporting.",
+          "typicalKpis": ["reporting cycle time", "assurance findings", "carbon per m²"],
+          "evidenceType": "industry_pattern",
+          "confidence": "low",
+          "sourceRefs": ["src-pattern-library", "src-office-report"]
+        }
+      ],
+      "customerReportExtracts": [
+        {
+          "id": "cre-office-1",
+          "statement": "Property cost reduction is named as a multi-year priority.",
+          "reportSection": "Chief executive review",
+          "evidenceType": "public_signal",
+          "confidence": "medium",
+          "sensitivity": "public",
+          "sourceRefs": ["src-office-report"]
+        },
+        {
+          "id": "cre-office-2",
+          "statement": "The workplace is described as a lever for attracting and retaining people under hybrid working.",
+          "reportSection": "People and culture",
+          "evidenceType": "public_signal",
+          "confidence": "medium",
+          "sensitivity": "public",
+          "sourceRefs": ["src-office-report"]
+        },
+        {
+          "id": "cre-office-3",
+          "statement": "A decarbonisation commitment with interim milestones is restated.",
+          "reportSection": "Sustainability statement",
+          "evidenceType": "public_signal",
+          "confidence": "medium",
+          "sensitivity": "public",
+          "sourceRefs": ["src-office-report"]
+        }
+      ],
+      "customerValueStreams": [
+        {
+          "id": "cvs-office-1",
+          "name": "Estate footprint decision",
+          "valueStreamStage": "Plan and supply workspace",
+          "derivedFrom": { "industryStream": "ivs-office-1", "reportExtracts": ["cre-office-1"] },
+          "description": "Deciding which floors and buildings to hold, sublet or release, using observed demand rather than headcount alone.",
+          "businessFunction": "Corporate real estate",
+          "stakeholders": ["CFO", "Head of Real Estate", "HR"],
+          "signals": ["Space demand gap", "Badge and booking aggregates"],
+          "metrics": ["cost per m²", "utilisation %"],
+          "frictions": ["Demand evidence is held per building, not per portfolio", "Lease events force decisions before evidence is ready"],
+          "opportunities": ["Build one demand picture before the next lease break", "Agree a utilisation threshold that triggers review"],
+          "capabilityNeeds": ["Consented occupancy aggregation", "A shared portfolio baseline"],
+          "dataDependencies": ["Badge or booking aggregates", "Lease schedule", "Floor areas"],
+          "partnerRelevance": "Workplace strategy advisory can run the baseline; the customer owns the decision.",
+          "evidenceType": "inferred",
+          "confidence": "low",
+          "validationQuestions": [
+            "Who owns the portfolio cost line, and what baseline do they already accept?",
+            "Which occupancy data may be used, at what aggregation, under which agreement?"
+          ],
+          "graphRefs": ["b1", "f2", "s1", "h1"],
+          "functionRefs": ["fn-office-2", "fn-office-1"]
+        },
+        {
+          "id": "cvs-office-2",
+          "name": "Plant scheduling against real use",
+          "valueStreamStage": "Operate the building day to day",
+          "derivedFrom": { "industryStream": "ivs-office-2", "reportExtracts": ["cre-office-3"] },
+          "description": "Matching heating and cooling schedules to observed occupancy instead of fixed calendars.",
+          "businessFunction": "Facilities / Energy",
+          "stakeholders": ["Facilities / Energy", "Head of Real Estate"],
+          "signals": ["Energy-performance mismatch", "After-hours plant draw"],
+          "metrics": ["kWh per occupied hour", "after-hours runtime"],
+          "frictions": ["Schedules are changed by hand and drift back", "Comfort complaints are not joined to schedule changes"],
+          "opportunities": ["Review occupied hours against the plant schedule", "Propose a reviewed schedule for human approval"],
+          "capabilityNeeds": ["Read-only access to plant and meter history", "A change route that keeps a human in control"],
+          "dataDependencies": ["Meter interval data", "Plant schedule", "Occupancy aggregates"],
+          "partnerRelevance": "FM or energy services partner would hold the change and the comfort risk.",
+          "evidenceType": "inferred",
+          "confidence": "low",
+          "validationQuestions": [
+            "Who may change a plant schedule today, and what approval does that need?",
+            "What comfort and safety overrides must always win?"
+          ],
+          "graphRefs": ["b3", "f4", "s2", "h2"],
+          "functionRefs": ["fn-office-4"]
+        },
+        {
+          "id": "cvs-office-3",
+          "name": "Workplace service response",
+          "valueStreamStage": "Serve the workforce",
+          "derivedFrom": { "industryStream": "ivs-office-3", "reportExtracts": ["cre-office-2"] },
+          "description": "How a reported workplace fault becomes a prioritised, resolved and confirmed piece of work.",
+          "businessFunction": "HR / Workplace",
+          "stakeholders": ["HR / Workplace", "Facilities / Energy", "CIO / Security"],
+          "signals": ["Service friction", "Repeat tickets in the same space"],
+          "metrics": ["tickets per 100 rooms", "mean time to resolve"],
+          "frictions": ["Repeat faults are closed as separate tickets", "Experience feedback is not linked to the asset"],
+          "opportunities": ["Group repeat faults by space before despatch", "Record the experience effect alongside the fix"],
+          "capabilityNeeds": ["Ticket and room data joined by a stable space identifier"],
+          "dataDependencies": ["FM ticket history", "Room inventory", "Collaboration room telemetry where permitted"],
+          "partnerRelevance": "Managed experience provider usually holds the service level.",
+          "evidenceType": "inferred",
+          "confidence": "low",
+          "validationQuestions": [
+            "Is there one space identifier shared by the booking, ticket and asset systems?",
+            "Which experience measure does the business already trust?"
+          ],
+          "graphRefs": ["f3", "s3", "h3"],
+          "functionRefs": ["fn-office-3"]
+        },
+        {
+          "id": "cvs-office-4",
+          "name": "Cost and carbon reporting",
+          "valueStreamStage": "Report and govern",
+          "derivedFrom": { "industryStream": "ivs-office-4", "reportExtracts": ["cre-office-1", "cre-office-3"] },
+          "description": "Producing the cost and carbon position that the board and external reporting rely on.",
+          "businessFunction": "CFO / Finance",
+          "stakeholders": ["CFO", "Sustainability lead", "CIO / Security"],
+          "metrics": ["carbon per m²", "reporting cycle time"],
+          "signals": ["Reporting rework", "Late or estimated meter data"],
+          "frictions": ["Figures are rebuilt by hand each cycle", "Estimates are not separated from measured readings"],
+          "opportunities": ["Separate measured from estimated at source", "Agree one evidence trail per reported figure"],
+          "capabilityNeeds": ["Lineage from reading to reported figure"],
+          "dataDependencies": ["Meter readings", "Finance ledger", "Floor areas"],
+          "partnerRelevance": "Assurance or advisory partner may review the method, not the result.",
+          "evidenceType": "assumption",
+          "confidence": "low",
+          "validationQuestions": [
+            "Which reported figures are currently estimated rather than measured?",
+            "Who signs the carbon position, and against which standard?"
+          ],
+          "graphRefs": ["b2", "f1", "f5"],
+          "functionRefs": ["fn-office-1", "fn-office-5"]
+        }
+      ],
+      "organisation": {
+        "structureNote": "Function names are taken from the supplied design pack. The reporting lines between them are an assumption until an organisation chart is shared.",
+        "functions": [
+          {
+            "id": "fn-office-1",
+            "name": "CFO / Finance",
+            "accountability": "Owns the property cost line and the investment case.",
+            "graphRef": "f1",
+            "evidenceType": "validated",
+            "confidence": "medium",
+            "sourceRefs": ["src-office-pack"],
+            "validationQuestions": ["Who inside finance owns the estate cost line day to day?"]
+          },
+          {
+            "id": "fn-office-2",
+            "name": "Corporate real estate",
+            "accountability": "Holds the lease portfolio and the space plan.",
+            "graphRef": "f2",
+            "evidenceType": "validated",
+            "confidence": "medium",
+            "sourceRefs": ["src-office-pack"],
+            "validationQuestions": ["Is space planning run centrally or per region?"]
+          },
+          {
+            "id": "fn-office-3",
+            "name": "HR / Workplace",
+            "accountability": "Owns the workplace experience and attendance policy.",
+            "graphRef": "f3",
+            "evidenceType": "validated",
+            "confidence": "medium",
+            "sourceRefs": ["src-office-pack"],
+            "validationQuestions": ["Which experience measure is already reported to the executive?"]
+          },
+          {
+            "id": "fn-office-4",
+            "name": "Facilities / Energy",
+            "accountability": "Runs plant, energy and the maintenance route.",
+            "graphRef": "f4",
+            "evidenceType": "validated",
+            "confidence": "medium",
+            "sourceRefs": ["src-office-pack"],
+            "validationQuestions": ["Is facilities delivered in-house or by a service provider?"]
+          },
+          {
+            "id": "fn-office-5",
+            "name": "CIO / Security",
+            "accountability": "Owns data access, network and security approval.",
+            "graphRef": "f5",
+            "evidenceType": "validated",
+            "confidence": "medium",
+            "sourceRefs": ["src-office-pack"],
+            "validationQuestions": ["What approval route governs building data leaving its original system?"]
+          }
+        ],
+        "personas": [
+          {
+            "id": "per-office-1",
+            "role": "Chief Financial Officer",
+            "functionRef": "fn-office-1",
+            "decisions": ["Approve or refuse estate investment", "Accept the cost baseline"],
+            "kpis": ["cost per m²", "lease exposure"],
+            "openQuestions": ["What would make this baseline credible to audit?"],
+            "evidenceType": "assumption",
+            "confidence": "low",
+            "validationQuestions": ["Is the CFO the decision owner, or a finance director below them?"]
+          },
+          {
+            "id": "per-office-2",
+            "role": "Head of Real Estate",
+            "functionRef": "fn-office-2",
+            "decisions": ["Hold, sublet or release space", "Set the utilisation threshold"],
+            "kpis": ["utilisation %", "cost per m²"],
+            "openQuestions": ["Which lease events fall in the next four quarters?"],
+            "evidenceType": "assumption",
+            "confidence": "low",
+            "validationQuestions": ["Who signs a release decision?"]
+          },
+          {
+            "id": "per-office-3",
+            "role": "Workplace Experience Lead",
+            "functionRef": "fn-office-3",
+            "decisions": ["Set service standards", "Prioritise workplace change"],
+            "kpis": ["experience score", "tickets per 100 rooms"],
+            "openQuestions": ["Does space change help or harm the experience measure?"],
+            "evidenceType": "assumption",
+            "confidence": "low",
+            "validationQuestions": ["Is there a named experience owner, or is it shared with HR?"]
+          },
+          {
+            "id": "per-office-4",
+            "role": "Energy and Facilities Manager",
+            "functionRef": "fn-office-4",
+            "decisions": ["Change plant schedules", "Raise and close work orders"],
+            "kpis": ["kWh per occupied hour", "mean time to resolve"],
+            "openQuestions": ["What schedule change is allowed without a formal change request?"],
+            "evidenceType": "assumption",
+            "confidence": "low",
+            "validationQuestions": ["Does an external FM provider hold this authority instead?"]
+          },
+          {
+            "id": "per-office-5",
+            "role": "IT and Security Architect",
+            "functionRef": "fn-office-5",
+            "decisions": ["Approve data access", "Approve integration patterns"],
+            "kpis": ["assurance findings", "time to approve access"],
+            "openQuestions": ["What aggregation makes occupancy data acceptable?"],
+            "evidenceType": "assumption",
+            "confidence": "low",
+            "validationQuestions": ["Which data protection assessment applies to occupancy data here?"]
+          }
+        ]
+      },
+      "unknowns": [
+        { "id": "unk-office-1", "unknown": "No customer baseline for cost per m² or kWh per occupied hour.", "validationQuestion": "Which baseline figures will finance accept, and for which period?", "blocks": ["cvs-office-1", "cvs-office-2"] },
+        { "id": "unk-office-2", "unknown": "Data access rights for occupancy and plant history are unconfirmed.", "validationQuestion": "What approval is needed to read occupancy and plant data, and at what aggregation?", "blocks": ["cvs-office-1", "cvs-office-2"] },
+        { "id": "unk-office-3", "unknown": "The named executive sponsor is unknown.", "validationQuestion": "Who sponsors this work and owns the outcome?", "blocks": ["cvs-office-1", "cvs-office-4"] },
+        { "id": "unk-office-4", "unknown": "Facilities delivery model is unconfirmed, in-house or outsourced.", "validationQuestion": "Who holds the maintenance and plant change authority today?", "blocks": ["cvs-office-2", "cvs-office-3"] }
+      ],
+      "aiUseCases": [
+        {
+          "id": "ai-office-1",
+          "name": "Demand pattern summary for a lease review",
+          "valueStreamRef": "cvs-office-1",
+          "impact": "medium",
+          "complexity": "low",
+          "confidence": "low",
+          "raiRisk": "medium",
+          "raiNotes": "Occupancy data can identify individuals if not aggregated. Aggregation thresholds must be agreed first.",
+          "dataDependencies": ["Aggregated occupancy", "Floor areas", "Lease schedule"],
+          "humanInTheLoop": "A real estate lead accepts or rejects every summary.",
+          "nextValidationAction": "Agree the aggregation level and run one building as a paper exercise."
+        },
+        {
+          "id": "ai-office-2",
+          "name": "Schedule mismatch explanation",
+          "valueStreamRef": "cvs-office-2",
+          "impact": "medium",
+          "complexity": "medium",
+          "confidence": "low",
+          "raiRisk": "high",
+          "raiNotes": "Must never issue a plant command. Comfort and safety overrides sit above any recommendation.",
+          "dataDependencies": ["Meter interval data", "Plant schedule", "Occupancy aggregates"],
+          "humanInTheLoop": "Facilities approval is required before any schedule change is drafted.",
+          "nextValidationAction": "Confirm the approval route and keep the agent to a drafted recommendation."
+        },
+        {
+          "id": "ai-office-3",
+          "name": "Repeat fault grouping",
+          "valueStreamRef": "cvs-office-3",
+          "impact": "low",
+          "complexity": "low",
+          "confidence": "low",
+          "raiRisk": "low",
+          "raiNotes": "Operational text may contain personal detail; strip it before use.",
+          "dataDependencies": ["FM ticket history", "Room inventory"],
+          "humanInTheLoop": "The service desk keeps the grouping decision.",
+          "nextValidationAction": "Test the grouping against one quarter of closed tickets."
+        }
+      ],
+      "partnerRoles": [
+        { "id": "pl-office-1", "name": "Workplace strategy advisory", "role": "Runs the demand baseline and the business case.", "evidenceType": "inferred", "confidence": "low", "validationQuestion": "Is an advisory partner already engaged on the estate plan?" },
+        { "id": "pl-office-2", "name": "SI and OT integration partner", "role": "Joins building, booking and network data under an agreed pattern.", "evidenceType": "inferred", "confidence": "low", "validationQuestion": "Who integrates building systems today?" },
+        { "id": "pl-office-3", "name": "FM or managed experience provider", "role": "Holds the service level and the change route.", "evidenceType": "inferred", "confidence": "low", "validationQuestion": "Which provider holds the current FM contract and when does it renew?" }
+      ]
+    },
+
+    "retail": {
+      "packId": "retail",
+      "industryContext": {
+        "id": "ind-retail",
+        "name": "Retail stores & omnichannel operations",
+        "definition": "Store estates where sales, service cost, stock loss and energy all move together, and where online orders are fulfilled from the same floor.",
+        "scopeNotes": "Covers physical stores and in-store fulfilment. Excludes pure e-commerce and distribution centres.",
+        "evidenceType": "industry_pattern",
+        "confidence": "medium",
+        "sourceRefs": ["src-retail-body", "src-retail-analyst", "src-retail-pack"],
+        "pressures": [
+          { "id": "prs-retail-1", "statement": "Store margin is squeezed between service cost, energy cost and in-store fulfilment labour.", "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-retail-body"] },
+          { "id": "prs-retail-2", "statement": "Conversion, availability and refrigeration performance are owned by different teams on different cycles.", "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-retail-analyst"] },
+          { "id": "prs-retail-3", "statement": "Chilled estate failures carry both waste cost and food safety exposure.", "evidenceType": "industry_pattern", "confidence": "low", "sourceRefs": ["src-retail-body"] }
+        ]
+      },
+      "industryValueStreams": [
+        { "id": "ivs-retail-1", "name": "Convert footfall to sales", "stages": ["Attract", "Serve", "Check out", "Follow up"], "description": "How a visit becomes a transaction and a repeat visit.", "typicalKpis": ["conversion %", "basket value", "wait time"], "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-pattern-library", "src-retail-analyst"] },
+        { "id": "ivs-retail-2", "name": "Keep stock available and safe", "stages": ["Replenish", "Hold", "Monitor condition", "Mark down or dispose"], "description": "How availability and condition are maintained, including the chilled estate.", "typicalKpis": ["availability %", "waste value", "temperature exceptions"], "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-pattern-library", "src-retail-body"] },
+        { "id": "ivs-retail-3", "name": "Fulfil omnichannel orders", "stages": ["Receive order", "Pick", "Stage", "Hand over"], "description": "How an online order is fulfilled from store stock and store labour.", "typicalKpis": ["cost per collection", "fulfilment SLA"], "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-pattern-library"] },
+        { "id": "ivs-retail-4", "name": "Run the store estate", "stages": ["Monitor sites", "Despatch engineers", "Verify the fix", "Report"], "description": "How multi-site assets and energy are managed centrally.", "typicalKpis": ["kWh per chilled m³", "engineer visits per site"], "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-pattern-library", "src-retail-analyst"] }
+      ],
+      "customerReportExtracts": [
+        { "id": "cre-retail-1", "statement": "Same-store sales growth is named as the primary commercial measure.", "reportSection": "Operating review", "evidenceType": "public_signal", "confidence": "medium", "sensitivity": "public", "sourceRefs": ["src-retail-report"] },
+        { "id": "cre-retail-2", "statement": "A cost to serve programme covering store labour and energy is described.", "reportSection": "Efficiency programme", "evidenceType": "public_signal", "confidence": "medium", "sensitivity": "public", "sourceRefs": ["src-retail-report"] },
+        { "id": "cre-retail-3", "statement": "Shrink, waste and energy intensity are reported together as responsibility measures.", "reportSection": "Responsible business", "evidenceType": "public_signal", "confidence": "medium", "sensitivity": "public", "sourceRefs": ["src-retail-report"] }
+      ],
+      "customerValueStreams": [
+        {
+          "id": "cvs-retail-1",
+          "name": "Queue and service recovery",
+          "valueStreamStage": "Convert footfall to sales",
+          "derivedFrom": { "industryStream": "ivs-retail-1", "reportExtracts": ["cre-retail-1"] },
+          "description": "Spotting a service queue early enough to move staff before a visit is lost.",
+          "businessFunction": "Store operations",
+          "stakeholders": ["COO / Retail", "Store Director", "Chief commercial officer"],
+          "signals": ["Footfall-to-sales gap", "Queue length"],
+          "metrics": ["conversion %", "wait time"],
+          "frictions": ["Footfall and till data are reviewed after the day ends", "Staffing plans are fixed a week ahead"],
+          "opportunities": ["Flag the gap during the trading day", "Give the store a bounded staffing prompt"],
+          "capabilityNeeds": ["Aggregated footfall counting", "A prompt route the store already uses"],
+          "dataDependencies": ["Footfall counts", "POS transactions", "Staff rota"],
+          "partnerRelevance": "Retail analytics specialist usually supplies the counting method.",
+          "evidenceType": "inferred",
+          "confidence": "low",
+          "validationQuestions": ["Is footfall counted consistently across the estate?", "Who may change staffing inside the trading day?"],
+          "graphRefs": ["b1", "f2", "s1", "h1"],
+          "functionRefs": ["fn-retail-2", "fn-retail-1"]
+        },
+        {
+          "id": "cvs-retail-2",
+          "name": "Chilled estate condition response",
+          "valueStreamStage": "Keep stock available and safe",
+          "derivedFrom": { "industryStream": "ivs-retail-2", "reportExtracts": ["cre-retail-3"] },
+          "description": "Turning a refrigeration anomaly into a prioritised engineer visit before stock is lost.",
+          "businessFunction": "Facilities / Energy",
+          "stakeholders": ["Facilities", "Store Director", "Loss Prevention"],
+          "signals": ["Refrigeration outliers", "Compressor load change"],
+          "metrics": ["waste value", "kWh per chilled m³"],
+          "frictions": ["Alarms are frequent and often cleared without a cause", "Repeat faults on one case are not grouped"],
+          "opportunities": ["Rank anomalies by stock at risk", "Draft a prioritised visit for a human to approve"],
+          "capabilityNeeds": ["Read-only condition history", "A work-order route with human approval"],
+          "dataDependencies": ["Temperature logs", "Energy metering", "Maintenance history"],
+          "partnerRelevance": "Refrigeration OEM and service partner hold the asset and the repair SLA.",
+          "evidenceType": "inferred",
+          "confidence": "low",
+          "validationQuestions": ["What food safety rule governs a temperature exception?", "Who may raise a priority engineer visit?"],
+          "graphRefs": ["b3", "f4", "s2", "h2"],
+          "functionRefs": ["fn-retail-4"]
+        },
+        {
+          "id": "cvs-retail-3",
+          "name": "Store fulfilment load",
+          "valueStreamStage": "Fulfil omnichannel orders",
+          "derivedFrom": { "industryStream": "ivs-retail-3", "reportExtracts": ["cre-retail-2"] },
+          "description": "Understanding what in-store picking costs and when it competes with serving customers.",
+          "businessFunction": "Store operations",
+          "stakeholders": ["Store Director", "COO / Retail", "Finance"],
+          "signals": ["Fulfilment strain", "Pick time per order"],
+          "metrics": ["cost per collection", "fulfilment SLA"],
+          "frictions": ["Picking labour is not separated from serving labour", "Peak picking overlaps peak trading"],
+          "opportunities": ["Separate the two labour lines in reporting", "Test a different picking window in one store"],
+          "capabilityNeeds": ["Order and rota data joined by store and hour"],
+          "dataDependencies": ["Order system", "Rota", "Queue or service data"],
+          "partnerRelevance": "Store systems integrator typically joins order and rota data.",
+          "evidenceType": "assumption",
+          "confidence": "low",
+          "validationQuestions": ["Is picking labour already costed separately?", "Which store would accept a controlled test?"],
+          "graphRefs": ["b2", "f3", "s3", "h3"],
+          "functionRefs": ["fn-retail-3"]
+        },
+        {
+          "id": "cvs-retail-4",
+          "name": "Multi-site energy and loss reporting",
+          "valueStreamStage": "Run the store estate",
+          "derivedFrom": { "industryStream": "ivs-retail-4", "reportExtracts": ["cre-retail-3"] },
+          "description": "Producing an estate view of energy intensity and loss that operations and finance both accept.",
+          "businessFunction": "Loss prevention / IT",
+          "stakeholders": ["Finance", "Loss Prevention", "Facilities"],
+          "signals": ["Site outliers", "Unexplained consumption"],
+          "metrics": ["kWh per chilled m³", "loss value"],
+          "frictions": ["Site data arrives at different times", "Outliers are explained locally and not recorded"],
+          "opportunities": ["One ranked outlier list per week", "Record the explanation against the site"],
+          "capabilityNeeds": ["Consistent site identifiers", "A single estate data set"],
+          "dataDependencies": ["Meter data", "Store master data", "Loss reports"],
+          "partnerRelevance": "Retail managed services partner may already produce part of this view.",
+          "evidenceType": "assumption",
+          "confidence": "low",
+          "validationQuestions": ["Does one estate data set already exist?", "Who signs the loss position?"],
+          "graphRefs": ["f5", "f1"],
+          "functionRefs": ["fn-retail-5", "fn-retail-1"]
+        }
+      ],
+      "organisation": {
+        "structureNote": "Function names come from the supplied design pack. Store-level authority is an assumption until confirmed.",
+        "functions": [
+          { "id": "fn-retail-1", "name": "Chief commercial officer", "accountability": "Owns sales performance and the commercial plan.", "graphRef": "f1", "evidenceType": "validated", "confidence": "medium", "sourceRefs": ["src-retail-pack"], "validationQuestions": ["Is trading performance owned centrally or by region?"] },
+          { "id": "fn-retail-2", "name": "Store operations", "accountability": "Runs the stores and the labour model.", "graphRef": "f2", "evidenceType": "validated", "confidence": "medium", "sourceRefs": ["src-retail-pack"], "validationQuestions": ["What may a store manager change without regional approval?"] },
+          { "id": "fn-retail-3", "name": "Merchandising", "accountability": "Owns range, space and availability.", "graphRef": "f3", "evidenceType": "validated", "confidence": "medium", "sourceRefs": ["src-retail-pack"], "validationQuestions": ["Who arbitrates between availability and waste?"] },
+          { "id": "fn-retail-4", "name": "Facilities / Energy", "accountability": "Maintains refrigeration, plant and energy contracts.", "graphRef": "f4", "evidenceType": "validated", "confidence": "medium", "sourceRefs": ["src-retail-pack"], "validationQuestions": ["Is refrigeration maintenance in-house or with an OEM partner?"] },
+          { "id": "fn-retail-5", "name": "Loss prevention / IT", "accountability": "Owns shrink, store systems and data access.", "graphRef": "f5", "evidenceType": "validated", "confidence": "medium", "sourceRefs": ["src-retail-pack"], "validationQuestions": ["Which team approves access to store video or POS data?"] }
+        ],
+        "personas": [
+          { "id": "per-retail-1", "role": "Retail Chief Operating Officer", "functionRef": "fn-retail-2", "decisions": ["Approve the store labour model", "Set the trading standard"], "kpis": ["conversion %", "cost to serve"], "openQuestions": ["Which stores carry the most service loss?"], "evidenceType": "assumption", "confidence": "low", "validationQuestions": ["Is the COO the sponsor for store change?"] },
+          { "id": "per-retail-2", "role": "Store Director", "functionRef": "fn-retail-2", "decisions": ["Move staff within the day", "Escalate a site fault"], "kpis": ["wait time", "availability %"], "openQuestions": ["What prompt would actually be used on the shop floor?"], "evidenceType": "assumption", "confidence": "low", "validationQuestions": ["How many stores does one director hold?"] },
+          { "id": "per-retail-3", "role": "Facilities Manager", "functionRef": "fn-retail-4", "decisions": ["Prioritise engineer visits", "Accept a maintenance plan"], "kpis": ["waste value", "repeat visits"], "openQuestions": ["Which assets fail most often and why?"], "evidenceType": "assumption", "confidence": "low", "validationQuestions": ["Does the OEM hold the priority decision instead?"] },
+          { "id": "per-retail-4", "role": "Loss Prevention Lead", "functionRef": "fn-retail-5", "decisions": ["Set the loss reporting standard", "Approve data use"], "kpis": ["loss value", "incident rate"], "openQuestions": ["Is loss driven by waste, theft or process?"], "evidenceType": "assumption", "confidence": "low", "validationQuestions": ["Who owns the shrink number in finance?"] },
+          { "id": "per-retail-5", "role": "Finance Business Partner", "functionRef": "fn-retail-1", "decisions": ["Accept a cost baseline", "Approve a store trial"], "kpis": ["cost per collection", "same-store sales"], "openQuestions": ["What evidence would justify an estate-wide change?"], "evidenceType": "assumption", "confidence": "low", "validationQuestions": ["Which finance partner covers store operations?"] }
+        ]
+      },
+      "unknowns": [
+        { "id": "unk-retail-1", "unknown": "No agreed baseline for conversion, waste or cost per collection.", "validationQuestion": "Which store metrics does finance already sign off?", "blocks": ["cvs-retail-1", "cvs-retail-3"] },
+        { "id": "unk-retail-2", "unknown": "Footfall counting consistency across the estate is unknown.", "validationQuestion": "Is footfall counted the same way in every store format?", "blocks": ["cvs-retail-1"] },
+        { "id": "unk-retail-3", "unknown": "Refrigeration maintenance authority is unconfirmed.", "validationQuestion": "Who may raise and prioritise a refrigeration visit today?", "blocks": ["cvs-retail-2"] },
+        { "id": "unk-retail-4", "unknown": "Food safety escalation rules are not documented here.", "validationQuestion": "What must happen within what time after a temperature exception?", "blocks": ["cvs-retail-2"] }
+      ],
+      "aiUseCases": [
+        { "id": "ai-retail-1", "name": "Trading-day service gap prompt", "valueStreamRef": "cvs-retail-1", "impact": "medium", "complexity": "medium", "confidence": "low", "raiRisk": "medium", "raiNotes": "Must not profile individual staff performance. Store-level aggregation only.", "dataDependencies": ["Footfall counts", "POS", "Rota"], "humanInTheLoop": "The store manager decides whether to act on a prompt.", "nextValidationAction": "Shadow one store for a week and compare the prompt with what the manager already knew." },
+        { "id": "ai-retail-2", "name": "Refrigeration anomaly ranking", "valueStreamRef": "cvs-retail-2", "impact": "medium", "complexity": "medium", "confidence": "low", "raiRisk": "high", "raiNotes": "Food safety decisions stay with the accountable human. No control command is permitted.", "dataDependencies": ["Temperature logs", "Energy metering", "Maintenance history"], "humanInTheLoop": "Facilities approves every drafted visit.", "nextValidationAction": "Replay three months of alarms and measure how many ranked items were already known." },
+        { "id": "ai-retail-3", "name": "Fulfilment load explanation", "valueStreamRef": "cvs-retail-3", "impact": "low", "complexity": "low", "confidence": "low", "raiRisk": "low", "raiNotes": "Keep output at store and hour level, not individual picker level.", "dataDependencies": ["Order system", "Rota"], "humanInTheLoop": "Operations reviews before any rota change.", "nextValidationAction": "Check the model against one quarter of actual picking hours." }
+      ],
+      "partnerRoles": [
+        { "id": "pl-retail-1", "name": "Retail analytics specialist", "role": "Supplies the counting and conversion method.", "evidenceType": "inferred", "confidence": "low", "validationQuestion": "Which analytics supplier is already in the stores?" },
+        { "id": "pl-retail-2", "name": "Store systems integrator", "role": "Joins POS, order and rota systems.", "evidenceType": "inferred", "confidence": "low", "validationQuestion": "Who integrates store systems today?" },
+        { "id": "pl-retail-3", "name": "Retail managed services partner", "role": "Runs multi-site monitoring and engineer despatch.", "evidenceType": "inferred", "confidence": "low", "validationQuestion": "Is estate monitoring already outsourced?" }
+      ]
+    },
+
+    "manufacturing": {
+      "packId": "manufacturing",
+      "industryContext": {
+        "id": "ind-manufacturing",
+        "name": "Manufacturing & industrial facilities",
+        "definition": "Production sites where throughput, quality, energy and safety are managed together, and where operational technology is separated from corporate IT.",
+        "scopeNotes": "Covers discrete and process plants. Control systems stay out of scope for any automated action.",
+        "evidenceType": "industry_pattern",
+        "confidence": "medium",
+        "sourceRefs": ["src-mfg-body", "src-mfg-analyst", "src-mfg-pack"],
+        "pressures": [
+          { "id": "prs-mfg-1", "statement": "Short repeated stoppages often remove more available production time than reported large failures.", "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-mfg-body"] },
+          { "id": "prs-mfg-2", "statement": "Historian, maintenance and energy data are rarely joined, so energy per good unit is hard to attribute.", "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-mfg-analyst"] },
+          { "id": "prs-mfg-3", "statement": "Any change near control systems carries a safety and availability risk that outranks efficiency.", "evidenceType": "industry_pattern", "confidence": "high", "sourceRefs": ["src-mfg-body", "src-mfg-pack"] }
+        ]
+      },
+      "industryValueStreams": [
+        { "id": "ivs-mfg-1", "name": "Convert plan into output", "stages": ["Schedule", "Set up", "Run", "Confirm output"], "description": "How a production plan becomes good units on the constraint asset.", "typicalKpis": ["OEE", "availability", "good units"], "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-pattern-library", "src-mfg-body"] },
+        { "id": "ivs-mfg-2", "name": "Maintain asset reliability", "stages": ["Detect condition", "Plan work", "Execute", "Verify"], "description": "How condition information becomes planned maintenance instead of a breakdown.", "typicalKpis": ["MTBF", "MTTR", "backlog age"], "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-pattern-library", "src-mfg-analyst"] },
+        { "id": "ivs-mfg-3", "name": "Manage energy and utilities", "stages": ["Meter", "Attribute", "Target", "Review"], "description": "How energy is attributed to lines, assets and units produced.", "typicalKpis": ["kWh per good unit", "utility cost per line"], "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-pattern-library", "src-mfg-analyst"] },
+        { "id": "ivs-mfg-4", "name": "Assure safety and compliance", "stages": ["Observe", "Record", "Correct", "Report"], "description": "How safety and environmental obligations are evidenced on site.", "typicalKpis": ["incident rate", "open corrective actions"], "evidenceType": "industry_pattern", "confidence": "medium", "sourceRefs": ["src-pattern-library", "src-mfg-body"] }
+      ],
+      "customerReportExtracts": [
+        { "id": "cre-mfg-1", "statement": "Reliable throughput and capacity utilisation are named as operating priorities.", "reportSection": "Operating review", "evidenceType": "public_signal", "confidence": "medium", "sensitivity": "public", "sourceRefs": ["src-mfg-report"] },
+        { "id": "cre-mfg-2", "statement": "Cost per unit and energy intensity are described as efficiency targets.", "reportSection": "Efficiency programme", "evidenceType": "public_signal", "confidence": "medium", "sensitivity": "public", "sourceRefs": ["src-mfg-report"] },
+        { "id": "cre-mfg-3", "statement": "Safety performance is reported as a standing board measure.", "reportSection": "Safety and sustainability", "evidenceType": "public_signal", "confidence": "high", "sensitivity": "public", "sourceRefs": ["src-mfg-report"] }
+      ],
+      "customerValueStreams": [
+        {
+          "id": "cvs-mfg-1",
+          "name": "Constraint uptime recovery",
+          "valueStreamStage": "Convert plan into output",
+          "derivedFrom": { "industryStream": "ivs-mfg-1", "reportExtracts": ["cre-mfg-1"] },
+          "description": "Finding and explaining the repeated short stoppages that remove time from the constraint asset.",
+          "businessFunction": "Production / Quality",
+          "stakeholders": ["Plant Director", "Production Manager", "Maintenance"],
+          "signals": ["Repeated micro-stops", "Output variance"],
+          "metrics": ["OEE", "good units per shift"],
+          "frictions": ["Micro-stops below a threshold are not recorded as losses", "Shift handover loses the cause"],
+          "opportunities": ["Count and group micro-stops by cause", "Bring one grouped cause to the daily review"],
+          "capabilityNeeds": ["Read-only historian extract", "A stable asset identifier"],
+          "dataDependencies": ["Historian events", "MES output counts", "Shift logs"],
+          "partnerRelevance": "OT integrator usually provides the historian extract route.",
+          "evidenceType": "inferred",
+          "confidence": "low",
+          "validationQuestions": ["What stoppage duration is currently recorded as a loss?", "Which asset is the agreed constraint?"],
+          "graphRefs": ["b1", "f2", "s1", "h1"],
+          "functionRefs": ["fn-mfg-2", "fn-mfg-1"]
+        },
+        {
+          "id": "cvs-mfg-2",
+          "name": "Condition to work order",
+          "valueStreamStage": "Maintain asset reliability",
+          "derivedFrom": { "industryStream": "ivs-mfg-2", "reportExtracts": ["cre-mfg-1"] },
+          "description": "Turning a condition alert into planned work before it becomes a breakdown.",
+          "businessFunction": "Maintenance",
+          "stakeholders": ["Maintenance", "Production Manager", "EHS / OT"],
+          "signals": ["Condition alerts vs backlog", "Vibration trend"],
+          "metrics": ["MTBF", "backlog age"],
+          "frictions": ["Alerts arrive faster than the team can plan work", "Backlog priority is set by the loudest line"],
+          "opportunities": ["Rank alerts against production impact", "Draft a work order for a planner to accept"],
+          "capabilityNeeds": ["Condition and maintenance data joined by asset", "A drafted work-order route with approval"],
+          "dataDependencies": ["Condition sensors", "CMMS work orders", "Production schedule"],
+          "partnerRelevance": "Reliability managed service partner may already hold the planning route.",
+          "evidenceType": "inferred",
+          "confidence": "low",
+          "validationQuestions": ["Who sets maintenance priority today?", "Is the asset register consistent between CMMS and historian?"],
+          "graphRefs": ["f3", "s3", "h3"],
+          "functionRefs": ["fn-mfg-3"]
+        },
+        {
+          "id": "cvs-mfg-3",
+          "name": "Energy per good unit attribution",
+          "valueStreamStage": "Manage energy and utilities",
+          "derivedFrom": { "industryStream": "ivs-mfg-3", "reportExtracts": ["cre-mfg-2"] },
+          "description": "Attributing energy use to a line and to units produced so that an efficiency target means something.",
+          "businessFunction": "EHS / Sustainability",
+          "stakeholders": ["EHS / Sustainability", "Finance", "Plant Director"],
+          "signals": ["Energy per good unit", "Idle running"],
+          "metrics": ["kWh per good unit"],
+          "frictions": ["Metering is at site level, not line level", "Production counts and meter intervals do not align"],
+          "opportunities": ["Align meter intervals with production counts", "Report idle running separately"],
+          "capabilityNeeds": ["Line-level metering or a defensible allocation method"],
+          "dataDependencies": ["Meter data", "Production counts", "Tariff data"],
+          "partnerRelevance": "Industrial engineering partner typically designs the allocation method.",
+          "evidenceType": "assumption",
+          "confidence": "low",
+          "validationQuestions": ["Is metering available below site level?", "Which allocation method would finance accept?"],
+          "graphRefs": ["b2", "f4", "s2", "h2"],
+          "functionRefs": ["fn-mfg-4"]
+        },
+        {
+          "id": "cvs-mfg-4",
+          "name": "Safe change and OT separation",
+          "valueStreamStage": "Assure safety and compliance",
+          "derivedFrom": { "industryStream": "ivs-mfg-4", "reportExtracts": ["cre-mfg-3"] },
+          "description": "Keeping any analysis or recommendation outside the control boundary, with a human change route.",
+          "businessFunction": "OT / IT / Finance",
+          "stakeholders": ["EHS / OT", "Plant Director", "IT security"],
+          "signals": ["Change requests", "Network segmentation exceptions"],
+          "metrics": ["open corrective actions", "unapproved change count"],
+          "frictions": ["Analysis tools are requested with write access by default", "Segmentation exceptions accumulate"],
+          "opportunities": ["Keep every agent read-only", "Record a drafted recommendation, never a command"],
+          "capabilityNeeds": ["Enforced read-only boundary", "An auditable approval record"],
+          "dataDependencies": ["Change records", "Network and asset inventory"],
+          "partnerRelevance": "OT integrator and security partner hold the segmentation design.",
+          "evidenceType": "validated",
+          "confidence": "medium",
+          "validationQuestions": ["Which standard governs change near control systems on this site?", "Who signs an OT change?"],
+          "graphRefs": ["b3", "f5"],
+          "functionRefs": ["fn-mfg-5"]
+        }
+      ],
+      "organisation": {
+        "structureNote": "Function names come from the supplied design pack. Site versus group authority is an assumption until confirmed.",
+        "functions": [
+          { "id": "fn-mfg-1", "name": "Plant director", "accountability": "Owns site output, cost and safety.", "graphRef": "f1", "evidenceType": "validated", "confidence": "medium", "sourceRefs": ["src-mfg-pack"], "validationQuestions": ["Does the site or the group own the improvement budget?"] },
+          { "id": "fn-mfg-2", "name": "Production / Quality", "accountability": "Runs the lines and owns quality outcomes.", "graphRef": "f2", "evidenceType": "validated", "confidence": "medium", "sourceRefs": ["src-mfg-pack"], "validationQuestions": ["Who chairs the daily production review?"] },
+          { "id": "fn-mfg-3", "name": "Maintenance", "accountability": "Plans and executes asset work.", "graphRef": "f3", "evidenceType": "validated", "confidence": "medium", "sourceRefs": ["src-mfg-pack"], "validationQuestions": ["Is maintenance planning centralised?"] },
+          { "id": "fn-mfg-4", "name": "EHS / Sustainability", "accountability": "Owns safety, environmental and energy reporting.", "graphRef": "f4", "evidenceType": "validated", "confidence": "medium", "sourceRefs": ["src-mfg-pack"], "validationQuestions": ["Who owns the energy target on site?"] },
+          { "id": "fn-mfg-5", "name": "OT / IT / Finance", "accountability": "Owns the control boundary, data access and the investment case.", "graphRef": "f5", "evidenceType": "validated", "confidence": "medium", "sourceRefs": ["src-mfg-pack"], "validationQuestions": ["Which team approves data leaving the OT network?"] }
+        ],
+        "personas": [
+          { "id": "per-mfg-1", "role": "Plant Director", "functionRef": "fn-mfg-1", "decisions": ["Approve site improvement work", "Accept the production baseline"], "kpis": ["OEE", "cost per good unit"], "openQuestions": ["Which loss is largest and best evidenced?"], "evidenceType": "assumption", "confidence": "low", "validationQuestions": ["Is the plant director the sponsor, or group operations?"] },
+          { "id": "per-mfg-2", "role": "Production Manager", "functionRef": "fn-mfg-2", "decisions": ["Set line priority", "Call a stoppage review"], "kpis": ["availability", "good units"], "openQuestions": ["Which stoppages repeat on the same shift?"], "evidenceType": "assumption", "confidence": "low", "validationQuestions": ["How many lines does one manager hold?"] },
+          { "id": "per-mfg-3", "role": "Maintenance Planner", "functionRef": "fn-mfg-3", "decisions": ["Accept or reject a drafted work order", "Sequence the backlog"], "kpis": ["MTBF", "backlog age"], "openQuestions": ["Which alerts have historically preceded a failure?"], "evidenceType": "assumption", "confidence": "low", "validationQuestions": ["Does an external reliability partner plan this work?"] },
+          { "id": "per-mfg-4", "role": "EHS and Energy Lead", "functionRef": "fn-mfg-4", "decisions": ["Set the energy target", "Escalate a safety finding"], "kpis": ["kWh per good unit", "incident rate"], "openQuestions": ["Can energy be attributed below site level?"], "evidenceType": "assumption", "confidence": "low", "validationQuestions": ["Is energy reporting owned on site or at group level?"] },
+          { "id": "per-mfg-5", "role": "OT Security Lead", "functionRef": "fn-mfg-5", "decisions": ["Approve data egress from OT", "Refuse any write path"], "kpis": ["unapproved change count", "segmentation exceptions"], "openQuestions": ["What read-only pattern is already approved?"], "evidenceType": "assumption", "confidence": "low", "validationQuestions": ["Which standard is the site assessed against?"] }
+        ]
+      },
+      "unknowns": [
+        { "id": "unk-mfg-1", "unknown": "No agreed OEE or energy baseline for the constraint asset.", "validationQuestion": "Which production baseline does the site already report and trust?", "blocks": ["cvs-mfg-1", "cvs-mfg-3"] },
+        { "id": "unk-mfg-2", "unknown": "Asset identifiers may differ between historian and CMMS.", "validationQuestion": "Is there one asset register shared by both systems?", "blocks": ["cvs-mfg-2"] },
+        { "id": "unk-mfg-3", "unknown": "Approved read-only data route out of OT is unconfirmed.", "validationQuestion": "What data egress pattern is already approved for this site?", "blocks": ["cvs-mfg-1", "cvs-mfg-2", "cvs-mfg-4"] },
+        { "id": "unk-mfg-4", "unknown": "Metering granularity below site level is unknown.", "validationQuestion": "Which lines, if any, are separately metered?", "blocks": ["cvs-mfg-3"] }
+      ],
+      "aiUseCases": [
+        { "id": "ai-mfg-1", "name": "Micro-stop cause grouping", "valueStreamRef": "cvs-mfg-1", "impact": "high", "complexity": "medium", "confidence": "low", "raiRisk": "medium", "raiNotes": "Grouping must not be used to assess individual operators. Output stays at asset and cause level.", "dataDependencies": ["Historian events", "MES counts", "Shift logs"], "humanInTheLoop": "Production review accepts or rejects each grouped cause.", "nextValidationAction": "Replay one month of historian events and compare with the recorded loss log." },
+        { "id": "ai-mfg-2", "name": "Condition alert prioritisation", "valueStreamRef": "cvs-mfg-2", "impact": "medium", "complexity": "medium", "confidence": "low", "raiRisk": "high", "raiNotes": "No control action. A missed alert carries safety consequence, so ranking never suppresses an alert.", "dataDependencies": ["Condition sensors", "CMMS", "Production schedule"], "humanInTheLoop": "A planner approves every drafted work order.", "nextValidationAction": "Backtest ranking against the last twelve breakdowns." },
+        { "id": "ai-mfg-3", "name": "Energy allocation explanation", "valueStreamRef": "cvs-mfg-3", "impact": "medium", "complexity": "high", "confidence": "low", "raiRisk": "low", "raiNotes": "An allocation method is a modelling choice, so publish the method with the number.", "dataDependencies": ["Meter data", "Production counts"], "humanInTheLoop": "Finance and EHS accept the method before any figure is reported.", "nextValidationAction": "Compare two allocation methods on one line for one month." }
+      ],
+      "partnerRoles": [
+        { "id": "pl-mfg-1", "name": "Industrial engineering or OT systems integrator", "role": "Designs the read-only data route and the asset register alignment.", "evidenceType": "inferred", "confidence": "low", "validationQuestion": "Which integrator holds the OT network today?" },
+        { "id": "pl-mfg-2", "name": "Machine OEM specialist", "role": "Explains asset behaviour and supports condition thresholds.", "evidenceType": "inferred", "confidence": "low", "validationQuestion": "Which OEM supports the constraint asset?" },
+        { "id": "pl-mfg-3", "name": "Industrial managed services partner", "role": "Runs reliability planning and the work-order route.", "evidenceType": "inferred", "confidence": "low", "validationQuestion": "Is maintenance planning already outsourced?" }
+      ]
+    }
+  }
+}

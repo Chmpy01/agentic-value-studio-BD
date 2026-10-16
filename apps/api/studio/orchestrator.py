@@ -134,6 +134,8 @@ def step(run_id: str) -> dict:
         raise RunError("run not found", 404)
     if run["orchestrator"] == "langgraph":
         raise RunError("this run is owned by the LangGraph orchestrator")
+    if run["orchestrator"] == "discovery":
+        raise RunError("this run is owned by the discovery agent; use /api/discovery/runs", 409)
     run = policy.expire_if_needed(run)
     if run["state"] in TERMINAL or run["state"] == "AWAITING_APPROVAL":
         return run

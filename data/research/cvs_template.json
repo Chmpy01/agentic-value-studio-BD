@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "cvs.twin-template/v1",
+  "templateName": "Cognitive Value Selling Twin",
+  "templateVersion": "1.1",
+  "source": "Supplied cvs_twin_template YAML, 16 October 2026. Stored as data so the agent reads the template rather than hard-coding it.",
+  "operatingPrinciples": {
+    "customerFirst": [
+      "Start with the customer, not the solution.",
+      "Use customer value creation as the organising spine.",
+      "Translate business strategy into value-stream friction, measurable outcomes and validation actions."
+    ],
+    "evidenceDiscipline": [
+      "Separate validated evidence, public signals, user-provided signals, industry patterns, assumptions and hypotheses.",
+      "Do not over-claim evidence.",
+      "Label every insight with source type, confidence and validation status.",
+      "Avoid unvalidated ROI claims."
+    ],
+    "valueSelling": [
+      "Map every opportunity to outcomes, KPIs, value-stream stages, stakeholders and validation evidence.",
+      "Frame technology as capability enablement, not the starting point.",
+      "Prioritise measurable value, risk reduction, adoption and operating model readiness."
+    ],
+    "partnerEcosystem": [
+      "Do not over-claim partner roles.",
+      "Label partner roles as evidenced, inferred, assumed or to-be-validated.",
+      "Show joint pursuit implications and P360 mapping guidance."
+    ],
+    "responsibleAi": [
+      "Include Responsible AI, governance, provenance, human review and data sensitivity.",
+      "Flag sensitive, confidential or restricted signals.",
+      "Include RAI risk, auditability and human-in-the-loop requirements for AI use cases."
+    ]
+  },
+  "cvsFlow": [
+    { "id": "01_understand", "icon": "compass", "name": "Understand", "description": "Know the customer, industry, organisation, market, strategy, metrics and ecosystem.", "shows": "Customer context, strategy signals, stakeholder landscape and evidence base.", "tellsUs": "Where value may be created, delayed, protected or improved.", "output": "Customer insight pack" },
+    { "id": "02_value_twin", "icon": "network", "name": "Value Twin", "description": "Map the customer value stream into visual nodes, signals, metrics and feedback loops.", "shows": "How value flows across the business from trigger to outcome.", "tellsUs": "Where friction, delay, risk, waste or missed opportunity may exist.", "output": "Interactive value twin" },
+    { "id": "03_current_state", "icon": "map-pin", "name": "Current State", "description": "Establish operating, technical and organisational reality.", "shows": "As-is maturity, known gaps, assumptions and validation questions.", "tellsUs": "What must be understood before proposing technology or change.", "output": "Current-state hypothesis map" },
+    { "id": "04_outcomes", "icon": "target", "name": "Outcomes", "description": "Connect friction to measurable outcomes and KPIs.", "shows": "Outcome themes, KPI relationships and stakeholder relevance.", "tellsUs": "Which value hypotheses are worth validating.", "output": "Outcome and KPI model" },
+    { "id": "05_capabilities", "icon": "layers", "name": "Capabilities", "description": "Map gaps to required capabilities and portfolio domains.", "shows": "Capabilities required to improve the value stream.", "tellsUs": "Where portfolio alignment may help, without becoming product-led.", "output": "Capability and portfolio alignment" },
+    { "id": "06_partners", "icon": "handshake", "name": "Partners", "description": "Map partner roles, influence, delivery fit and co-sell motion.", "shows": "Evidenced and inferred partner roles across advisory, integration, managed services and adoption.", "tellsUs": "Who can help create, deliver, scale or validate the outcome.", "output": "Partner landscape and P360 view" },
+    { "id": "07_validate", "icon": "check", "name": "Validate", "description": "Validate through evidence, pilots, governance, adoption and measurement.", "shows": "Validation gates, use case readiness, RAI risk and next actions.", "tellsUs": "What should move forward, pause, be redesigned or be rejected.", "output": "Validated roadmap and AI value twin" }
+  ],
+  "sellingComparison": [
+    { "lens": "Starting point", "solutionLed": "Product, feature, architecture or vendor agenda.", "outcomeAligned": "Customer strategy, value-stream friction and measurable outcomes." },
+    { "lens": "Discovery", "solutionLed": "Qualifies fit for a known solution.", "outcomeAligned": "Explores how value is created, delayed, lost or exposed to risk." },
+    { "lens": "Stakeholders", "solutionLed": "Often technical buyer-centric.", "outcomeAligned": "Maps executive, operating, technical, finance, partner and CX stakeholders." },
+    { "lens": "Business case", "solutionLed": "Justifies spend after solution selection.", "outcomeAligned": "Defines value hypotheses first and validates them with evidence." },
+    { "lens": "Partner motion", "solutionLed": "Partner is attached after solution shaping.", "outcomeAligned": "Partner role is mapped to value creation, validation, delivery and adoption." },
+    { "lens": "AI use cases", "solutionLed": "AI ideas are positioned as innovation or automation.", "outcomeAligned": "AI use cases are tied to value-stream friction, KPIs, risk and validation gates." }
+  ],
+  "evidenceModel": {
+    "evidenceTypes": ["validated", "public_signal", "user_provided", "industry_pattern", "inferred", "assumption", "unknown"],
+    "confidenceLevels": ["low", "medium", "high"],
+    "validationStatus": ["validated", "partially_validated", "hypothesis", "requires_discovery", "do_not_use_without_validation"],
+    "sensitivityLevels": ["public", "internal", "confidential", "restricted"],
+    "statusByEvidenceType": {
+      "validated": "partially_validated",
+      "public_signal": "hypothesis",
+      "user_provided": "hypothesis",
+      "industry_pattern": "do_not_use_without_validation",
+      "inferred": "requires_discovery",
+      "assumption": "do_not_use_without_validation",
+      "unknown": "requires_discovery"
+    }
+  },
+  "valueTwinNodeContract": {
+    "requiredFields": [
+      "node_id",
+      "node_name",
+      "value_stream_stage",
+      "description",
+      "business_function",
+      "stakeholders",
+      "signals",
+      "metrics",
+      "frictions",
+      "opportunities",
+      "capability_needs",
+      "data_dependencies",
+      "partner_relevance",
+      "evidence_refs",
+      "confidence",
+      "validation_questions"
+    ],
+    "optionalFields": ["ai_use_cases", "feedback_loops", "risk_flags", "regulatory_considerations", "operating_model_notes"]
+  },
+  "knowledgeGraphLayers": [
+    { "id": "industry_context", "label": "Industry context", "order": 1, "description": "What the industry is and what pressures act on it." },
+    { "id": "industry_value_stream", "label": "Industry value streams", "order": 2, "description": "The value streams the industry runs in general." },
+    { "id": "customer_value_stream", "label": "Customer value streams", "order": 3, "description": "How this customer appears to run those streams, inferred from their reporting." },
+    { "id": "function", "label": "Organisation and functions", "order": 4, "description": "The functions that own each customer value stream." },
+    { "id": "persona", "label": "Personas", "order": 5, "description": "The roles inside each function that decide, measure and approve." }
+  ],
+  "dashboardConfig": {
+    "navigation": { "style": "top_tabs", "behaviour": "load_section_in_place", "defaultSection": "knowledge_graph" },
+    "visualLanguage": {
+      "style": "executive_advisory",
+      "colourSystem": {
+        "method": "subtle_blue",
+        "understand": "subtle_teal",
+        "value_twin": "subtle_purple",
+        "current_state": "subtle_orange",
+        "outcomes": "subtle_green",
+        "capabilities": "subtle_indigo",
+        "partners": "subtle_cyan",
+        "validate": "subtle_emerald"
+      },
+      "iconography": "stage_icons_plus_section_icons"
+    },
+    "interactions": [
+      "Navigation changes active section",
+      "Knowledge graph node click updates the detail panel",
+      "Layer filter narrows the graph to one concept level",
+      "Evidence filter narrows the graph by evidence class",
+      "Theme toggle",
+      "Embedded JSON viewer"
+    ],
+    "technicalConstraints": [
+      "All dashboard content renders from the generated pack",
+      "No live data calls",
+      "No external research calls at runtime"
+    ]
+  },
+  "generationRules": [
+    "Generate the JSON pack first, then render it.",
+    "Mark all unvalidated items clearly as hypotheses.",
+    "Do not invent evidence. Where evidence is absent, create a validation question.",
+    "Use industry patterns only as hypotheses unless supported by evidence.",
+    "Prioritise capability needs before portfolio mapping.",
+    "Ensure every AI use case has RAI risk, data dependency and validation action."
+  ]
+}

@@ -38,7 +38,22 @@
     "graphRefs": {"type": "array", "items": {"type": "string"}},
     "evidenceStatus": {
       "type": "string",
-      "enum": ["SIMULATED", "STALE_SIMULATED", "ILLUSTRATIVE", "UNVALIDATED", "PROPOSED", "POLICY", "NOT_MEASURED"]
+      "enum": [
+        "SIMULATED",
+        "STALE_SIMULATED",
+        "ILLUSTRATIVE",
+        "UNVALIDATED",
+        "PROPOSED",
+        "POLICY",
+        "NOT_MEASURED",
+        "INPUT_CAPTURED",
+        "INDUSTRY_PATTERN",
+        "PUBLIC_SIGNAL",
+        "CLASSIFIED",
+        "INFERRED",
+        "GRAPH_ASSEMBLED",
+        "REQUIRES_DISCOVERY"
+      ]
     },
     "actor": {"type": "string"},
     "timestamp": {"type": "string"}
