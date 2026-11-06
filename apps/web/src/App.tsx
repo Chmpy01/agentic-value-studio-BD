@@ -48,7 +48,18 @@ export default function App() {
     setError('')
     setSelected('b1')
     setSynergyId('')
-    api.pack(packId).then(setPack).catch((reason: Error) => setBootError(reason.message))
+    api
+      .pack(packId)
+      .then((detail) => {
+        if (!detail?.overlay?.personas || !detail.design?.nodes) {
+          setBootError(
+            'The running API returned an older pack format (no persona overlay). It was probably started from another branch. Stop it and start it again from this checkout.',
+          )
+          return
+        }
+        setPack(detail)
+      })
+      .catch((reason: Error) => setBootError(reason.message))
   }, [packId])
 
   useEffect(() => {
@@ -130,7 +141,7 @@ export default function App() {
   if (bootError) {
     return (
       <main className="boot">
-        <h1>Studio API is not reachable</h1>
+        <h1>Studio API is not reachable or out of date</h1>
         <p>{bootError}</p>
         <p>Start it with <code>python apps/api/main.py</code> from the repository root, then refresh.</p>
       </main>
